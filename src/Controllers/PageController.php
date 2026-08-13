@@ -22,7 +22,11 @@ final class PageController extends Controleur
     /** Métadonnées SEO par page. Une page, une adresse, un signal. */
     private const PAGES = [
         'accueil' => [
-            'vue'         => 'pages/accueil',
+            // Bascule sur la direction v2 (2026-08-13). L'ancienne vue reste sur
+            // le disque et dans l'historique Git : revenir en arriere ne demande
+            // que de retirer ces deux lignes.
+            'vue'         => 'pages/accueil-v2',
+            'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/',
             'titre'       => "Augmentez vos résultats sans augmenter vos coûts — EA-SERVICES",
             'description' => "Récupérez 420 à 720 heures par an, répondez à vos clients en moins de 2 minutes et gagnez en visibilité. Diagnostic gratuit de 30 minutes à Abidjan.",
@@ -90,7 +94,7 @@ final class PageController extends Controleur
             'description' => $p['description'],
             'canonical'   => $p['canonical'],
             'json_ld'     => Seo::blocsCommuns($cle),
-        ]);
+        ], $p['gabarit'] ?? 'layouts/public');
     }
 
     private function articlesRecents(int $limite): array

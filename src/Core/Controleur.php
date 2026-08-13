@@ -13,10 +13,10 @@ abstract class Controleur
      * sinon `?utm_source=facebook` crée une adresse canonique de plus pour
      * la même page (erreur déjà commise sur ce domaine).
      */
-    protected function page(string $vue, array $donnees = [], array $seo = []): string
+    protected function page(string $vue, array $donnees = [], array $seo = [], string $gabarit = 'layouts/public'): string
     {
         Vue::meta($seo);
-        $html = Vue::rendre($vue, $donnees, 'layouts/public');
+        $html = Vue::rendre($vue, $donnees, $gabarit);
         $this->cachePublic($html);
         return $html;
     }
