@@ -1,0 +1,713 @@
+@charset "UTF-8";
+/* ==========================================================================
+   EA-SERVICES — système de design
+   Marine + or, repris du logo. Base claire, thème sombre disponible.
+   Mobile first : tout est écrit pour 390 px, puis élargi.
+   Aucune couleur de texte codée en dur — uniquement des variables, sinon le
+   texte disparaît dans l'autre thème.
+   ========================================================================== */
+
+/* --- 1. Jetons ---------------------------------------------------------- */
+
+:root {
+  /* Marque, relevée sur le logo */
+  --marine-900: #0d1b38;
+  --marine-800: #14274e;
+  --marine-700: #1c3566;
+  --marine-600: #274a8a;
+  --marine-100: #e8eef7;
+  --marine-050: #f4f7fc;
+
+  --or-600: #8f660b;   /* or lisible en TEXTE sur fond clair (5,2:1 mesuré — #a8790f ne faisait que 3,9:1) */
+  --or-500: #d8a22a;   /* or du logo — aplats et bordures */
+  --or-400: #e8be5f;
+  --or-100: #fdf4de;
+
+  /* Surfaces et texte — thème clair (défaut) */
+  --fond:            #ffffff;
+  --fond-alt:        #f4f7fc;
+  --surface:         #ffffff;
+  --surface-haute:   #ffffff;
+  --bordure:         #dde5f0;
+  --texte:           #101a2f;
+  --texte-doux:      #4a5875;
+  --texte-inverse:   #ffffff;
+  --ombre:           0 1px 2px rgba(13, 27, 56, .06), 0 8px 24px rgba(13, 27, 56, .06);
+  --ombre-haute:     0 2px 6px rgba(13, 27, 56, .08), 0 18px 40px rgba(13, 27, 56, .12);
+
+  /* Les cinq gains. Une teinte = un gain, partout sur le site.
+     Chaque gain a un ton « fort » (texte, 4,5:1 mini) et un fond léger. */
+  --perte:            #b42318;
+  --perte-fond:       #fef3f2;
+  --gain-temps:       #0f766e;
+  --gain-temps-fond:  #effcfa;
+  --gain-conv:        #15803d;
+  --gain-conv-fond:   #f0fdf4;
+  --gain-visi:        #b45309;
+  --gain-visi-fond:   #fffbeb;
+  --gain-ca:          #6d28d9;
+  --gain-ca-fond:     #f7f2ff;
+  --gain-seren:       #1c3566;
+  --gain-seren-fond:  #f0f4fb;
+
+  --whatsapp:        #128c4a;
+
+  /* Rythme */
+  --r-xs: .5rem;  --r-sm: .75rem; --r-md: 1rem;
+  --r-lg: 1.5rem; --r-xl: 2.5rem; --r-2xl: 4rem; --r-3xl: 6rem;
+  --arrondi:    .75rem;
+  --arrondi-lg: 1.25rem;
+  --largeur:    72rem;
+  --transition: 180ms cubic-bezier(.4, 0, .2, 1);
+}
+
+:root[data-theme="sombre"] {
+  --fond:          #0b1220;
+  --fond-alt:      #101a2f;
+  --surface:       #131f38;
+  --surface-haute: #1a2947;
+  --bordure:       #26385c;
+  --texte:         #eef3fb;
+  --texte-doux:    #a8b8d4;
+  --texte-inverse: #0b1220;
+  --ombre:         0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+  --ombre-haute:   0 2px 6px rgba(0, 0, 0, .5), 0 18px 40px rgba(0, 0, 0, .45);
+
+  --marine-100: #1a2947;
+  --marine-050: #131f38;
+  --or-600:     #e8be5f;
+
+  --perte:           #fda29b;
+  --perte-fond:      #2a1512;
+  --gain-temps:      #5eead4;
+  --gain-temps-fond: #0c2320;
+  --gain-conv:       #86efac;
+  --gain-conv-fond:  #0d2417;
+  --gain-visi:       #fcd34d;
+  --gain-visi-fond:  #2a1f05;
+  --gain-ca:         #c4b5fd;
+  --gain-ca-fond:    #1e1533;
+  --gain-seren:      #93c5fd;
+  --gain-seren-fond: #101f3d;
+  --whatsapp:        #4ade80;
+}
+
+/* --- 2. Réinitialisation ------------------------------------------------ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/**
+ * PAS de `overflow-x: hidden` ici — piège réel rencontré le 2026-08-06 : posé
+ * sur `html`/`body`, cela transforme le corps de page en conteneur défilant à
+ * part entière, et `.entete { position: sticky }` perd alors son ancrage sur
+ * la fenêtre. Le symptôme observé : la barre de navigation défile avec la
+ * page au lieu de rester fixe. Vérifié sans débordement horizontal à 390 px
+ * (voir tests) — donc rien ne justifiait le filet de sécurité, et il cassait
+ * la barre. Si un débordement apparaît un jour, le corriger à la source
+ * (largeur du contenu fautif), jamais en ajoutant overflow-x ici.
+ */
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+h1, h2, h3, h4 { margin: 0 0 var(--r-md); line-height: 1.2; font-weight: 800; letter-spacing: -.02em; }
+p, ul, ol { margin: 0 0 var(--r-lg); }
+/* `:not(.bouton)` est indispensable, pas cosmétique : `:root[data-theme] a`
+   pèse plus lourd que `.bouton--or`, et sans cette exclusion le texte des
+   boutons repasse en or sur fond or en thème sombre — illisible. C'est
+   exactement le piège du texte qui disparaît dans l'autre thème. */
+a:not(.bouton) { color: var(--marine-600); }
+:root[data-theme="sombre"] a:not(.bouton) { color: var(--or-400); }
+
+/* Un focus toujours visible : le site doit se parcourir au clavier. */
+:focus-visible {
+  outline: 3px solid var(--or-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/**
+ * Révélation au défilement. La classe `.reveal` n'est posée que par
+ * `ea.js` — jamais dans le HTML des vues : sans JavaScript, ou si le script
+ * échoue, le contenu reste NORMALEMENT visible (opacité 1 par défaut ici).
+ * `prefers-reduced-motion` est déjà neutralisé plus haut (transition à
+ * 0,01 ms) : un visiteur qui refuse le mouvement voit le contenu apparaître
+ * sans latence perceptible, jamais rester cachée.
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s cubic-bezier(.4, 0, .2, 1), transform .6s cubic-bezier(.4, 0, .2, 1);
+}
+.reveal--visible { opacity: 1; transform: none; }
+
+/* Titres de section : entrée plus ample que les cartes — un mouvement de
+   sur-titre + h2 qui monte ensemble, plutôt que le petit fondu des cartes. */
+.reveal--titre { transform: translateY(28px); transition-duration: .75s; }
+
+/* --- 3. Mise en page ---------------------------------------------------- */
+
+.contenant {
+  width: 100%;
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Rythme vertical généreux entre les sections : un site composé "respire",
+   un gabarit rempli entasse. Le resserrement d'origine était l'un des tics
+   qui donnaient au site un air de modèle rempli plutôt que de page conçue. */
+.section        { padding-block: var(--r-2xl); }
+.section--alt   { background: var(--fond-alt); }
+.section--serre { padding-block: var(--r-xl); }
+
+@media (min-width: 48rem) {
+  .section { padding-block: var(--r-3xl); }
+  body     { font-size: 1.0625rem; }
+}
+
+.pile        { display: flex; flex-direction: column; gap: var(--r-lg); }
+.rangee      { display: flex; flex-wrap: wrap; gap: var(--r-sm); align-items: center; }
+.mesure      { max-width: 42rem; }   /* ~70 caractères */
+.centre      { text-align: center; margin-inline: auto; }
+.defile-x    { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* En-tête de section : l'espace entre le chapô et ce qui suit (grille,
+   relevé, manifeste…) fait partie du rythme, pas un réglage au cas par cas. */
+.entete-section { margin-bottom: var(--r-xl); }
+
+/* Grille : une colonne sur mobile sans media query. */
+.grille {
+  display: grid;
+  gap: var(--r-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+.grille--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+
+/* --- 4. Typographie ----------------------------------------------------- */
+
+h1, .t1 { font-size: clamp(2rem, 7vw, 3.25rem); letter-spacing: -.03em; }
+h2, .t2 { font-size: clamp(1.5rem, 4.5vw, 2.25rem); }
+h3, .t3 { font-size: clamp(1.15rem, 3vw, 1.4rem); }
+
+.sur-titre {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .8125rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--or-600);
+  margin-bottom: var(--r-xs);
+}
+.sur-titre::before {
+  content: ""; width: 1.75rem; height: 2px;
+  background: var(--or-500); border-radius: 2px;
+}
+.centre .sur-titre { justify-content: center; }
+
+.chapo      { font-size: clamp(1.0625rem, 2.6vw, 1.25rem); color: var(--texte-doux); }
+.doux       { color: var(--texte-doux); }
+.fort       { font-weight: 700; color: var(--texte); }
+.chiffre    { font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+
+/* --- 5. Boutons — cible tactile 44 px minimum --------------------------- */
+
+.bouton {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 3rem; padding: .75rem 1.5rem;
+  border: 2px solid transparent; border-radius: var(--arrondi);
+  font: inherit; font-weight: 700; text-decoration: none; text-align: center;
+  cursor: pointer; transition: var(--transition);
+}
+.bouton:hover  { transform: translateY(-1px); }
+.bouton:active { transform: translateY(0); }
+
+/* Or sur marine : c'est l'action principale, et le seul usage de l'or plein. */
+.bouton--or {
+  background: var(--or-500); color: var(--marine-900);
+  box-shadow: 0 4px 14px rgba(216, 162, 42, .35);
+}
+.bouton--or:hover { background: var(--or-400); }
+
+.bouton--marine { background: var(--marine-800); color: #fff; }
+.bouton--marine:hover { background: var(--marine-700); }
+
+.bouton--contour {
+  background: transparent; color: var(--texte);
+  border-color: var(--bordure);
+}
+.bouton--contour:hover { border-color: var(--or-500); }
+
+.bouton--whatsapp { background: var(--whatsapp); color: #fff; }
+:root[data-theme="sombre"] .bouton--whatsapp { color: var(--marine-900); }
+
+.bouton--large { width: 100%; }
+@media (min-width: 30rem) { .bouton--large { width: auto; } }
+
+/**
+ * Relevé éditorial — remplace la grille de cartes identiques pour les
+ * sections "pertes" et "gains" de l'accueil. Une carte répétée cinq fois de
+ * suite est le signe le plus visible d'un gabarit rempli ; une liste type
+ * relevé de compte, avec un grand chiffre et une règle horizontale, se lit
+ * comme une composition choisie plutôt qu'un modèle dupliqué.
+ */
+.releve { border-top: 1px solid var(--bordure); }
+.releve__ligne {
+  display: grid; grid-template-columns: 7.5rem 1fr; gap: .25rem 1.5rem;
+  align-items: start; padding-block: 1.5rem;
+  border-bottom: 1px solid var(--bordure);
+}
+.releve__chiffre {
+  font-size: 1.625rem; font-weight: 800; line-height: 1.15; letter-spacing: -.02em;
+  color: var(--ton, var(--perte)); font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.releve__corps h3 { margin-bottom: .35rem; font-size: 1.0625rem; }
+.releve__corps p:last-child { margin-bottom: 0; }
+@media (max-width: 34rem) {
+  .releve__ligne { grid-template-columns: 1fr; gap: .5rem; }
+}
+
+/* Manifeste — la liste numérotée des cinq gains, en alternative au motif
+   "carte + icône" utilisé partout ailleurs sur le site (voir .gain plus
+   bas, toujours en usage sur /pages/services). */
+.manifeste { border-top: 1px solid var(--bordure); }
+.manifeste__ligne {
+  display: grid; grid-template-columns: 3.25rem 1fr auto; gap: .25rem 1.5rem;
+  align-items: baseline; padding-block: 1.75rem;
+  border-bottom: 1px solid var(--bordure);
+}
+.manifeste__num {
+  font-size: 1.5rem; font-weight: 800; color: var(--ton, var(--marine-600));
+  font-variant-numeric: tabular-nums; align-self: start; padding-top: .1rem;
+}
+.manifeste__corps h3 { margin-bottom: .35rem; color: var(--texte); }
+.manifeste__corps p { margin-bottom: 0; max-width: 34rem; }
+.manifeste__impact {
+  text-align: right; font-weight: 800; color: var(--ton, var(--marine-600));
+  white-space: nowrap; font-size: .9375rem;
+}
+@media (max-width: 40rem) {
+  .manifeste__ligne { grid-template-columns: 2.5rem 1fr; }
+  .manifeste__impact { grid-column: 1 / -1; text-align: left; padding-left: 2.5rem; white-space: normal; }
+}
+
+/**
+ * Duo texte/image — une photo fixe occupe toute la hauteur de la section, à
+ * côté du relevé ou du manifeste. Empilée sur mobile, texte d'abord (la
+ * lecture prime), l'image suit en pleine largeur.
+ */
+.duo { display: grid; gap: var(--r-xl); align-items: stretch; }
+@media (min-width: 60rem) {
+  .duo { grid-template-columns: 1.3fr 1fr; }
+}
+.duo__image {
+  position: relative; overflow: hidden; border-radius: var(--arrondi-lg);
+  min-height: 18rem; box-shadow: var(--ombre);
+}
+.duo__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.duo__image figcaption {
+  position: absolute; inset: auto 0 0 0; padding: 1.25rem 1.25rem 1rem;
+  background: linear-gradient(transparent, rgba(13, 27, 56, .88) 65%);
+  color: #fff; font-size: .8125rem;
+}
+
+/* --- 6. Cartes de bénéfice — le motif dominant du site ------------------ */
+
+.carte {
+  background: var(--surface);
+  border: 1px solid var(--bordure);
+  border-radius: var(--arrondi-lg);
+  padding: var(--r-lg);
+  box-shadow: var(--ombre);
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+}
+.carte:hover { box-shadow: var(--ombre-haute); transform: translateY(-3px); border-color: color-mix(in srgb, var(--or-500) 40%, var(--bordure)); }
+
+/* Une carte de gain : barre latérale colorée, fond teinté, ligne Impact. */
+.gain {
+  border-left: 4px solid var(--ton, var(--marine-600));
+  background: var(--ton-fond, var(--marine-050));
+  border-radius: 0 var(--arrondi-lg) var(--arrondi-lg) 0;
+  padding: var(--r-lg);
+  height: 100%;
+}
+.gain h3 { color: var(--ton, var(--texte)); }
+.gain p:last-of-type { margin-bottom: 0; }
+
+.gain--temps { --ton: var(--gain-temps); --ton-fond: var(--gain-temps-fond); }
+.gain--conv  { --ton: var(--gain-conv);  --ton-fond: var(--gain-conv-fond); }
+.gain--visi  { --ton: var(--gain-visi);  --ton-fond: var(--gain-visi-fond); }
+.gain--ca    { --ton: var(--gain-ca);    --ton-fond: var(--gain-ca-fond); }
+.gain--seren { --ton: var(--gain-seren); --ton-fond: var(--gain-seren-fond); }
+.gain--perte { --ton: var(--perte);      --ton-fond: var(--perte-fond); }
+
+/* La promesse chiffrée. Toujours en dernier dans la carte. */
+.impact {
+  display: block; margin-top: var(--r-sm); padding-top: var(--r-sm);
+  border-top: 1px dashed color-mix(in srgb, var(--ton, var(--marine-600)) 40%, transparent);
+  font-weight: 700; font-size: .9375rem; color: var(--ton, var(--texte));
+}
+.impact::before { content: "Impact : "; font-weight: 800; }
+
+/* --- 7. Bandeau d'ouverture -------------------------------------------- */
+
+/**
+ * Le halo doré en dégradé radial dans un coin est devenu LE tic visuel des
+ * sites "générés" — retiré ici et dans le voile photo plus bas. À la place :
+ * un grain fin (bruit SVG, `feTurbulence`) qui donne une matière tactile à
+ * l'aplat marine, et une seule ligne d'accent oblique — un choix de
+ * composition assumé, pas un gabarit rempli.
+ */
+.hero {
+  position: relative;
+  padding-block: var(--r-xl) var(--r-2xl);
+  background: linear-gradient(170deg, var(--marine-900) 0%, var(--marine-800) 55%, var(--marine-700) 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: .5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  top: -20%; right: 12%; width: 1px; height: 140%;
+  background: linear-gradient(rgba(216, 162, 42, 0), var(--or-500) 45%, rgba(216, 162, 42, 0));
+  transform: rotate(12deg);
+  opacity: .55;
+}
+.hero > .contenant { position: relative; z-index: 1; }
+.hero h1 { color: #fff; }
+.hero .chapo { color: rgba(255, 255, 255, .84); }
+.hero .sur-titre { color: var(--or-400); }
+.hero a:not(.bouton) { color: var(--or-400); }
+
+.hero__preuves {
+  display: grid; gap: var(--r-sm); margin-top: var(--r-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+}
+.hero__preuve {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: var(--arrondi);
+  padding: var(--r-sm);
+}
+.hero__preuve .chiffre { display: block; font-size: 1.5rem; color: var(--or-400); }
+.hero__preuve span:last-child { font-size: .875rem; color: rgba(255, 255, 255, .78); }
+
+/**
+ * Bandeau d'accueil avec photos d'Abidjan en fond, en fondu lent (JS, voir
+ * ea.js). Trois <img> superposées, une seule visible à la fois via `opacity`
+ * — la transition CSS produit le fondu enchaîné, JS ne fait que changer la
+ * classe.
+ */
+.hero--photos { background: linear-gradient(170deg, var(--marine-900) 0%, var(--marine-700) 100%); }
+.hero__fond { position: absolute; inset: 0; z-index: 0; }
+.hero__fond img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.8s ease;
+}
+.hero__fond img:first-child { opacity: 1; }  /* visible par défaut : JS absent, motion réduite, ou avant chargement */
+.hero__fond img.est-visible { opacity: 1; }
+.hero__fond img.est-cachee { opacity: 0; }
+
+/* Voile au-dessus des photos : garantit la lisibilité du texte quelle que
+   soit l'image affichée, tout en laissant deviner la photo sur la droite. */
+.hero--photos .hero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(100deg, rgba(13, 27, 56, .96) 0%, rgba(13, 27, 56, .90) 30%,
+                     rgba(20, 39, 78, .68) 58%, rgba(20, 39, 78, .42) 100%);
+}
+/* La ligne d'accent oblique (.hero::after, z:0 par défaut) doit rester
+   visible au-dessus du voile photo (z:1) mais sous le texte (z:2). */
+.hero--photos::after { z-index: 1; }
+
+.hero__credit {
+  position: relative; z-index: 2; margin: var(--r-sm) 0 0; text-align: right;
+  font-size: .6875rem; color: rgba(255, 255, 255, .45);
+}
+.hero__credit a { color: rgba(255, 255, 255, .6); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__fond img { transition: none; }
+}
+
+/* --- 8. En-tête et navigation ------------------------------------------ */
+
+.entete {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--fond) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bordure);
+}
+.entete__barre {
+  display: flex; align-items: center; gap: var(--r-sm);
+  min-height: 4rem;
+}
+.marque { display: flex; align-items: center; gap: .625rem; text-decoration: none; margin-right: auto; }
+.marque img { width: 2.5rem; height: 2.5rem; border-radius: 50%; }
+.marque__nom { font-weight: 800; font-size: 1.0625rem; color: var(--texte); letter-spacing: -.02em; }
+.marque__ligne { display: block; font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; color: var(--texte-doux); }
+
+.nav__liens { display: none; }
+.nav__liens a {
+  padding: .5rem .75rem; border-radius: var(--arrondi);
+  color: var(--texte-doux); text-decoration: none; font-weight: 600; font-size: .9375rem;
+  transition: var(--transition);
+}
+.nav__liens a:hover { color: var(--texte); background: var(--fond-alt); }
+.nav__liens a[aria-current="page"] { color: var(--marine-600); background: var(--marine-100); }
+:root[data-theme="sombre"] .nav__liens a[aria-current="page"] { color: var(--or-400); }
+
+/* Boutons d'en-tête : 44 px de cible tactile, toujours visibles. */
+.icone-bouton {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem;
+  background: transparent; border: 1px solid var(--bordure);
+  border-radius: var(--arrondi); color: var(--texte);
+  cursor: pointer; transition: var(--transition);
+}
+.icone-bouton:hover { border-color: var(--or-500); }
+.entete .bouton { display: none; }
+
+/* Menu mobile : panneau déroulant, jamais un survol. */
+.nav__panneau {
+  display: none; flex-direction: column; gap: .25rem;
+  padding: var(--r-sm) 0 var(--r-md);
+  border-top: 1px solid var(--bordure);
+}
+.nav__panneau[data-ouvert="oui"] { display: flex; }
+.nav__panneau a {
+  padding: .875rem .75rem; border-radius: var(--arrondi);
+  color: var(--texte); text-decoration: none; font-weight: 600;
+}
+.nav__panneau a:hover { background: var(--fond-alt); }
+.nav__panneau .bouton { margin-top: var(--r-xs); }
+
+@media (min-width: 60rem) {
+  .nav__liens { display: flex; align-items: center; gap: .125rem; }
+  .entete .bouton { display: inline-flex; }
+  .nav__bascule { display: none; }
+  .nav__panneau { display: none !important; }
+}
+
+/* --- 9. Pied de page ---------------------------------------------------- */
+
+.pied {
+  background: var(--marine-900); color: rgba(255, 255, 255, .78);
+  padding-block: var(--r-xl) var(--r-md);
+  margin-top: var(--r-xl);
+}
+.pied h4 { color: #fff; font-size: .8125rem; letter-spacing: .1em; text-transform: uppercase; }
+/* Même piège que plus haut : sans `:not(.bouton)`, le bouton or du pied de
+   page hérite du blanc à 78 % et tombe à 2,3:1 sur son fond or. */
+.pied a:not(.bouton) { color: rgba(255, 255, 255, .78); text-decoration: none; }
+.pied a:not(.bouton):hover { color: var(--or-400); text-decoration: underline; }
+.pied__grille { display: grid; gap: var(--r-lg); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+.pied__liste { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+.pied__bas {
+  margin-top: var(--r-lg); padding-top: var(--r-md);
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  display: flex; flex-wrap: wrap; gap: var(--r-sm); justify-content: space-between;
+  font-size: .875rem; color: rgba(255, 255, 255, .6);
+}
+
+/* --- 10. Appel à l'action final (présent sur chaque page) --------------- */
+
+.diagnostic {
+  background: linear-gradient(140deg, var(--marine-800), var(--marine-600));
+  color: #fff; border-radius: var(--arrondi-lg);
+  padding: var(--r-lg);
+  text-align: center;
+}
+.diagnostic h2 { color: #fff; }
+.diagnostic p  { color: rgba(255, 255, 255, .85); }
+.diagnostic .rangee { justify-content: center; }
+.diagnostic__promesse {
+  display: inline-block; margin-top: var(--r-sm);
+  font-size: .875rem; color: var(--or-400); font-weight: 600;
+}
+@media (min-width: 48rem) { .diagnostic { padding: var(--r-xl); } }
+
+/* --- 11. Formulaires ---------------------------------------------------- */
+
+.champ { display: grid; gap: .375rem; margin-bottom: var(--r-md); }
+.champ label { font-weight: 600; font-size: .9375rem; }
+.champ input, .champ textarea, .champ select {
+  width: 100%; min-height: 3rem; padding: .75rem;
+  font: inherit; color: var(--texte);
+  background: var(--surface);
+  border: 1px solid var(--bordure); border-radius: var(--arrondi);
+  transition: var(--transition);
+}
+.champ textarea { min-height: 8rem; resize: vertical; }
+.champ input:focus, .champ textarea:focus, .champ select:focus { border-color: var(--or-500); }
+.champ__aide { font-size: .8125rem; color: var(--texte-doux); }
+/* Piège à robots : invisible pour l'humain, rempli par les automates. */
+.piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.alerte {
+  padding: var(--r-sm) var(--r-md); border-radius: var(--arrondi);
+  border-left: 4px solid; margin-bottom: var(--r-md);
+}
+.alerte--ok    { border-color: var(--gain-conv); background: var(--gain-conv-fond); color: var(--gain-conv); }
+.alerte--erreur{ border-color: var(--perte); background: var(--perte-fond); color: var(--perte); }
+
+/* --- 12. Contenu rédactionnel (articles) -------------------------------- */
+
+.redaction { font-size: 1.0625rem; line-height: 1.8; }
+.redaction > * { max-width: 42rem; }
+.redaction h2 { margin-top: var(--r-lg); }
+.redaction h3 { margin-top: var(--r-md); }
+.redaction ul, .redaction ol { padding-left: 1.25rem; }
+.redaction li { margin-bottom: .5rem; }
+.redaction img { border-radius: var(--arrondi); margin-block: var(--r-md); }
+.redaction blockquote {
+  margin: var(--r-md) 0; padding: var(--r-sm) var(--r-md);
+  border-left: 4px solid var(--or-500); background: var(--fond-alt);
+  border-radius: 0 var(--arrondi) var(--arrondi) 0;
+}
+.redaction table { width: 100%; border-collapse: collapse; }
+.redaction td, .redaction th { padding: .5rem; border-bottom: 1px solid var(--bordure); text-align: left; }
+
+/* --- 13. Articles : vignettes ------------------------------------------- */
+
+.vignette { position: relative; display: flex; flex-direction: column; overflow: hidden; padding: 0; }
+.vignette img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.vignette__corps { padding: var(--r-md); display: flex; flex-direction: column; flex: 1; gap: .5rem; }
+.vignette h3 { font-size: 1.0625rem; }
+.vignette h3 a { color: var(--texte); text-decoration: none; }
+/* Toute la vignette devient la zone cliquable : au doigt, un titre de deux
+   lignes fait 40 px de haut, sous le minimum de 44 px. La carte entière en
+   fait plus de 250. Mesuré à 390 px, pas supposé. */
+.vignette h3 a::after { content: ""; position: absolute; inset: 0; }
+.vignette h3 a:hover { color: var(--marine-600); }
+:root[data-theme="sombre"] .vignette h3 a:hover { color: var(--or-400); }
+.vignette__meta { margin-top: auto; font-size: .8125rem; color: var(--texte-doux); }
+
+.etiquette {
+  display: inline-block; padding: .25rem .625rem; border-radius: 999px;
+  font-size: .6875rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  background: var(--marine-100); color: var(--marine-600);
+}
+:root[data-theme="sombre"] .etiquette { color: var(--or-400); }
+
+/* --- 14. Étapes numérotées ---------------------------------------------- */
+
+.etapes { list-style: none; padding: 0; display: grid; gap: var(--r-md); counter-reset: etape; }
+.etape { display: grid; grid-template-columns: auto 1fr; gap: var(--r-sm); align-items: start; }
+.etape::before {
+  counter-increment: etape; content: counter(etape);
+  display: grid; place-items: center;
+  width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  background: var(--marine-800); color: #fff; font-weight: 800;
+}
+.etape h3 { margin-bottom: .25rem; }
+
+/* --- 15. Icônes et divers ----------------------------------------------- */
+
+.ico { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2;
+       stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.ico--lg { width: 1.75rem; height: 1.75rem; }
+
+.liste-cochee { list-style: none; padding: 0; display: grid; gap: .625rem; }
+.liste-cochee li { display: grid; grid-template-columns: auto 1fr; gap: .625rem; align-items: start; }
+.liste-cochee li::before {
+  content: "→"; color: var(--or-600); font-weight: 800; line-height: 1.75;
+}
+
+/* `a.saut-contenu` et non `.saut-contenu` : la règle générique des liens est
+   plus spécifique qu'une simple classe et rendait ce lien marine sur marine. */
+a.saut-contenu {
+  position: absolute; left: -9999px; z-index: 100;
+  padding: .75rem 1rem; background: var(--marine-800); color: #fff; border-radius: var(--arrondi);
+}
+.saut-contenu:focus { left: 1rem; top: 1rem; }
+
+/* --- 16. Bandeau cookies ------------------------------------------------ */
+
+.cookies {
+  position: fixed; inset: auto 0 0 0; z-index: 60;
+  display: none; gap: var(--r-sm); align-items: center; flex-wrap: wrap;
+  padding: var(--r-md); margin: .75rem;
+  background: var(--surface-haute); border: 1px solid var(--bordure);
+  border-radius: var(--arrondi-lg); box-shadow: var(--ombre-haute);
+  font-size: .9375rem;
+}
+.cookies[data-visible="oui"] { display: flex; }
+.cookies p { margin: 0; flex: 1 1 16rem; }
+
+/* --- 17. Boutons flottants (WhatsApp) ----------------------------------- */
+
+.flottant {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 55;
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 3.25rem; padding: 0 1.125rem;
+  background: var(--whatsapp); color: #fff;
+  border-radius: 999px; text-decoration: none; font-weight: 700;
+  box-shadow: 0 8px 24px rgba(18, 140, 74, .4);
+}
+:root[data-theme="sombre"] .flottant { color: var(--marine-900); }
+.flottant span { display: none; }
+@media (min-width: 30rem) { .flottant span { display: inline; } }
+
+/* --- 18. Administration ------------------------------------------------- */
+
+.admin { display: grid; gap: var(--r-md); }
+.admin__entete {
+  display: flex; flex-wrap: wrap; gap: var(--r-sm);
+  align-items: center; justify-content: space-between;
+  padding-block: var(--r-md); border-bottom: 1px solid var(--bordure);
+}
+.admin__onglets { display: flex; flex-wrap: wrap; gap: .375rem; }
+.admin__onglets a {
+  padding: .5rem .875rem; border-radius: var(--arrondi);
+  background: var(--fond-alt); color: var(--texte-doux);
+  text-decoration: none; font-weight: 600; font-size: .9375rem;
+}
+.admin__onglets a[aria-current="page"] { background: var(--marine-800); color: #fff; }
+
+.tableau { width: 100%; border-collapse: collapse; font-size: .9375rem; }
+.tableau th, .tableau td { padding: .625rem .75rem; text-align: left; border-bottom: 1px solid var(--bordure); }
+.tableau th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--texte-doux); }
+.tableau tr:hover td { background: var(--fond-alt); }
+
+.stat { padding: var(--r-md); border-radius: var(--arrondi-lg); background: var(--fond-alt); border: 1px solid var(--bordure); }
+.stat .chiffre { display: block; font-size: 2rem; color: var(--marine-600); }
+:root[data-theme="sombre"] .stat .chiffre { color: var(--or-400); }
+.stat span:last-child { font-size: .875rem; color: var(--texte-doux); }
+
+/**
+ * FAQ — <details>/<summary> natifs : accessible et navigable au clavier
+ * sans une ligne de JavaScript. `list-style:none` ne suffit pas à retirer le
+ * triangle par défaut sous WebKit, qui utilise son propre pseudo-élément —
+ * les deux règles ci-dessous sont nécessaires ensemble.
+ */
+.faq summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  font-weight: 700; cursor: pointer; list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq__fleche { transition: transform var(--transition); flex: none; color: var(--or-600); }
+:root[data-theme="sombre"] .faq__fleche { color: var(--or-400); }
+.faq[open] .faq__fleche { transform: rotate(90deg); }
+.faq p { margin: .875rem 0 0; }

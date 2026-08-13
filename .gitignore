@@ -1,0 +1,8 @@
+# Données vivantes du site — jamais versionnées : elles changent à chaque
+# visite et écraseraient la production en cas de restauration.
+data/site.sqlite
+data/*.sqlite
+storage/sessions/
+storage/cache/
+storage/logs/
+*.log
