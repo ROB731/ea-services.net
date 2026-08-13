@@ -711,3 +711,32 @@ a.saut-contenu {
 :root[data-theme="sombre"] .faq__fleche { color: var(--or-400); }
 .faq[open] .faq__fleche { transform: rotate(90deg); }
 .faq p { margin: .875rem 0 0; }
+
+/* --- Bandeau de consentement : compact sur mobile --------------------------
+   Mesuré à 390 px : le bandeau occupait environ un quart du premier écran et
+   recouvrait les chiffres du héros — c'est-à-dire la preuve, exactement au
+   moment où le visiteur décide de rester ou de partir. Sur un marché
+   massivement mobile, c'était le défaut le plus coûteux du site.
+
+   Le texte n'est PAS raccourci : la doctrine veut une explication honnête du
+   traitement de l'adresse IP, pas une formule creuse. On agit uniquement sur
+   la densité — marges, corps de texte, interligne — et on met les deux boutons
+   côte à côte plutôt qu'empilés.
+
+   Les boutons conservent 2.75rem (44 px) de hauteur : c'est la cible tactile
+   minimale du système de design, elle ne se négocie pas. */
+@media (max-width: 34rem) {
+  .cookies {
+    margin: .5rem;
+    padding: .8125rem .875rem;
+    gap: .625rem;
+    font-size: .8125rem;
+  }
+  .cookies p      { flex: 1 1 100%; line-height: 1.5; }
+  .cookies .rangee { width: 100%; flex-wrap: nowrap; }
+  .cookies .rangee .bouton {
+    flex: 1;
+    min-height: 2.75rem;
+    padding: .5rem .75rem;
+  }
+}
