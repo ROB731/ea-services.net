@@ -32,7 +32,10 @@ final class PageController extends Controleur
             'description' => "Récupérez 420 à 720 heures par an, répondez à vos clients en moins de 2 minutes et gagnez en visibilité. Diagnostic gratuit de 30 minutes à Abidjan.",
         ],
         'services' => [
-            'vue'         => 'pages/services',
+            // Portée sur la direction v2 (2026-08-13). L'ancienne vue reste sur
+            // le disque et dans Git : revenir = retirer ces deux lignes.
+            'vue'         => 'pages/services-v2',
+            'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/services',
             'titre'       => "Nos services — cinq pertes, cinq façons de les arrêter | EA-SERVICES",
             'description' => "Temps, clients, visibilité, chiffre d'affaires, sérénité : comment nous traitons vos cinq plus grosses pertes, avec un chiffre en face de chacune.",

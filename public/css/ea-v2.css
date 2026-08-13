@@ -133,7 +133,14 @@ h1 em, h2 span.suite {
   font-style: normal;
   color: var(--safran-encre);
 }
+/* Sur fond foncé, l'or CLAIR — mesuré : safran sur encre = 6,4:1, alors que
+   safran-encre n'y atteint que 2,25:1, très en dessous des 4,5:1 exigés.
+   `h1 em` etait absent de cette liste : un titre de page pose sur une section
+   encre ressortait donc en or sombre, illisible. Constate sur /pages/services
+   en MESURANT le contraste, pas en relisant le CSS. */
 .heros h1 em,
+.section--encre h1 em,
+.diagnostic h1 em,
 .section--encre h2 span.suite,
 .diagnostic h2 span.suite { color: var(--safran); }
 
@@ -611,4 +618,22 @@ img { max-width: 100%; height: auto; display: block; }
   .cookies p       { flex: 1 1 100%; line-height: 1.5; }
   .cookies .rangee { width: 100%; flex-wrap: nowrap; }
   .cookies .rangee .bouton { flex: 1; min-height: 2.75rem; padding: .5rem .75rem; }
+}
+
+/* --- Liste à puces fléchées ------------------------------------------------
+   Reprise de l'intention de la v1 (une flèche plutôt qu'une puce : on annonce
+   un mouvement, pas un inventaire), avec les jetons de cette feuille.
+   `--safran-encre` et non `--safran` : l'or clair sur fond papier plafonne
+   autour de 2:1, très en dessous du 4,5:1 exigé par le système de design. */
+.liste-cochee { list-style: none; padding: 0; display: grid; gap: .625rem; }
+.liste-cochee li {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: .625rem; align-items: start;
+  color: var(--texte-doux);
+}
+.liste-cochee li::before {
+  content: "→";
+  color: var(--safran-encre);
+  font-weight: 700;
+  line-height: 1.7;
 }
