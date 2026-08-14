@@ -637,3 +637,53 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 700;
   line-height: 1.7;
 }
+
+/* --- Formulaire, alertes, FAQ ----------------------------------------------
+   Portés depuis la v1 pour la page contact. Intention conservée, jetons de
+   CETTE feuille — jamais de couleur en dur, sinon illisible dans l'autre
+   thème (piège déjà rencontré sur ce dépôt).
+
+   Champs à 3rem de haut : au-dessus des 44 px de cible tactile exigés par le
+   système de design, et confortable au pouce sur un formulaire long. */
+.champ { display: grid; gap: .375rem; margin-bottom: 1.25rem; }
+.champ label { font-weight: 600; font-size: .9375rem; color: var(--texte); }
+.champ input, .champ textarea, .champ select {
+  width: 100%; min-height: 3rem; padding: .75rem;
+  font: inherit; color: var(--texte);
+  background: var(--surface);
+  border: 1px solid var(--trait); border-radius: var(--arrondi);
+  transition: border-color .2s var(--sortie);
+}
+.champ input:focus, .champ textarea:focus, .champ select:focus {
+  outline: 2px solid var(--safran-encre); outline-offset: 1px;
+  border-color: var(--safran-encre);
+}
+.champ textarea { min-height: 8rem; resize: vertical; }
+.champ__aide { font-size: .8125rem; color: var(--texte-doux); }
+
+/* Piège à robots : retiré de l'écran sans `display:none`, que certains
+   remplisseurs automatiques ignorent — il doit rester dans le flux. */
+.piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.alerte {
+  padding: .75rem 1rem; border-radius: var(--arrondi);
+  border-left: 4px solid; margin-bottom: 1.25rem;
+}
+.alerte--ok     { border-color: var(--signal); background: rgba(18, 140, 74, .08);  color: var(--texte); }
+.alerte--erreur { border-color: #b3261e;       background: rgba(179, 38, 30, .08);  color: var(--texte); }
+
+.pile { display: flex; flex-direction: column; gap: 1rem; }
+.entete-section { margin-bottom: 2.5rem; }
+
+.faq summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  font-weight: 700; cursor: pointer; list-style: none; color: var(--texte);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq__fleche { transition: transform .2s var(--sortie); flex: none; color: var(--safran-encre); }
+.faq[open] .faq__fleche { transform: rotate(90deg); }
+.faq p { margin: .875rem 0 0; }
+
+/* WhatsApp garde sa couleur propre : c'est le seul usage de --signal, et le
+   canal est identifie par sa teinte dans tout le marche vise. */
+.bouton--whatsapp { background: var(--signal); color: #fff; }

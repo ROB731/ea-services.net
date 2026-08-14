@@ -59,7 +59,10 @@ final class PageController extends Controleur
             'description' => "Il n'existe pas d'achat, il n'existe que des investissements. Notre principe, notre méthode en quatre étapes et nos engagements. Équipe basée à Abidjan.",
         ],
         'contact' => [
-            'vue'         => 'pages/contact',
+            // Portee sur la direction v2 (2026-08-13). Formulaire identique :
+            // memes champs, meme CSRF, meme action POST, repli sans JavaScript.
+            'vue'         => 'pages/contact-v2',
+            'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/contact',
             'titre'       => "Contact — diagnostic gratuit de 30 minutes | EA-SERVICES",
             'description' => "WhatsApp, téléphone ou formulaire : réservez votre diagnostic gratuit de 30 minutes. Réponse sous 2 heures. EA-SERVICES, Marcory Biétry, Abidjan.",
