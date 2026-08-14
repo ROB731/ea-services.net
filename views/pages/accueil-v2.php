@@ -334,6 +334,9 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
       <a class="bouton bouton--safran" href="/pages/contact">
         <?= e(cfg('cta.libelle')) ?> <?= icone('fleche') ?>
       </a>
+      <a class="bouton bouton--contour-clair" href="/diagnostic">
+        Chiffrer mes pertes en 2 minutes <?= icone('fleche') ?>
+      </a>
       <a class="bouton bouton--contour-clair" href="<?= e(whatsapp()) ?>" target="_blank" rel="noopener">
         <?= icone('whatsapp') ?> Écrire sur WhatsApp
       </a>

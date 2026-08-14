@@ -80,6 +80,21 @@ $ancien = $ancien ?? [];
         <h2>Ou écrivez-nous ici</h2>
         <p class="doux">Nous répondons sous 24 heures ouvrées.</p>
 
+        <?php /* Raccourci vers le diagnostic automatique : quelqu'un qui hesite
+                 a laisser ses coordonnees obtient quand meme un chiffre. La
+                 doctrine dit « vous repartez avec, que vous travailliez avec
+                 nous ou non » — autant le proposer avant le formulaire. */ ?>
+        <div class="carte" style="margin-bottom:1.5rem">
+          <h3>Pas envie d'attendre ?</h3>
+          <p class="doux">
+            Répondez à cinq questions et obtenez tout de suite vos deux plus
+            grosses pertes, chiffrées. Deux minutes, sans laisser vos coordonnées.
+          </p>
+          <a class="bouton bouton--contour bouton--large" href="/diagnostic">
+            Chiffrer mes pertes maintenant <?= icone('fleche') ?>
+          </a>
+        </div>
+
         <?php if (!empty($etatEnvoi)): ?>
           <div class="alerte alerte--<?= $etatEnvoi === 'ok' ? 'ok' : 'erreur' ?>">
             <?= e($messageEnvoi) ?>

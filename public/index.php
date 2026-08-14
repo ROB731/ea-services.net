@@ -29,6 +29,7 @@ use EA\Controllers\AdminController;
 use EA\Controllers\ArticleController;
 use EA\Controllers\AuthController;
 use EA\Controllers\ContactController;
+use EA\Controllers\DiagnosticController;
 use EA\Controllers\PageController;
 use EA\Controllers\Seo;
 
@@ -45,6 +46,10 @@ $routeur->post('/pages/contact',   [ContactController::class, 'envoyer']);
 
 /* Prototype de la nouvelle direction artistique. Désindexé, hors navigation,
    hors sitemap : il n'existe que pour être regardé sur un téléphone. */
+// Diagnostic automatique : le questionnaire, puis son resultat chiffre.
+$routeur->get('/diagnostic',  [DiagnosticController::class, 'formulaire']);
+$routeur->post('/diagnostic', [DiagnosticController::class, 'calculer']);
+
 $routeur->get('/apercu', [PageController::class, 'apercu']);
 
 /* Page d'erreur du site statique précédent : 410, pas 404 (sort de l'index
