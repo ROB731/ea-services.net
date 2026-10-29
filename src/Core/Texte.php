@@ -84,4 +84,26 @@ final class Texte
         $mots = max(1, str_word_count(strip_tags($texte), 0, 'àâäéèêëïîôöùûüçÀÂÄÉÈÊËÏÎÔÖÙÛÜÇ'));
         return max(1, (int)ceil($mots / 200)) . ' min';
     }
+
+    /**
+     * Adresse d'intégration (iframe) à partir d'un lien YouTube ou Vimeo
+     * collé en administration. On ne fait JAMAIS confiance à l'URL saisie
+     * telle quelle dans un `src` d'iframe : seul l'identifiant de vidéo,
+     * extrait par expression régulière, sert à reconstruire une adresse
+     * d'intégration connue — tout autre lien (autre domaine, script) est
+     * ignoré plutôt qu'intégré.
+     */
+    public static function urlIntegrationVideo(?string $url): ?string
+    {
+        $url = trim((string)$url);
+        if ($url === '') return null;
+
+        if (preg_match('#youtu(?:be\.com/watch\?v=|be\.com/shorts/|\.be/)([\w-]{6,})#', $url, $m)) {
+            return 'https://www.youtube-nocookie.com/embed/' . $m[1];
+        }
+        if (preg_match('#vimeo\.com/(\d+)#', $url, $m)) {
+            return 'https://player.vimeo.com/video/' . $m[1];
+        }
+        return null;
+    }
 }

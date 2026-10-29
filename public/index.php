@@ -28,6 +28,7 @@ use EA\Core\Router;
 use EA\Controllers\AdminController;
 use EA\Controllers\ArticleController;
 use EA\Controllers\AuthController;
+use EA\Controllers\ChatController;
 use EA\Controllers\ContactController;
 use EA\Controllers\DiagnosticController;
 use EA\Controllers\PageController;
@@ -44,13 +45,13 @@ $routeur->get('/article/{slug}',   [ArticleController::class, 'afficher']);
 $routeur->post('/article/{slug}/commentaire', [ArticleController::class, 'commenter']);
 $routeur->post('/pages/contact',   [ContactController::class, 'envoyer']);
 
-/* Prototype de la nouvelle direction artistique. Désindexé, hors navigation,
-   hors sitemap : il n'existe que pour être regardé sur un téléphone. */
 // Diagnostic automatique : le questionnaire, puis son resultat chiffre.
 $routeur->get('/diagnostic',  [DiagnosticController::class, 'formulaire']);
 $routeur->post('/diagnostic', [DiagnosticController::class, 'calculer']);
 
-$routeur->get('/apercu', [PageController::class, 'apercu']);
+/* Agent de conversation — voir ChatController pour le cadrage et la limite. */
+$routeur->post('/chat/message',    [ChatController::class, 'message']);
+$routeur->get('/chat/historique',  [ChatController::class, 'historique']);
 
 /* Page d'erreur du site statique précédent : 410, pas 404 (sort de l'index
    plus vite). */
@@ -72,15 +73,21 @@ $routeur->post('/admin/demandes/lue',          [AdminController::class, 'marquer
 $routeur->post('/admin/demandes/supprimer',    [AdminController::class, 'supprimerDemande']);
 $routeur->get('/admin/articles',               [AdminController::class, 'articles']);
 $routeur->get('/admin/articles/{id}',          [AdminController::class, 'editerArticle']);
+$routeur->get('/admin/articles/{id}/previsualiser', [AdminController::class, 'previsualiserArticleParId']);
 $routeur->post('/admin/articles/enregistrer',  [AdminController::class, 'enregistrerArticle']);
+$routeur->post('/admin/articles/previsualiser',[AdminController::class, 'previsualiserArticle']);
 $routeur->post('/admin/articles/basculer',     [AdminController::class, 'basculerArticle']);
 $routeur->post('/admin/articles/supprimer',    [AdminController::class, 'supprimerArticle']);
+$routeur->post('/admin/articles/televerser',   [AdminController::class, 'televerserImage']);
 $routeur->get('/admin/commentaires',           [AdminController::class, 'commentaires']);
 $routeur->post('/admin/commentaires/valider',  [AdminController::class, 'validerCommentaire']);
 $routeur->post('/admin/commentaires/supprimer',[AdminController::class, 'supprimerCommentaire']);
-$routeur->get('/admin/temoignages',            [AdminController::class, 'temoignages']);
-$routeur->post('/admin/temoignages/ajouter',   [AdminController::class, 'ajouterTemoignage']);
-$routeur->post('/admin/temoignages/supprimer', [AdminController::class, 'supprimerTemoignage']);
+$routeur->get('/admin/temoignages',             [AdminController::class, 'temoignages']);
+$routeur->get('/admin/temoignages/{id}',        [AdminController::class, 'editerTemoignage']);
+$routeur->post('/admin/temoignages/enregistrer',[AdminController::class, 'enregistrerTemoignage']);
+$routeur->post('/admin/temoignages/supprimer',  [AdminController::class, 'supprimerTemoignage']);
+$routeur->post('/admin/assistant/article',      [AdminController::class, 'assistantArticle']);
+$routeur->post('/admin/assistant/temoignage',   [AdminController::class, 'assistantTemoignage']);
 $routeur->get('/admin/audience',               [AdminController::class, 'audience']);
 
 try {

@@ -80,6 +80,28 @@ rendue visible :
 4. **Le diagnostic gratuit** — toute page finit là : *30 minutes, gratuit,
    sans engagement*. C'est l'unique appel à l'action du site.
 
+### Deux publics, jamais un seul (règle ajoutée le 2026-08-15)
+
+La perte n'est le point d'entrée que pour la moitié des lecteurs. L'autre
+moitié ne va pas mal : elle va déjà bien et veut aller plus vite. Un site qui
+ne parle qu'en pertes ("vous perdez du temps, des clients...") est invisible
+pour un dirigeant ambitieux qui ne se reconnaît dans aucune de ces phrases —
+même si le gain qu'on lui propose (le chiffre d'affaires, par exemple) est
+exactement ce qu'il cherche.
+
+**La structure perte → gain reste inchangée** — elle sert les deux publics,
+à condition de le dire une fois, explicitement, avant d'y entrer. Chaque page
+qui ouvre sur une perte doit contenir, tôt, une phrase qui nomme aussi
+l'autre lecteur : *"que vous partiez d'une perte à arrêter ou d'une
+croissance à accélérer, la question reste la même..."*. Ce n'est pas une
+reformulation cosmétique, c'est un lecteur entier qui, sans elle, ne se sent
+pas concerné et referme l'onglet.
+
+Ne pas dupliquer tout le contenu en deux versions (une pour la perte, une
+pour la croissance) — ce serait le "grand soir" que `ea-produit` interdit.
+Une phrase-pont au bon endroit suffit ; le reste (les cinq gains, les
+preuves) parle déjà aux deux.
+
 ## Règles de rédaction non négociables
 
 - **Partir de la douleur du client**, jamais de la solution technique.

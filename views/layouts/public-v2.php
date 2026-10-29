@@ -22,6 +22,7 @@ $typeOg      = (string)Vue::lireMeta('og_type', 'website');
 $jsonLd      = Vue::lireMeta('json_ld', []);
 $cheminActif = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $version     = @filemtime(dirname(__DIR__, 2) . '/public/css/ea-v2.css') ?: 1;
+$versionJs   = @filemtime(dirname(__DIR__, 2) . '/public/js/ea-v2.js') ?: 1;
 ?>
 <!doctype html>
 <html lang="fr">
@@ -47,6 +48,7 @@ $version     = @filemtime(dirname(__DIR__, 2) . '/public/css/ea-v2.css') ?: 1;
 <meta property="og:description" content="<?= e($description) ?>">
 <meta property="og:url" content="<?= e($canonique) ?>">
 <meta property="og:image" content="<?= e($image) ?>">
+<meta property="og:image:alt" content="<?= e($titre) ?>">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= e($titre) ?>">
 <meta name="twitter:description" content="<?= e($description) ?>">
@@ -76,11 +78,61 @@ require dirname(__DIR__) . '/partials/pied-v2.php';
 require dirname(__DIR__) . '/partials/cookies.php';
 ?>
 
+<?php /* Coquille de la modale diagnostic — vide au chargement, remplie en
+         JavaScript par fragment (voir ea-v2.js). Sans JavaScript, les liens
+         qui l'ouvrent normalement gardent leur destination réelle (/diagnostic,
+         /pages/contact) et fonctionnent comme avant, en pleine page. */ ?>
+<dialog id="modale-diagnostic" class="modale" aria-label="Diagnostic rapide">
+  <div class="modale__barre">
+    <button type="button" class="modale__fermer" data-action="fermer-modale" aria-label="Fermer">
+      <?= icone('fermer') ?>
+    </button>
+  </div>
+  <div class="modale__corps" id="modale-diagnostic-corps">
+    <p class="modale__attente">Chargement…</p>
+  </div>
+</dialog>
+
+<?php /* Agent de conversation. Coquille statique, contenu géré entièrement
+         par ea-v2.js — sans JavaScript, ce bouton ne s'affiche jamais (voir
+         [hidden] plus bas) : mieux vaut l'absence totale du bouton qu'un
+         bouton qui ne répond à rien au clic. Le canal WhatsApp, lui, reste
+         un vrai lien et fonctionne dans tous les cas. */ ?>
+<button type="button" class="chat-bulle" id="chat-ouvrir" aria-label="Ouvrir EMTITÉ, l'assistant EA-SERVICES" hidden>
+  <?= icone('discussion', 'ico ico--lg') ?>
+</button>
+
+<dialog id="chat-fenetre" class="chat-fenetre" aria-label="EMTITÉ, assistant EA-SERVICES">
+  <div class="chat-entete">
+    <div>
+      <strong>EMTITÉ</strong>
+      <span>L'assistant EA-SERVICES — vous répond, vous oriente</span>
+    </div>
+    <button type="button" data-action="fermer-chat" aria-label="Fermer">
+      <?= icone('fermer') ?>
+    </button>
+  </div>
+  <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+    <p class="chat-bulle-msg chat-bulle-msg--agent">
+      Bonjour, je suis EMTITÉ. Dites-moi ce que vous cherchez à améliorer dans
+      votre activité, je vous oriente vers la bonne page — ou vers le
+      diagnostic gratuit si c'est plus rapide.
+    </p>
+  </div>
+  <form class="chat-formulaire" id="chat-formulaire">
+    <input type="text" id="chat-saisie" name="message" placeholder="Écrivez votre message…"
+           autocomplete="off" maxlength="2000" required>
+    <button type="submit" aria-label="Envoyer">
+      <?= icone('envoyer') ?>
+    </button>
+  </form>
+</dialog>
+
 <a class="flottant" href="<?= e(whatsapp()) ?>" target="_blank" rel="noopener"
    aria-label="Discuter sur WhatsApp">
   <?= icone('whatsapp', 'ico ico--lg') ?><span>WhatsApp</span>
 </a>
 
-<script src="/js/ea-v2.js" defer></script>
+<script src="/js/ea-v2.js?v=<?= $versionJs ?>" defer></script>
 </body>
 </html>

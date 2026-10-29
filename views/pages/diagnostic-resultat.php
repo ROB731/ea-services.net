@@ -25,7 +25,7 @@ $reste = array_slice($pertes, 2);
     </p>
 
     <?php if ($deux === []): ?>
-      <h1 class="mesure">Rien d'alarmant<em>dans ce que vous décrivez.</em></h1>
+      <h1 class="mesure titre-machine">Rien d'alarmant<em>dans ce que vous décrivez.</em></h1>
       <p class="mesure-large doux" style="margin-top:1.25rem">
         D'après vos réponses, vous répondez vite, vos données sont sauvegardées
         et vos clients vous trouvent. Nous n'allons pas vous inventer un
@@ -33,7 +33,7 @@ $reste = array_slice($pertes, 2);
         creuser un point précis, le diagnostic de trente minutes reste ouvert.
       </p>
     <?php else: ?>
-      <h1 class="mesure">Voici où votre croissance<em>fuit aujourd'hui.</em></h1>
+      <h1 class="mesure titre-machine">Voici où votre croissance<em>fuit aujourd'hui.</em></h1>
       <p class="mesure-large doux" style="margin-top:1.25rem">
         <?= count($deux) > 1 ? 'Deux pertes' : 'Une perte' ?> ressorte<?= count($deux) > 1 ? 'nt' : '' ?>
         de vos réponses. Chaque chiffre vient de ce que vous avez déclaré — la

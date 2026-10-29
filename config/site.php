@@ -27,6 +27,14 @@ return [
         'pays_code'         => 'CI',
     ],
 
+    // Réseaux réels — confirmés par le dirigeant le 2026-08-15. N'en ajouter
+    // un que si le lien est vérifié : un lien social mort ou générique fait
+    // plus de mal à la crédibilité qu'aucun lien du tout.
+    'reseaux' => [
+        'youtube'  => 'https://www.youtube.com/@ea-services',
+        'facebook' => 'https://www.facebook.com/entreprendreaujourdhui',
+    ],
+
     // L'unique appel à l'action du site. Aucune page ne finit autrement.
     'cta' => [
         'titre'   => 'Commençons par un diagnostic gratuit',
@@ -73,12 +81,19 @@ return [
     ],
 
     // Navigation publique. L'ordre est celui du parcours de décision.
+    // « Solutions » retiré du menu (2026-08-16) : cette page reste en ligne
+    // et indexée, atteinte depuis la section « Nos prestations » de l'accueil.
+    // « Résultats » a été scindé en deux VRAIES pages séparées (2026-08-17) :
+    // /pages/realisations (cas clients chiffrés) et /pages/blog (articles).
+    // Une seule page qui mélangeait les deux, retrouvée par une ancre, ne
+    // correspondait à aucune des deux quand on cliquait dessus.
     'navigation' => [
-        ['url' => '/',                 'libelle' => 'Accueil'],
-        ['url' => '/pages/services',   'libelle' => 'Services'],
-        ['url' => '/pages/produits',   'libelle' => 'Solutions'],
-        ['url' => '/pages/blog',       'libelle' => 'Résultats'],
-        ['url' => '/pages/a-propos',   'libelle' => 'À propos'],
+        ['url' => '/',                    'libelle' => 'Accueil'],
+        ['url' => '/pages/services',      'libelle' => 'Services'],
+        ['url' => '/pages/prestations',   'libelle' => 'Prestations'],
+        ['url' => '/pages/realisations',  'libelle' => 'Réalisations'],
+        ['url' => '/pages/blog',          'libelle' => 'Blog'],
+        ['url' => '/pages/a-propos',      'libelle' => 'À propos'],
     ],
 
     /**

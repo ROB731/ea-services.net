@@ -27,7 +27,7 @@ $liens = (array)cfg('navigation', []);
         <?= icone('lune') ?>
       </button>
 
-      <a class="bouton bouton--safran" href="/pages/contact"><?= e(cfg('cta.libelle')) ?></a>
+      <a class="bouton bouton--safran" href="/diagnostic"><?= e(cfg('cta.libelle')) ?></a>
 
       <button type="button" class="bouton-icone nav__bascule" data-action="menu"
               aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
@@ -39,7 +39,7 @@ $liens = (array)cfg('navigation', []);
       <?php foreach ($liens as $lien): ?>
         <a href="<?= e($lien['url']) ?>"<?= $cheminActif === $lien['url'] ? ' aria-current="page"' : '' ?>><?= e($lien['libelle']) ?></a>
       <?php endforeach; ?>
-      <a href="/pages/contact" class="bouton bouton--safran bouton--large"><?= e(cfg('cta.libelle')) ?></a>
+      <a href="/diagnostic" class="bouton bouton--safran bouton--large"><?= e(cfg('cta.libelle')) ?></a>
     </nav>
   </div>
 </header>

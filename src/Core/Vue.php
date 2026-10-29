@@ -25,7 +25,7 @@ final class Vue
         return self::$meta[$cle] ?? $defaut;
     }
 
-    public static function rendre(string $vue, array $donnees = [], ?string $layout = 'layouts/public'): string
+    public static function rendre(string $vue, array $donnees = [], ?string $layout = 'layouts/public-v2'): string
     {
         $contenu = self::capturer($vue, $donnees);
         if ($layout === null) return $contenu;

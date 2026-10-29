@@ -5,6 +5,14 @@
 
 use EA\Core\Auth;
 
+// Sans cette version dans l'URL, un navigateur qui a déjà mis admin.js en
+// cache ne voit jamais une mise à jour du script tant que le cache n'expire
+// pas — un bouton ajouté récemment peut alors paraître « ne pas fonctionner »
+// alors que c'est l'ancien fichier qui tourne encore. ea.css suit déjà cette
+// règle depuis le début ; ea.js et admin.js l'avaient oubliée.
+$versionEaJs    = @filemtime(dirname(__DIR__, 2) . '/public/js/ea.js') ?: 1;
+$versionAdminJs = @filemtime(dirname(__DIR__, 2) . '/public/js/admin.js') ?: 1;
+
 $onglets = [
     'tableau'      => ['/admin', 'Tableau de bord'],
     'demandes'     => ['/admin/demandes', 'Demandes'],
@@ -51,6 +59,7 @@ $onglets = [
 
   <main class="admin" style="padding-bottom:4rem"><?= $contenu ?></main>
 </div>
-<script src="/js/ea.js" defer></script>
+<script src="/js/ea.js?v=<?= $versionEaJs ?>" defer></script>
+<script src="/js/admin.js?v=<?= $versionAdminJs ?>" defer></script>
 </body>
 </html>

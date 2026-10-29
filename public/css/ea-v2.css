@@ -144,6 +144,24 @@ h1 em, h2 span.suite {
 .section--encre h2 span.suite,
 .diagnostic h2 span.suite { color: var(--safran); }
 
+/* Titres de hero : effet machine à écrire (posé par ea-v2.js). Le curseur
+   emprunte la couleur du texte qui l'entoure (currentColor) : blanc sur la
+   première ligne, safran une fois déplacé dans la seconde (<em>). Sans JS ou
+   en mouvement réduit, le titre reste simplement affiché tel quel — l'effet
+   ne retape jamais le texte lu par un lecteur d'écran (voir aria-label). */
+.titre-machine__curseur {
+  display: inline-block;
+  width: .05em; height: .82em;
+  margin-left: .03em;
+  background: currentColor;
+  vertical-align: -.08em;
+  animation: titre-machine-clignoter 1s step-end infinite;
+}
+@keyframes titre-machine-clignoter { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .titre-machine__curseur { display: none; }
+}
+
 p { margin: 0 0 1rem; }
 p:last-child { margin-bottom: 0; }
 
@@ -176,13 +194,47 @@ img { max-width: 100%; height: auto; display: block; }
   padding-inline: var(--gouttiere);
 }
 
-.section { padding-block: 3.5rem; }
+.section { position: relative; overflow: hidden; padding-block: 3.5rem; }
 .section--claire { background: var(--ivoire); }
 .section--papier { background: var(--surface); }
 .section--sable  { background: var(--sable); }
 .section--encre  { background: var(--encre); color: #fff; }
 .section--encre .doux { color: rgba(255, 255, 255, .72); }
 .section--encre a { text-decoration-color: var(--safran); }
+
+/* Fond animé de chaque section : cinq pictos épais — nuage, code, robot,
+   croissance, engrenage — plutôt que des vagues abstraites, pour ancrer
+   visuellement le métier (dev, IA, cloud, automatisation, résultats
+   chiffrés). `currentColor` reprend la couleur de texte déjà posée par
+   chaque variante de section (sombre sur fond clair, blanc sur
+   `.section--encre`) : le motif reste visible dans les deux thèmes sans
+   jeton de couleur séparé à entretenir. Un masque plutôt qu'une image : la
+   teinte suit le thème, seule la forme vient du SVG — la tuile (340 × 340)
+   se répète à l'identique en largeur ET en hauteur, et se déplace en
+   diagonale plutôt qu'en ligne droite. Opacité basse et masquée derrière
+   tout élément opaque (cartes, boutons) : jamais sous le texte qui compte. */
+.section::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: currentColor;
+  opacity: .05;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 340'%3E%3Cg fill='white'%3E%3Crect x='30' y='70' width='90' height='34' rx='17'/%3E%3Ccircle cx='50' cy='66' r='20'/%3E%3Ccircle cx='78' cy='54' r='26'/%3E%3Ccircle cx='106' cy='66' r='18'/%3E%3Cpolygon points='225,52 195,90 225,128 237,116 211,90 237,64'/%3E%3Cpolygon points='275,52 305,90 275,128 263,116 289,90 263,64'/%3E%3Crect x='242' y='48' width='14' height='84' rx='6' transform='rotate(20 249 90)'/%3E%3Crect x='150' y='195' width='70' height='60' rx='14'/%3E%3Crect x='177' y='170' width='16' height='26' rx='8'/%3E%3Ccircle cx='185' cy='164' r='9'/%3E%3Crect x='130' y='210' width='18' height='30' rx='9'/%3E%3Crect x='222' y='210' width='18' height='30' rx='9'/%3E%3Crect x='16' y='255' width='20' height='35' rx='4'/%3E%3Crect x='42' y='235' width='20' height='55' rx='4'/%3E%3Crect x='68' y='205' width='20' height='85' rx='4'/%3E%3Crect x='-6' y='-46' width='13' height='66' rx='6' transform='translate(80,235) rotate(-35)'/%3E%3Cpolygon points='86,178 112,182 92,202'/%3E%3Cg transform='translate(280,255)'%3E%3Ccircle r='30'/%3E%3Crect x='-7' y='-42' width='14' height='20' rx='4'/%3E%3Crect x='-7' y='22' width='14' height='20' rx='4'/%3E%3Crect x='-42' y='-7' width='20' height='14' rx='4'/%3E%3Crect x='22' y='-7' width='20' height='14' rx='4'/%3E%3Crect x='-7' y='-42' width='14' height='20' rx='4' transform='rotate(45)'/%3E%3Crect x='-7' y='22' width='14' height='20' rx='4' transform='rotate(45)'/%3E%3Crect x='-42' y='-7' width='20' height='14' rx='4' transform='rotate(45)'/%3E%3Crect x='22' y='-7' width='20' height='14' rx='4' transform='rotate(45)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 340'%3E%3Cg fill='white'%3E%3Crect x='30' y='70' width='90' height='34' rx='17'/%3E%3Ccircle cx='50' cy='66' r='20'/%3E%3Ccircle cx='78' cy='54' r='26'/%3E%3Ccircle cx='106' cy='66' r='18'/%3E%3Cpolygon points='225,52 195,90 225,128 237,116 211,90 237,64'/%3E%3Cpolygon points='275,52 305,90 275,128 263,116 289,90 263,64'/%3E%3Crect x='242' y='48' width='14' height='84' rx='6' transform='rotate(20 249 90)'/%3E%3Crect x='150' y='195' width='70' height='60' rx='14'/%3E%3Crect x='177' y='170' width='16' height='26' rx='8'/%3E%3Ccircle cx='185' cy='164' r='9'/%3E%3Crect x='130' y='210' width='18' height='30' rx='9'/%3E%3Crect x='222' y='210' width='18' height='30' rx='9'/%3E%3Crect x='16' y='255' width='20' height='35' rx='4'/%3E%3Crect x='42' y='235' width='20' height='55' rx='4'/%3E%3Crect x='68' y='205' width='20' height='85' rx='4'/%3E%3Crect x='-6' y='-46' width='13' height='66' rx='6' transform='translate(80,235) rotate(-35)'/%3E%3Cpolygon points='86,178 112,182 92,202'/%3E%3Cg transform='translate(280,255)'%3E%3Ccircle r='30'/%3E%3Crect x='-7' y='-42' width='14' height='20' rx='4'/%3E%3Crect x='-7' y='22' width='14' height='20' rx='4'/%3E%3Crect x='-42' y='-7' width='20' height='14' rx='4'/%3E%3Crect x='22' y='-7' width='20' height='14' rx='4'/%3E%3Crect x='-7' y='-42' width='14' height='20' rx='4' transform='rotate(45)'/%3E%3Crect x='-7' y='22' width='14' height='20' rx='4' transform='rotate(45)'/%3E%3Crect x='-42' y='-7' width='20' height='14' rx='4' transform='rotate(45)'/%3E%3Crect x='22' y='-7' width='20' height='14' rx='4' transform='rotate(45)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat; mask-repeat: repeat;
+  -webkit-mask-size: 340px 340px; mask-size: 340px 340px;
+  animation: vague-defiler 38s linear infinite;
+  pointer-events: none;
+}
+@keyframes vague-defiler {
+  0%   { -webkit-mask-position: 0px 0px;       mask-position: 0px 0px; }
+  25%  { -webkit-mask-position: -340px -85px;  mask-position: -340px -85px; }
+  50%  { -webkit-mask-position: -85px -340px;  mask-position: -85px -340px; }
+  75%  { -webkit-mask-position: 255px -255px;  mask-position: 255px -255px; }
+  100% { -webkit-mask-position: 340px -340px;  mask-position: 340px -340px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section::before { animation: none; }
+}
 
 @media (min-width: 48rem) {
   :root { --gouttiere: 2rem; }
@@ -310,8 +362,8 @@ img { max-width: 100%; height: auto; display: block; }
 .nav__panneau .bouton { margin-top: 1rem; }
 
 /* --- 8. Bandeau d'accueil ------------------------------------------------
-   Marine plein cadre, photo en fond très assombrie : la photo pose
-   l'atmosphère, elle ne porte pas le message. Le message, c'est le titre. */
+   La photo pose l'atmosphere, le voile ne doit pas l'etouffer : image
+   lumineuse, degrade resserre derriere le titre et le chapo seulement. */
 
 .heros {
   position: relative;
@@ -321,18 +373,45 @@ img { max-width: 100%; height: auto; display: block; }
   padding-block: 3.5rem 2.5rem;
 }
 .heros__fond { position: absolute; inset: 0; z-index: 0; }
-.heros__fond img { width: 100%; height: 100%; object-fit: cover; opacity: .55; }
-/* Le voile doit laisser la ville lisible tout en gardant 7:1 sous le texte :
-   dégradé vertical fort là où le titre se pose, transparent en haut. */
+/* Trois photos superposées, une seule opaque a la fois (fondu piloté par
+   ea-v2.js). Par defaut la premiere est visible en continu : sans JS, en
+   mouvement reduit, ou avant le premier bascule, rien ne casse. */
+.heros__fond img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.8s ease;
+}
+.heros__fond img:first-child { opacity: .85; }
+.heros__fond img.est-visible { opacity: .85; }
+.heros__fond img.est-cachee { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .heros__fond img { transition: none; }
+}
+/* Le voile garde 4,5:1 sous le titre et le chapo (bas-gauche) sans assombrir
+   le reste de la photo : transparent des le haut, resserre en bas-gauche. */
 .heros__voile {
   position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(180deg, rgba(9, 26, 50, .35) 0%, rgba(9, 26, 50, .78) 45%, var(--encre-fond) 100%),
-    linear-gradient(90deg, rgba(9, 26, 50, .85) 0%, rgba(9, 26, 50, .1) 75%);
+    linear-gradient(180deg, rgba(9, 26, 50, .28) 0%, rgba(9, 26, 50, .5) 55%, rgba(9, 26, 50, .82) 100%),
+    linear-gradient(90deg, rgba(9, 26, 50, .55) 0%, rgba(9, 26, 50, 0) 65%);
 }
 .heros > .page-large { position: relative; z-index: 2; }
 
 .heros h1 { margin-bottom: 1.25rem; }
+
+/* Badge de positionnement : porte les mots que les gens tapent réellement
+   (« agence de développement web ») sans les mettre dans le H1 — la
+   doctrine veut que le grand titre parle de la perte et du gain, jamais de
+   l'outil. Un badge distinct, juste sous le titre, donne au mot-clé une
+   vraie présence visuelle sans diluer le message principal. */
+.heros__badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1rem; margin-bottom: 1.5rem;
+  background: rgba(242, 182, 43, .12); border: 1px solid rgba(242, 182, 43, .4);
+  border-radius: 999px; color: var(--safran);
+  font-size: .8125rem; font-weight: 700; letter-spacing: .01em;
+}
+.heros__badge .ico { width: 1rem; height: 1rem; flex: none; }
+
 .heros__chapo {
   font-size: 1.0625rem; color: rgba(255, 255, 255, .82);
   max-width: 46ch; margin-bottom: 2rem;
@@ -371,6 +450,14 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .heros__chiffre span { font-size: .8125rem; color: rgba(255, 255, 255, .68); line-height: 1.35; }
 
+/* Honnêteté sur ce que ces chiffres représentent : des résultats déjà
+   mesurés, pas une promesse identique quel que soit le visiteur — deux
+   entreprises ne perdent jamais exactement la même chose. */
+.heros__note {
+  margin-top: .875rem; font-size: .8125rem; line-height: 1.5;
+  color: rgba(255, 255, 255, .5); max-width: 34rem;
+}
+
 @media (min-width: 48rem) {
   .heros { padding-block: 6rem 3rem; }
   .heros__chiffres { grid-template-columns: repeat(4, 1fr); }
@@ -403,9 +490,21 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--texte-doux); font-weight: 500;
 }
 @media (min-width: 48rem) {
-  /* 13rem : « 120 h » doit tenir sur une seule ligne à 4 rem de corps. */
-  .releve__ligne { grid-template-columns: 13rem 1fr 12rem; gap: 2rem; align-items: start; }
-  .releve__chiffre { font-size: 4rem; white-space: nowrap; }
+  /**
+   * BUG RÉEL CORRIGÉ (2026-08-15) : cette colonne était calée sur « 120 h »
+   * (13rem fixes, 4rem de corps fixe, nowrap forcé) — un débordement de
+   * texte visible dès que le chiffre est devenu « 420-720 h » (9 caractères
+   * contre 5), la valeur ne tenant plus dans la colonne.
+   *
+   * Corrigé une première fois en élargissant la colonne à la main ; corrigé
+   * pour de bon ici en la rendant FLUIDE (clamp avec composante vw) : la
+   * colonne et la police suivent la largeur d'écran en continu, au lieu
+   * d'un saut brutal figé à un seul point de rupture. Un chiffre plus long
+   * demain n'aura pas besoin d'un nouveau correctif — il s'étale sur deux
+   * lignes proprement si vraiment nécessaire, jamais hors de sa boîte.
+   */
+  .releve__ligne { grid-template-columns: clamp(11rem, 8rem + 12vw, 16rem) 1fr clamp(9rem, 6rem + 8vw, 12rem); gap: 2rem; align-items: start; }
+  .releve__chiffre { font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem); white-space: normal; }
   .releve__bascule { text-align: right; }
 }
 
@@ -420,7 +519,7 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: start;
 }
 .manifeste__num {
-  font-family: var(--serif-titre); font-size: 1rem; font-weight: 600;
+  font-family: var(--serif-titre); font-size: clamp(.9375rem, .85rem + .4vw, 1.0625rem); font-weight: 600;
   color: var(--safran); padding-top: .2rem;
 }
 .manifeste__corps h3 { margin-bottom: .35rem; }
@@ -431,8 +530,11 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--safran); font-variant-numeric: tabular-nums;
 }
 @media (min-width: 48rem) {
-  .manifeste__ligne { grid-template-columns: 3rem 1fr 16rem; gap: 2rem; align-items: center; }
-  .manifeste__impact { grid-column: 3; margin-top: 0; text-align: right; font-size: 1.0625rem; }
+  /* Troisième colonne (l'impact chiffré) fluide plutôt que 16rem figés :
+     un libellé plus long (« 420 à 720 heures récupérées par an ») garde de
+     la place pour respirer sans jamais forcer la colonne du texte courant. */
+  .manifeste__ligne { grid-template-columns: clamp(2.5rem, 2rem + 2vw, 3.5rem) 1fr clamp(12rem, 8rem + 14vw, 18rem); gap: 2rem; align-items: center; }
+  .manifeste__impact { grid-column: 3; margin-top: 0; text-align: right; font-size: clamp(.9375rem, .85rem + .3vw, 1.0625rem); }
 }
 
 /* --- 11. Cartes et preuve ----------------------------------------------- */
@@ -449,12 +551,38 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .carte h3 { margin-bottom: .5rem; }
 
+/* Aperçu d'un site réalisé : le vrai site chargé en direct (iframe) ou, à
+   défaut d'autorisation côté serveur tiers (ivoirrapid.ci), une vraie
+   capture d'écran — jamais une image inventée. Ratio fixe pour que la grille
+   reste régulière quelle que soit la hauteur réelle de chaque site. */
+.apercu-site {
+  aspect-ratio: 16 / 10;
+  background: var(--sable);
+  border-bottom: 1px solid var(--trait);
+  overflow: hidden;
+}
+.apercu-site iframe, .apercu-site img {
+  width: 100%; height: 100%; border: 0; display: block; object-fit: cover;
+}
+
 .chapeau {
   display: inline-block; margin-bottom: .75rem;
   font-family: var(--serif-titre); font-size: .6875rem; font-weight: 600;
   letter-spacing: .14em; text-transform: uppercase;
   color: var(--safran-encre);
 }
+
+/* Rangée de pastilles — les six familles de prestations sur l'accueil, ou un
+   mot-clé public par gain sur /pages/services : un repère de vocabulaire,
+   pas un lien de plus à cliquer. */
+.marqueurs { display: flex; flex-wrap: wrap; gap: .5rem; }
+.marqueur {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .375rem .75rem; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--trait);
+  font-size: .8125rem; font-weight: 600; color: var(--texte-doux);
+}
+.marqueur .ico { width: 1rem; height: 1rem; color: var(--safran-encre); }
 
 /* Avant → après : le tableau de la v1 devient une paire de chiffres. Un
    tableau à trois colonnes sur 390 px se lit mal ; deux chiffres et une
@@ -486,6 +614,27 @@ img { max-width: 100%; height: auto; display: block; }
   border: 2px dashed var(--trait); border-radius: var(--arrondi-lg);
   text-align: center; color: var(--texte-doux);
 }
+
+/* Variante "preuve à venir" : un vrai bloc éditorial, pas un placeholder qui
+   se voit — le fond plein et l'icône lui donnent la même intention visuelle
+   que les cartes de cas chiffrés juste au-dessus. */
+.reserve--avis {
+  border-style: solid; background: var(--papier);
+  max-width: 34rem; margin-left: auto; margin-right: auto;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+}
+.reserve__icone {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem; margin-bottom: 1rem;
+  border-radius: 50%; background: color-mix(in srgb, var(--safran) 20%, transparent);
+  color: var(--safran-encre);
+}
+.reserve__icone .ico { width: 1.375rem; height: 1.375rem; }
+.reserve__titre {
+  margin: 0 0 .5rem; font-family: var(--serif-titre);
+  font-size: 1.0625rem; color: var(--encre);
+}
+.reserve__texte { margin: 0; font-size: .9375rem; }
 
 /* --- 12. Méthode -------------------------------------------------------- */
 
@@ -521,7 +670,16 @@ img { max-width: 100%; height: auto; display: block; }
 @media (min-width: 30rem) { .diagnostic__actions { display: flex; flex-wrap: wrap; align-items: center; } }
 .diagnostic__note { font-size: .875rem; color: rgba(255, 255, 255, .65); }
 @media (min-width: 60rem) {
-  .diagnostic__inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; }
+  /**
+   * BUG RÉEL CORRIGÉ (2026-08-15) : `auto` se dimensionne sur le contenu
+   * NON replié (max-content) même quand ce contenu a `flex-wrap: wrap` —
+   * la colonne des boutons+note réclamait donc toute sa largeur sur une
+   * seule ligne (756px mesurés), écrasant la colonne de texte à 316px et
+   * forçant le titre à se replier mot par mot. `minmax(0, …)` sur les deux
+   * pistes autorise chacune à rétrécir sous son contenu naturel, ce qui
+   * laisse `flex-wrap` faire son travail normalement.
+   */
+  .diagnostic__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); gap: 3rem; align-items: end; }
   .diagnostic__actions { margin-top: 0; }
 }
 
@@ -687,3 +845,284 @@ img { max-width: 100%; height: auto; display: block; }
 /* WhatsApp garde sa couleur propre : c'est le seul usage de --signal, et le
    canal est identifie par sa teinte dans tout le marche vise. */
 .bouton--whatsapp { background: var(--signal); color: #fff; }
+
+/* --- 17. Modale (diagnostic rapide) --------------------------------------
+   Le diagnostic (5 questions, calcul honnête déjà en place sur /diagnostic)
+   se charge ici en fragment, sans jamais quitter la page où le visiteur se
+   trouvait. `<dialog>` natif : gestion clavier (Échap), calque, et focus de
+   base fournis par le navigateur — pas besoin de les recoder à la main. */
+dialog.modale {
+  padding: 0; border: 0; border-radius: var(--arrondi-lg);
+  width: min(100% - 2rem, 40rem);
+  max-height: min(100dvh - 3rem, 46rem);
+  background: var(--surface); color: var(--texte);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+}
+/* La boîte s'élargit avec l'écran plutôt que de rester figée à 40rem : sur
+   un grand moniteur, une largeur fixe laisse un pavé étroit perdu au milieu
+   d'un calque sombre. Le contenu (une seule colonne de questions) reste
+   confortable à lire à chaque palier — voir .modale__corps ci-dessous pour
+   la marge intérieure qui grandit avec la boîte. */
+@media (min-width: 48rem) {
+  dialog.modale { width: min(100% - 3rem, 46rem); }
+}
+@media (min-width: 64rem) {
+  dialog.modale { width: min(100% - 4rem, 54rem); max-height: min(100dvh - 5rem, 50rem); }
+}
+@media (min-width: 90rem) {
+  dialog.modale { width: min(100% - 4rem, 62rem); }
+}
+dialog.modale::backdrop { background: rgba(11, 12, 16, .6); backdrop-filter: blur(2px); }
+dialog.modale[open] { display: flex; flex-direction: column; }
+
+.modale__barre {
+  position: sticky; top: 0; z-index: 1;
+  display: flex; justify-content: flex-end;
+  padding: .75rem .75rem 0; background: var(--surface);
+}
+.modale__fermer {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.75rem; height: 2.75rem; border-radius: 999px; border: 0;
+  background: var(--sable); color: var(--texte); cursor: pointer;
+}
+.modale__fermer:hover { background: var(--trait); }
+
+.modale__corps { overflow-y: auto; padding: 0 0 1.5rem; }
+/* Les sections du fragment /diagnostic sont pensées pleine page (page-large,
+   grandes marges) : resserrées ici pour tenir dans une boîte de dialogue.
+   La marge intérieure grandit avec la boîte (voir dialog.modale plus haut) :
+   sinon la largeur gagnée sur grand écran ne fait qu'élargir les champs sans
+   respirer, et un formulaire d'une seule colonne devient difficile à suivre. */
+.modale__corps .section { padding-block: 1.5rem; }
+.modale__corps .page-large { padding-inline: 1.5rem; max-width: none; }
+@media (min-width: 48rem) {
+  .modale__corps .page-large { padding-inline: 2.25rem; }
+}
+@media (min-width: 64rem) {
+  .modale__corps .page-large { padding-inline: 3rem; }
+}
+.modale__corps .section--encre { margin: 0 0 1rem; border-radius: var(--arrondi-lg) var(--arrondi-lg) 0 0; }
+
+.modale__attente {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 16rem; color: var(--texte-doux);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.modale {
+    transition: opacity .2s var(--sortie), transform .2s var(--sortie), overlay .2s allow-discrete, display .2s allow-discrete;
+    opacity: 0; transform: translateY(.75rem) scale(.98);
+  }
+  dialog.modale[open] { opacity: 1; transform: none; }
+  @starting-style { dialog.modale[open] { opacity: 0; transform: translateY(.75rem) scale(.98); } }
+  dialog.modale::backdrop {
+    transition: opacity .2s var(--sortie), overlay .2s allow-discrete, display .2s allow-discrete;
+    opacity: 0;
+  }
+  dialog.modale[open]::backdrop { opacity: 1; }
+  @starting-style { dialog.modale[open]::backdrop { opacity: 0; } }
+}
+
+/* --- 18. Agent de conversation --------------------------------------------
+   Bouton empilé au-dessus du bouton WhatsApp (même colonne, jamais les deux
+   à la même hauteur). La fenêtre est un <dialog> non modal : elle reste à
+   l'écran pendant qu'on continue de lire la page, contrairement à la modale
+   diagnostic qui, elle, bloque volontairement le reste. */
+.chat-bulle {
+  position: fixed; right: 1rem; bottom: calc(1rem + 3.25rem + .75rem); z-index: 55;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 3.25rem; height: 3.25rem; border: 0; border-radius: 999px;
+  background: var(--encre); color: #fff; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(17, 40, 73, .35);
+}
+.chat-bulle:hover { background: var(--encre-douce); }
+
+/* Invitation ponctuelle : une seule fois par visiteur (voir ea-v2.js), pour
+   inciter à ouvrir la discussion sans harceler à chaque page. Placée
+   au-dessus du bouton pour ne jamais recouvrir le bouton WhatsApp ni le
+   bouton du chat lui-même. */
+.chat-invite {
+  position: fixed; right: 1rem; z-index: 56;
+  bottom: calc(1rem + 3.25rem + .75rem + 3.25rem + .75rem);
+  max-width: 16rem;
+  display: flex; align-items: flex-start; gap: .625rem;
+  background: var(--surface); color: var(--texte);
+  border: 1px solid var(--trait); border-radius: var(--arrondi-lg);
+  box-shadow: 0 12px 32px rgba(17, 40, 73, .18);
+  padding: .875rem 1rem; font-size: .875rem; line-height: 1.4;
+  cursor: pointer;
+}
+.chat-invite__texte { flex: 1; }
+.chat-invite__texte strong { display: block; font-family: var(--serif-titre); margin-bottom: .125rem; }
+.chat-invite__fermer {
+  flex: none; width: 1.5rem; height: 1.5rem; border: 0; border-radius: 999px;
+  background: transparent; color: var(--texte-doux); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.chat-invite__fermer:hover { background: var(--sable); }
+@media (max-width: 26rem) {
+  .chat-invite { left: 1rem; right: 1rem; max-width: none; }
+}
+
+dialog.chat-fenetre {
+  /**
+   * BUG RÉEL CORRIGÉ (2026-08-15) : aucun z-index n'était posé ici. Un
+   * <dialog> non modal (ouvert via .show(), pas .showModal()) ne passe pas
+   * forcément dans la « couche supérieure » du navigateur — sur mobile, où
+   * la fenêtre se repositionne en bas de l'écran (juste en dessous), le
+   * bouton WhatsApp (z-index:55, plus loin dans le DOM) passait PAR-DESSUS
+   * le bas de la fenêtre et bloquait le clic sur le bouton d'envoi. Un
+   * z-index explicite, plus haut que les boutons flottants, referme le cas
+   * sans dépendre de l'ordre du DOM. Les boutons flottants sont en plus
+   * masqués pendant que la fenêtre est ouverte (voir ea-v2.js) : aucun
+   * chevauchement possible, quel que soit le navigateur.
+   */
+  position: fixed; right: 1rem; bottom: calc(1rem + 3.25rem + .75rem + 3.25rem + .75rem);
+  left: auto; top: auto; margin: 0; padding: 0; border: 0; border-radius: var(--arrondi-lg);
+  z-index: 60;
+  width: min(23rem, calc(100vw - 2rem));
+  height: min(32rem, calc(100dvh - 8rem));
+  background: var(--surface); color: var(--texte);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .3);
+  display: none; flex-direction: column; overflow: hidden;
+}
+dialog.chat-fenetre[open] { display: flex; }
+dialog.chat-fenetre::backdrop { background: transparent; } /* non modale : la page reste utilisable */
+
+/* Masqués pendant que la fenêtre de chat est ouverte — posé par ea-v2.js. */
+body.chat-ouverte .chat-bulle,
+body.chat-ouverte .flottant { display: none; }
+
+@media (max-width: 26rem) {
+  /* Plein écran sur mobile : une fenêtre de discussion à moitié visible ne
+     sert à rien sur un petit téléphone. */
+  dialog.chat-fenetre {
+    right: .5rem; bottom: .5rem;
+    width: calc(100vw - 1rem); height: min(calc(100dvh - 6rem), 34rem);
+  }
+}
+
+.chat-entete {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  padding: .875rem 1rem; background: var(--encre); color: #fff; flex: none;
+}
+.chat-entete strong { font-family: var(--serif-titre); }
+.chat-entete span { display: block; font-size: .75rem; color: rgba(255, 255, 255, .65); }
+.chat-entete button {
+  border: 0; background: rgba(255, 255, 255, .12); color: #fff;
+  width: 2.25rem; height: 2.25rem; border-radius: 999px; cursor: pointer; flex: none;
+}
+.chat-entete button:hover { background: rgba(255, 255, 255, .22); }
+
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .625rem;
+}
+.chat-bulle-msg {
+  max-width: 85%; padding: .625rem .875rem; border-radius: .875rem; line-height: 1.5;
+  font-size: .9375rem; white-space: pre-wrap;
+}
+.chat-bulle-msg--agent {
+  align-self: flex-start; background: var(--sable); color: var(--texte);
+  border-bottom-left-radius: .25rem;
+}
+.chat-bulle-msg--agent a { color: var(--safran-encre); font-weight: 700; text-decoration: underline; }
+.chat-bulle-msg--client {
+  align-self: flex-end; background: var(--encre); color: #fff;
+  border-bottom-right-radius: .25rem;
+}
+.chat-bulle-msg--client a { color: var(--safran); font-weight: 700; text-decoration: underline; }
+.chat-bulle-msg--systeme {
+  align-self: center; background: none; color: var(--texte-doux); font-size: .8125rem; text-align: center;
+}
+
+.chat-attente { align-self: flex-start; display: flex; gap: .25rem; padding: .5rem .875rem; }
+.chat-attente span {
+  width: .4rem; height: .4rem; border-radius: 999px; background: var(--texte-doux);
+  animation: chat-rebond 1.2s infinite ease-in-out;
+}
+.chat-attente span:nth-child(2) { animation-delay: .15s; }
+.chat-attente span:nth-child(3) { animation-delay: .3s; }
+@keyframes chat-rebond { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-.15rem); } }
+@media (prefers-reduced-motion: reduce) { .chat-attente span { animation: none; opacity: .7; } }
+
+.chat-formulaire {
+  display: flex; gap: .5rem; padding: .75rem; border-top: 1px solid var(--trait); flex: none;
+}
+.chat-formulaire input {
+  flex: 1; min-height: 2.75rem; padding: 0 .875rem; border: 1px solid var(--trait);
+  border-radius: var(--arrondi); background: var(--fond); color: var(--texte); font: inherit;
+}
+.chat-formulaire input:focus { outline: 2px solid var(--safran); outline-offset: 1px; }
+.chat-formulaire button {
+  width: 2.75rem; height: 2.75rem; border: 0; border-radius: var(--arrondi);
+  background: var(--safran); color: var(--encre); cursor: pointer; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.chat-formulaire button:disabled { opacity: .5; cursor: default; }
+
+/* --- 19. Contenu rédactionnel (article) ----------------------------------
+   Le texte d'un article est écrit en administration (voir Texte::enHtml) :
+   du HTML simple généré depuis du texte brut, jamais un gabarit à part
+   entière — ce bloc lui donne juste une largeur de lecture confortable et
+   des espacements cohérents avec le reste de la direction v2. */
+.redaction { font-size: 1.0625rem; line-height: 1.8; }
+.redaction > * { max-width: 42rem; }
+.redaction h2 { margin-top: 2.5rem; }
+.redaction h3 { margin-top: 1.75rem; }
+.redaction ul, .redaction ol { padding-left: 1.25rem; }
+.redaction li { margin-bottom: .5rem; }
+.redaction img { border-radius: var(--arrondi); margin-block: 1.75rem; }
+.redaction blockquote {
+  margin: 1.75rem 0; padding: 1rem 1.5rem;
+  border-left: 4px solid var(--safran); background: var(--sable);
+  border-radius: 0 var(--arrondi) var(--arrondi) 0;
+}
+.redaction table { width: 100%; border-collapse: collapse; }
+.redaction td, .redaction th { padding: .5rem; border-bottom: 1px solid var(--trait); text-align: left; }
+
+/* --- 20. Bandeau d'aperçu (administration) -------------------------------- */
+.bandeau-apercu {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--safran); color: var(--encre);
+  text-align: center; font-weight: 700; font-size: .875rem;
+  padding: .625rem 1rem;
+}
+
+/* --- 21. Partage d'un article ---------------------------------------------
+   Sur un marché où WhatsApp est le canal de partage réel (cf. balises og:
+   déjà en place), un lien mort ou un bouton qui ne fait rien coûte plus cher
+   qu'aucun bouton. WhatsApp et Facebook restent de vrais liens <a> — ils
+   marchent sans JavaScript ; seul « Copier le lien » en dépend. */
+.partage { display: flex; align-items: center; gap: .625rem; margin-top: 1.5rem; }
+.partage__etiquette { font-size: .8125rem; font-weight: 700; color: rgba(255, 255, 255, .6); }
+.partage__bouton {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .18);
+  color: #fff; cursor: pointer; transition: background .15s;
+}
+.partage__bouton:hover { background: rgba(255, 255, 255, .18); }
+.partage__bouton .ico { width: 1.125rem; height: 1.125rem; }
+.partage__bouton[data-copie] { background: #15803d; border-color: transparent; }
+
+/* --- 22. Promotion interne, en cours de lecture d'un article -------------- */
+.promo-article {
+  margin-top: 3rem; padding: 1.5rem; border-radius: var(--arrondi-lg);
+  background: var(--sable); border: 1px solid var(--trait);
+}
+.promo-article__etiquette {
+  font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--safran-encre); margin-bottom: 1rem;
+}
+.promo-article__grille { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 30rem) { .promo-article__grille { grid-template-columns: 1fr 1fr; } }
+.promo-article__carte {
+  display: flex; flex-direction: column; gap: .375rem;
+  padding: 1rem; border-radius: var(--arrondi); background: var(--fond, #fff);
+  border: 1px solid var(--trait); text-decoration: none; color: inherit;
+  transition: border-color .15s, transform .15s;
+}
+.promo-article__carte:hover { border-color: var(--safran); transform: translateY(-2px); }
+.promo-article__carte .ico { color: var(--safran-encre); }
+.promo-article__titre { font-weight: 700; font-size: .9375rem; }
+.promo-article__impact { font-size: .8125rem; color: var(--texte-doux); }

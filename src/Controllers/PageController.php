@@ -28,8 +28,8 @@ final class PageController extends Controleur
             'vue'         => 'pages/accueil-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/',
-            'titre'       => "Augmentez vos résultats sans augmenter vos coûts — EA-SERVICES",
-            'description' => "Récupérez 420 à 720 heures par an, répondez à vos clients en moins de 2 minutes et gagnez en visibilité. Diagnostic gratuit de 30 minutes à Abidjan.",
+            'titre'       => "Agence de développement web et de logiciel sur mesure à Abidjan | EA-SERVICES",
+            'description' => "Agence digitale à Abidjan : développement web, développement de logiciel sur mesure, automatisation et IA pour entreprises. Récupérez 420 à 720 heures par an. Diagnostic gratuit.",
         ],
         'services' => [
             // Portée sur la direction v2 (2026-08-13). L'ancienne vue reste sur
@@ -37,26 +37,43 @@ final class PageController extends Controleur
             'vue'         => 'pages/services-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/services',
-            'titre'       => "Nos services — cinq pertes, cinq façons de les arrêter | EA-SERVICES",
-            'description' => "Temps, clients, visibilité, chiffre d'affaires, sérénité : comment nous traitons vos cinq plus grosses pertes, avec un chiffre en face de chacune.",
+            'titre'       => "Automatisation, chatbot WhatsApp, prospection : nos services à Abidjan | EA-SERVICES",
+            'description' => "Automatisation des tâches, chatbot WhatsApp, référencement, gestion commerciale, maintenance informatique : cinq pertes traitées, un chiffre en face de chacune.",
         ],
         'produits' => [
-            'vue'         => 'pages/produits',
+            'vue'         => 'pages/produits-v2',
+            'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/produits',
-            'titre'       => "Nos solutions — visibilité, prospection, recrutement | EA-SERVICES",
-            'description' => "Trois ensembles qui se renforcent : présence en ligne complète, prospection commerciale autonome et recrutement simplifié pour les entreprises ivoiriennes.",
+            'titre'       => "Solutions : site internet, prospection automatisée, recrutement | EA-SERVICES",
+            'description' => "Création de site internet, prospection commerciale automatisée et recrutement simplifié : trois solutions pour entreprises ivoiriennes, pensées pour fonctionner ensemble.",
+        ],
+        'prestations' => [
+            'vue'         => 'pages/prestations-v2',
+            'gabarit'     => 'layouts/public-v2',
+            'canonical'   => '/pages/prestations',
+            'titre'       => "Développement de logiciel sur mesure, site web, IA à Abidjan | EA-SERVICES",
+            'description' => "Développement de logiciel sur mesure, application web ou mobile, site vitrine, boutique en ligne, automatisation, formation informatique et IA : nos prestations, une par une.",
+        ],
+        'realisations' => [
+            'vue'         => 'pages/realisations-v2',
+            'gabarit'     => 'layouts/public-v2',
+            'canonical'   => '/pages/realisations',
+            'titre'       => "Nos réalisations : sites web et résultats clients à Abidjan | EA-SERVICES",
+            'description' => "Exemples réels de sites web et applications créés pour des entreprises ivoiriennes, avec les chiffres avant/après : placements, prospects, heures récupérées.",
         ],
         'blog' => [
-            'vue'         => 'pages/blog',
+            'vue'         => 'pages/blog-v2',
+            'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/blog',
-            'titre'       => "Résultats clients — cas réels et chiffres | EA-SERVICES",
-            'description' => "De 10 à 30 placements par mois, 3 heures récupérées par jour, 15 heures par semaine rendues à un dirigeant : trois cas clients détaillés, chiffres à l'appui.",
+            'titre'       => "Blog — automatisation, IA, création de site web pour PME | EA-SERVICES",
+            'description' => "Chatbot WhatsApp, agent IA, création de site web, recrutement : nos articles répondent à ce que les entreprises ivoiriennes cherchent vraiment sur Google.",
         ],
         'a-propos' => [
-            'vue'         => 'pages/a-propos',
+            'vue'         => 'pages/a-propos-v2',
+            'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/a-propos',
-            'titre'       => "À propos — pourquoi EA-SERVICES existe | Abidjan",
-            'description' => "Il n'existe pas d'achat, il n'existe que des investissements. Notre principe, notre méthode en quatre étapes et nos engagements. Équipe basée à Abidjan.",
+            'titre'       => "Notre agence web à Abidjan — pourquoi EA-SERVICES existe",
+            'description' => "Il n'existe pas d'achat, il n'existe que des investissements. Notre principe, notre méthode en quatre étapes et nos engagements. Agence basée à Marcory, Abidjan.",
         ],
         'contact' => [
             // Portee sur la direction v2 (2026-08-13). Formulaire identique :
@@ -64,7 +81,7 @@ final class PageController extends Controleur
             'vue'         => 'pages/contact-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/contact',
-            'titre'       => "Contact — diagnostic gratuit de 30 minutes | EA-SERVICES",
+            'titre'       => "Contact agence web Abidjan — diagnostic gratuit de 30 minutes | EA-SERVICES",
             'description' => "WhatsApp, téléphone ou formulaire : réservez votre diagnostic gratuit de 30 minutes. Réponse sous 2 heures. EA-SERVICES, Marcory Biétry, Abidjan.",
         ],
     ];
@@ -100,7 +117,7 @@ final class PageController extends Controleur
             'description' => $p['description'],
             'canonical'   => $p['canonical'],
             'json_ld'     => Seo::blocsCommuns($cle),
-        ], $p['gabarit'] ?? 'layouts/public');
+        ], $p['gabarit'] ?? 'layouts/public-v2');
     }
 
     private function articlesRecents(int $limite): array
@@ -110,31 +127,6 @@ final class PageController extends Controleur
              FROM articles WHERE published = 1 ORDER BY datetime(created_at) DESC LIMIT ?',
             [$limite]
         );
-    }
-
-    /**
-     * `/apercu` — prototype de la nouvelle direction artistique.
-     *
-     * Vit à côté de la production, jamais à sa place : aucune page en ligne
-     * n'est modifiée, l'adresse n'est ni dans la navigation, ni dans le
-     * sitemap, et elle est explicitement désindexée. À supprimer le jour où
-     * la v2 remplace la v1 (ou si elle est abandonnée).
-     */
-    public function apercu(): string
-    {
-        header('X-Robots-Tag: noindex, nofollow');
-
-        Vue::meta([
-            'titre'       => "Aperçu de la nouvelle direction — EA-SERVICES",
-            'description' => "Prototype interne. Cette adresse n'est pas publiée.",
-            'canonical'   => '/apercu',
-            'robots'      => 'noindex, nofollow',
-        ]);
-
-        return Vue::rendre('pages/accueil-v2', [
-            'temoignages' => Database::tous('SELECT name, comment, rating FROM testimonials ORDER BY id DESC LIMIT 3'),
-            'articles'    => $this->articlesRecents(3),
-        ], 'layouts/public-v2');
     }
 
     /** 404 habillée : elle garde le visiteur sur le site au lieu de le perdre. */
@@ -147,9 +139,9 @@ final class PageController extends Controleur
             'canonical'   => '/',
             'robots'      => 'noindex, follow',
         ]);
-        $html = Vue::rendre('pages/introuvable', [
+        $html = Vue::rendre('pages/introuvable-v2', [
             'articles' => $this->articlesRecents(3),
-        ], 'layouts/public');
+        ], 'layouts/public-v2');
         echo $html;
         return '';
     }
@@ -170,10 +162,10 @@ final class PageController extends Controleur
             'canonical'   => '/',
             'robots'      => 'noindex, follow',
         ]);
-        echo Vue::rendre('pages/introuvable', [
+        echo Vue::rendre('pages/introuvable-v2', [
             'articles' => $this->articlesRecents(3),
             'disparue' => true,
-        ], 'layouts/public');
+        ], 'layouts/public-v2');
         return '';
     }
 }

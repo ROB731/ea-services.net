@@ -19,6 +19,7 @@ $gains = (array)cfg('gains');
 $services = [
     [
         'cle' => 'temps', 'icone' => 'temps', 'numero' => '01',
+        'mots' => ['Automatisation'],
         'titre' => $gains['temps']['titre'],
         'probleme' => "Vous passez vos journées sur des tâches qu'une machine ferait sans vous : "
                     . "relancer un prospect, ressaisir les mêmes informations d'un carnet à un fichier, "
@@ -35,6 +36,7 @@ $services = [
     ],
     [
         'cle' => 'conversion', 'icone' => 'conversion', 'numero' => '02',
+        'mots' => ['Automatisation', 'Présence en ligne'],
         'titre' => $gains['conversion']['titre'],
         'probleme' => "Un client vous écrit à 21 h. Vous le voyez le lendemain à 11 h. Entre-temps il a écrit "
                     . "à deux autres entreprises, et l'une d'elles a répondu. Vous n'avez pas perdu sur le prix "
@@ -51,6 +53,7 @@ $services = [
     ],
     [
         'cle' => 'visibilite', 'icone' => 'visibilite', 'numero' => '03',
+        'mots' => ['Présence en ligne'],
         'titre' => $gains['visibilite']['titre'],
         'probleme' => "Quelqu'un cherche exactement ce que vous vendez, à Abidjan, aujourd'hui. "
                     . "Il tape sa recherche sur son téléphone. Il ne vous trouve pas. Il appelle "
@@ -67,6 +70,7 @@ $services = [
     ],
     [
         'cle' => 'ca', 'icone' => 'croissance', 'numero' => '04',
+        'mots' => ['Développement sur mesure', 'Accompagnement'],
         'titre' => $gains['ca']['titre'],
         'probleme' => "Pour gagner plus, il faudrait travailler plus. Vos journées sont déjà pleines. "
                     . "Vous êtes devenu le plafond de votre propre entreprise.",
@@ -82,6 +86,7 @@ $services = [
     ],
     [
         'cle' => 'serenite', 'icone' => 'serenite', 'numero' => '05',
+        'mots' => ['Infrastructure'],
         'titre' => $gains['serenite']['titre'],
         'probleme' => "Le fichier de vos clients est sur un seul ordinateur. Vous ne savez pas ce que vous "
                     . "devez faire des données que vous collectez. Le jour où l'ordinateur tombe, "
@@ -101,6 +106,16 @@ $libelles = [
     'temps' => 'Temps', 'conversion' => 'Conversion', 'visibilite' => 'Visibilité',
     'ca' => "Chiffre d'affaires", 'serenite' => 'Sérénité',
 ];
+
+/* Le mot que quelqu'un tape réellement dans Google n'est jamais « gagnez du
+   temps » — c'est « automatisation », « développement logiciel »… Chaque
+   gain est donc rattaché au(x) mot-clé(s) public(s) sous lequel on le
+   cherche, affichés en pastille sous le titre (voir plus bas). */
+$iconesMots = [
+    'Présence en ligne' => 'visibilite', 'Développement sur mesure' => 'croissance',
+    'Automatisation' => 'temps', 'Formation' => 'serenite',
+    'Accompagnement' => 'cible', 'Infrastructure' => 'document',
+];
 ?>
 
 <?php /* ------------------------------------------------------ L'ouverture */ ?>
@@ -113,10 +128,16 @@ $libelles = [
     <?php /* `em` et non `span.suite` : le systeme de design fait passer la
              seconde ligne en bloc via `h1 em` et `h2 span.suite`. Dans un h1,
              span.suite reste en ligne — le titre se collait sans espace. */ ?>
-    <h1 class="mesure">Cinq pertes.<em>Cinq façons de les arrêter.</em></h1>
+    <h1 class="mesure titre-machine">Cinq pertes.<em>Cinq façons de les arrêter.</em></h1>
+    <p class="heros__badge"><?= icone('cible') ?> Agence de développement web &amp; automatisation — Abidjan, Côte d'Ivoire</p>
     <p class="mesure-large doux" style="margin-top:1.25rem">
       Chaque service part d'une perte que vous subissez déjà. Pas d'une
       technologie qu'il faudrait adopter. Vous choisissez par où commencer.
+    </p>
+    <p class="mesure-large" style="margin-top:1rem;font-weight:600">
+      Ces cinq pertes ne parlent pas qu'à ceux qui vont mal : arrêter une
+      fuite et accélérer une croissance, c'est le même travail. Si vous allez
+      déjà bien, ces cinq leviers sont ceux qui vous font aller plus vite.
     </p>
   </div>
 </section>
@@ -124,13 +145,21 @@ $libelles = [
 <?php /* Les cinq gains, développés. Fond alterné pour séparer les blocs sans
          ajouter de bordure : la respiration fait le découpage. */ ?>
 <?php foreach ($services as $i => $s): ?>
-<section class="section <?= $i % 2 ? 'section--sable' : 'section--papier' ?>">
+<section class="section <?= $i % 2 ? 'section--sable' : 'section--papier' ?>" id="gain-<?= e($s['cle']) ?>">
   <div class="page-large">
     <p class="etiquette-section">
       <span class="etiquette-section__index"><?= e($s['numero']) ?></span>
       <span class="etiquette-section__texte"><?= e($libelles[$s['cle']]) ?></span>
     </p>
     <h2 class="mesure"><?= icone($s['icone'], 'ico ico--lg') ?> <?= e($s['titre']) ?></h2>
+
+    <?php if (!empty($s['mots'])): ?>
+      <div class="marqueurs" style="margin:1rem 0 1.5rem">
+        <?php foreach ($s['mots'] as $mot): ?>
+          <span class="marqueur"><?= icone($iconesMots[$mot] ?? 'cible') ?> <?= e($mot) ?></span>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
 
     <div class="grille grille--2">
       <article class="carte">
@@ -185,7 +214,7 @@ $libelles = [
       </p>
     </div>
     <div class="diagnostic__actions">
-      <a class="bouton bouton--safran" href="/pages/contact">
+      <a class="bouton bouton--safran" href="/diagnostic">
         <?= e(cfg('cta.libelle')) ?> <?= icone('fleche') ?>
       </a>
       <a class="bouton bouton--contour-clair" href="<?= e(whatsapp()) ?>" target="_blank" rel="noopener">

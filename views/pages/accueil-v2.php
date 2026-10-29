@@ -7,9 +7,11 @@
  * poser — un déroulé de démonstration numéroté (la perte, le gain, la preuve,
  * la méthode) au lieu de six sections de cartes identiques.
  *
- * Aucune photo n'affirme montrer EA-SERVICES : les trois images sont les
- * photos d'Abidjan sous licence Wikimedia déjà utilisées, créditées en bas de
- * bandeau, et les emplacements des vraies photos sont marqués comme tels.
+ * Aucune photo n'affirme montrer EA-SERVICES : ce sont des photos
+ * illustratives d'Abidjan sous licence Wikimedia, créditées en bas de
+ * bandeau. Trois images en fondu enchaîné (ea-v2.js) : purement décoratives,
+ * la première reste affichée en continu sans JavaScript ou en mouvement
+ * réduit — rien ne casse, il n'y a simplement pas de mouvement.
  *
  * @var array $temoignages
  * @var array $articles
@@ -20,20 +22,30 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
 ?>
 
 <section class="heros">
-  <div class="heros__fond">
+  <div class="heros__fond" aria-hidden="true">
     <img src="/assets/hero-nuit-900.jpg"
          srcset="/assets/hero-nuit-900.jpg 900w, /assets/hero-nuit-1920.jpg 1920w"
          sizes="100vw" alt="" width="1920" height="864" fetchpriority="high">
+    <img src="/assets/hero-jour-900.jpg"
+         srcset="/assets/hero-jour-900.jpg 900w, /assets/hero-jour-1920.jpg 1920w"
+         sizes="100vw" alt="" width="1920" height="864" loading="lazy">
+    <img src="/assets/hero-plateau-900.jpg"
+         srcset="/assets/hero-plateau-900.jpg 900w, /assets/hero-plateau-1920.jpg 1920w"
+         sizes="100vw" alt="" width="1920" height="864" loading="lazy">
   </div>
   <div class="heros__voile" aria-hidden="true"></div>
 
   <div class="page-large">
     <p class="etiquette-section">
       <span class="etiquette-section__index">01 / La promesse</span>
-      <span class="etiquette-section__texte">Entreprises et indépendants en Côte d'Ivoire</span>
+      <span class="etiquette-section__texte">Agence de développement web et d'automatisation à Abidjan</span>
     </p>
 
-    <h1>Vous ne manquez pas de travail.<em>Vous perdez ce qu'il rapporte.</em></h1>
+    <h1 class="titre-machine">Vous ne manquez pas de travail.<em>Vous perdez ce qu'il rapporte.</em></h1>
+
+    <p class="heros__badge">
+      <?= icone('cible') ?> Agence de développement web &amp; logiciel sur mesure — Abidjan, Côte d'Ivoire
+    </p>
 
     <p class="heros__chapo">
       Les entreprises qui prospèrent ne travaillent pas plus : elles arrêtent de
@@ -42,7 +54,7 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
     </p>
 
     <div class="heros__actions">
-      <a class="bouton bouton--safran" href="/pages/contact">
+      <a class="bouton bouton--safran" href="/diagnostic">
         Chiffrer mes deux plus grosses pertes <?= icone('fleche') ?>
       </a>
       <a class="bouton bouton--contour-clair" href="#la-perte">
@@ -63,6 +75,11 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
       <div class="heros__chiffre"><strong>+40 %</strong><span>de demandes venues de Google</span></div>
       <div class="heros__chiffre"><strong>+20 à 40 %</strong><span>de chiffre d'affaires la 1<sup>re</sup> année</span></div>
     </div>
+    <p class="heros__note">
+      Ce sont nos résultats mesurés chez d'autres entreprises — pas une promesse
+      identique pour tous. Chaque activité perd différemment ; le diagnostic
+      chiffre la vôtre.
+    </p>
   </div>
 
   <div class="page-large">
@@ -85,6 +102,17 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
     <p class="mesure-large doux" style="margin-top:1.25rem">
       Ces pertes n'apparaissent sur aucune facture. C'est pour ça qu'on les laisse
       durer — jusqu'à ce qu'on les mette en face d'un chiffre.
+    </p>
+
+    <?php /* Le pont entre les deux publics : celui qui a mal (perte) et celui
+             qui a de l'ambition (croissance). Le reste de la page garde la
+             structure perte→gain — elle marche pour les deux, à condition de
+             le dire une fois, clairement, avant d'y entrer. */ ?>
+    <p class="mesure-large" style="margin-top:1rem;font-weight:600">
+      Que vous partiez d'une perte à arrêter ou d'une croissance à accélérer,
+      la question est la même : quel est le prochain chiffre que vous voulez
+      voir bouger ? Voici, pour commencer, ce que la plupart des dirigeants
+      perdent sans le voir — que vous soyez déjà en avance ou pas.
     </p>
 
     <div class="releve">
@@ -189,7 +217,7 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
     </div>
 
     <p style="margin-top:1.5rem">
-      <a class="lien-fleche" href="/pages/blog">Lire les cas complets <?= icone('fleche') ?></a>
+      <a class="lien-fleche" href="/pages/realisations">Lire les cas complets <?= icone('fleche') ?></a>
     </p>
 
     <?php if ($temoignages): ?>
@@ -208,11 +236,14 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
       </div>
     <?php else: ?>
       <?php /* Règle absolue du projet : jamais un témoignage inventé, et
-               jamais un visage généré. L'emplacement le dit franchement, et
-               disparaît dès qu'un vrai avis est saisi en administration. */ ?>
-      <div class="reserve">
-        <p style="margin:0">Espace réservé aux avis de nos clients —
-           en attente d'un premier témoignage vérifié, avec nom et accord.</p>
+               jamais un visage généré. Ce bloc dit la même chose que les cas
+               chiffrés au-dessus (des faits, pas des adjectifs), et disparaît
+               dès qu'un vrai avis est saisi en administration. */ ?>
+      <div class="reserve reserve--avis">
+        <span class="reserve__icone"><?= icone('cible') ?></span>
+        <p class="reserve__titre">Nos clients parlent en chiffres, bientôt en mots</p>
+        <p class="reserve__texte">Les cas ci-dessus sont vérifiés et mesurés. Les avis nommés
+           de nos clients arrivent ici dès qu'ils nous les confient — jamais avant, jamais inventés.</p>
       </div>
     <?php endif; ?>
   </div>
@@ -289,11 +320,83 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
   </div>
 </section>
 
-<?php if ($articles): ?>
+<?php /* --------------------------------------------- 07 / NOS PRESTATIONS */ ?>
 <section class="section section--papier">
   <div class="page-large">
     <p class="etiquette-section">
-      <span class="etiquette-section__index">07 / À lire</span>
+      <span class="etiquette-section__index">07 / Nos prestations</span>
+      <span class="etiquette-section__texte">Ce qu'il y a concrètement dans la boîte à outils</span>
+    </p>
+    <h2 class="mesure">Six familles.<span class="suite">Un seul point d'entrée : le diagnostic.</span></h2>
+    <p class="mesure-large doux" style="margin-top:1.25rem;margin-bottom:1.5rem">
+      Présence en ligne, développement sur mesure, automatisation, formation,
+      accompagnement, infrastructure — chacune rattachée à l'un des cinq gains
+      ci-dessus.
+    </p>
+
+    <div class="grille grille--3" style="margin-bottom:1.75rem">
+      <article class="carte" style="padding:0;overflow:hidden">
+        <img src="/assets/prestations/presence-en-ligne.svg" alt="" width="400" height="220"
+             style="width:100%;aspect-ratio:400/220;object-fit:cover" loading="lazy">
+        <div style="padding:1.5rem">
+          <h3>Présence en ligne</h3>
+          <p class="doux">Ce qui vous rend trouvable et crédible, du premier clic jusqu'à l'achat.</p>
+        </div>
+      </article>
+      <article class="carte" style="padding:0;overflow:hidden">
+        <img src="/assets/prestations/developpement-sur-mesure.svg" alt="" width="400" height="220"
+             style="width:100%;aspect-ratio:400/220;object-fit:cover" loading="lazy">
+        <div style="padding:1.5rem">
+          <h3>Développement sur mesure</h3>
+          <p class="doux">Quand un site ou un outil standard ne suffit plus, notre équipe de
+             développement de logiciel construit exactement ce qu'il vous faut.</p>
+        </div>
+      </article>
+      <article class="carte" style="padding:0;overflow:hidden">
+        <img src="/assets/prestations/automatisation.svg" alt="" width="400" height="220"
+             style="width:100%;aspect-ratio:400/220;object-fit:cover" loading="lazy">
+        <div style="padding:1.5rem">
+          <h3>Automatisation</h3>
+          <p class="doux">Les tâches répétitives tournent sans vous.</p>
+        </div>
+      </article>
+      <article class="carte" style="padding:0;overflow:hidden">
+        <img src="/assets/prestations/formation.svg" alt="" width="400" height="220"
+             style="width:100%;aspect-ratio:400/220;object-fit:cover" loading="lazy">
+        <div style="padding:1.5rem">
+          <h3>Formation</h3>
+          <p class="doux">Pour que votre équipe n'ait plus besoin de nous sur le quotidien.</p>
+        </div>
+      </article>
+      <article class="carte" style="padding:0;overflow:hidden">
+        <img src="/assets/prestations/accompagnement.svg" alt="" width="400" height="220"
+             style="width:100%;aspect-ratio:400/220;object-fit:cover" loading="lazy">
+        <div style="padding:1.5rem">
+          <h3>Accompagnement</h3>
+          <p class="doux">Un regard extérieur régulier sur vos décisions, pas un cours ponctuel.</p>
+        </div>
+      </article>
+      <article class="carte" style="padding:0;overflow:hidden">
+        <img src="/assets/prestations/infrastructure.svg" alt="" width="400" height="220"
+             style="width:100%;aspect-ratio:400/220;object-fit:cover" loading="lazy">
+        <div style="padding:1.5rem">
+          <h3>Infrastructure</h3>
+          <p class="doux">Ce qui continue de tourner pendant que vous ne regardez pas.</p>
+        </div>
+      </article>
+    </div>
+
+    <a class="bouton bouton--marine" href="/pages/prestations">
+      Voir le détail des prestations <?= icone('fleche') ?>
+    </a>
+  </div>
+</section>
+
+<?php if ($articles): ?>
+<section class="section section--claire">
+  <div class="page-large">
+    <p class="etiquette-section">
+      <span class="etiquette-section__index">08 / Notre blog</span>
       <span class="etiquette-section__texte">Écrit pour ce que les entreprises cherchent vraiment</span>
     </p>
     <h2 class="mesure">Nos derniers articles</h2>
@@ -311,6 +414,10 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
         </article>
       <?php endforeach; ?>
     </div>
+
+    <p style="margin-top:1.75rem">
+      <a class="lien-fleche" href="/pages/blog">Voir tous nos articles <?= icone('fleche') ?></a>
+    </p>
   </div>
 </section>
 <?php endif; ?>
@@ -331,11 +438,8 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
       </p>
     </div>
     <div class="diagnostic__actions">
-      <a class="bouton bouton--safran" href="/pages/contact">
+      <a class="bouton bouton--safran" href="/diagnostic">
         <?= e(cfg('cta.libelle')) ?> <?= icone('fleche') ?>
-      </a>
-      <a class="bouton bouton--contour-clair" href="/diagnostic">
-        Chiffrer mes pertes en 2 minutes <?= icone('fleche') ?>
       </a>
       <a class="bouton bouton--contour-clair" href="<?= e(whatsapp()) ?>" target="_blank" rel="noopener">
         <?= icone('whatsapp') ?> Écrire sur WhatsApp

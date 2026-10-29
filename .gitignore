@@ -6,3 +6,15 @@ storage/sessions/
 storage/cache/
 storage/logs/
 *.log
+
+# Clés d'API et autres secrets — jamais dans le dépôt, jamais côté client.
+config/secrets.php
+
+# Photos et vidéos téléversées depuis l'administration — contenu vivant,
+# jamais versionné (comme data/site.sqlite). Seul .gitkeep reste suivi pour
+# que le dossier existe après un clone.
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/articles/
+public/uploads/articles/*
+!public/uploads/articles/.gitkeep

@@ -122,7 +122,7 @@ final class ContactController extends Controleur
         }
         if (!$ok) http_response_code(422);
 
-        return $this->page('pages/contact', [
+        return $this->page('pages/contact-v2', [
             'etatEnvoi'    => $ok ? 'ok' : 'erreur',
             'messageEnvoi' => $message,
             'ancien'       => $ok ? [] : $ancien,
@@ -132,6 +132,6 @@ final class ContactController extends Controleur
             'canonical'   => '/pages/contact',
             'robots'      => 'noindex, follow',
             'json_ld'     => Seo::blocsCommuns('contact'),
-        ]);
+        ], 'layouts/public-v2');
     }
 }

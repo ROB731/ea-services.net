@@ -4,12 +4,10 @@ use EA\Core\Csrf;
 ?>
 <h1 style="font-size:1.5rem">Demandes de diagnostic</h1>
 
-<?php if (!$demandes): ?>
-  <p class="doux">Aucune demande reçue pour l'instant.</p>
-<?php else: ?>
-  <div class="pile">
+<div class="pile" data-liste-vide>
+  <p class="doux" data-message-vide<?= $demandes ? ' hidden' : '' ?>>Aucune demande reçue pour l'instant.</p>
     <?php foreach ($demandes as $d): $p = $d['donnees']; ?>
-      <article class="carte" style="<?= empty($d['read']) ? 'border-left:4px solid var(--or-500)' : '' ?>">
+      <article class="carte" data-ligne style="<?= empty($d['read']) ? 'border-left:4px solid var(--or-500)' : '' ?>">
         <div class="rangee" style="justify-content:space-between">
           <div>
             <h2 style="font-size:1.15rem;margin-bottom:.25rem">
@@ -47,14 +45,14 @@ use EA\Core\Csrf;
 
         <div class="rangee" style="margin-top:1rem">
           <?php if (empty($d['read'])): ?>
-            <form method="post" action="/admin/demandes/lue">
+            <form method="post" action="/admin/demandes/lue" data-async="lue">
               <?= Csrf::champ() ?>
               <input type="hidden" name="id" value="<?= (int)$d['id'] ?>">
               <button class="bouton bouton--contour" type="submit"><?= icone('coche') ?> Marquer comme traitée</button>
             </form>
           <?php endif; ?>
           <form method="post" action="/admin/demandes/supprimer"
-                onsubmit="return confirm('Supprimer définitivement cette demande ?')">
+                data-async="supprimer" data-confirmer="Supprimer définitivement cette demande ?">
             <?= Csrf::champ() ?>
             <input type="hidden" name="id" value="<?= (int)$d['id'] ?>">
             <button class="bouton bouton--contour" type="submit">Supprimer</button>
@@ -62,5 +60,4 @@ use EA\Core\Csrf;
         </div>
       </article>
     <?php endforeach; ?>
-  </div>
-<?php endif; ?>
+</div>

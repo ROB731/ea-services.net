@@ -51,6 +51,10 @@ final class Seo extends Controleur
             ],
             'priceRange'  => 'FCFA',
             'knowsLanguage' => 'fr',
+            // Les vrais profils sociaux, jamais un lien générique ou deviné :
+            // c'est ce qui permet à Google de relier ces comptes à CETTE
+            // entreprise (le même @id) plutôt que de les traiter à part.
+            'sameAs'      => array_values((array)Config::get('reseaux', [])),
         ];
 
         $blocs = [$organisation];
@@ -70,7 +74,7 @@ final class Seo extends Controleur
 
         // Le contenu structuré FAQPage doit correspondre à du texte RÉELLEMENT
         // affiché sur la même page (règle Google) — la FAQ visible vit sur
-        // /pages/contact (views/pages/contact.php), donc c'est la seule page
+        // /pages/contact (views/pages/contact-v2.php), donc c'est la seule page
         // qui porte ce bloc.
         if ($page === 'contact') {
             $blocs[] = self::questionsFrequentes();
@@ -82,8 +86,9 @@ final class Seo extends Controleur
     private static function filAriane(string $page): array
     {
         $libelles = [
-            'services' => 'Services', 'produits' => 'Solutions',
-            'blog' => 'Résultats',   'a-propos' => 'À propos', 'contact' => 'Contact',
+            'services' => 'Services', 'produits' => 'Solutions', 'prestations' => 'Prestations',
+            'realisations' => 'Réalisations', 'blog' => 'Blog',
+            'a-propos' => 'À propos', 'contact' => 'Contact',
         ];
         return [
             '@context' => 'https://schema.org',
@@ -142,7 +147,7 @@ final class Seo extends Controleur
                 '@type'    => 'BreadcrumbList',
                 'itemListElement' => [
                     ['@type' => 'ListItem', 'position' => 1, 'name' => 'Accueil',   'item' => Config::url('/')],
-                    ['@type' => 'ListItem', 'position' => 2, 'name' => 'Résultats', 'item' => Config::url('/pages/blog')],
+                    ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog', 'item' => Config::url('/pages/blog')],
                     ['@type' => 'ListItem', 'position' => 3, 'name' => $article['title'],
                      'item' => Config::url('/article/' . $article['slug'])],
                 ],
@@ -162,17 +167,19 @@ final class Seo extends Controleur
         header('Cache-Control: public, max-age=3600');
 
         $pages = [
-            ['/',                 '1.0', 'weekly'],
-            ['/pages/services',   '0.9', 'monthly'],
-            ['/pages/produits',   '0.9', 'monthly'],
-            ['/pages/blog',       '0.8', 'weekly'],
-            ['/pages/a-propos',   '0.7', 'monthly'],
-            ['/pages/contact',    '0.8', 'monthly'],
+            ['/',                   '1.0', 'weekly'],
+            ['/pages/services',     '0.9', 'monthly'],
+            ['/pages/produits',     '0.9', 'monthly'],
+            ['/pages/prestations',  '0.9', 'monthly'],
+            ['/pages/realisations', '0.8', 'monthly'],
+            ['/pages/blog',         '0.8', 'weekly'],
+            ['/pages/a-propos',     '0.7', 'monthly'],
+            ['/pages/contact',      '0.8', 'monthly'],
         ];
 
         // Date du dernier déploiement des gabarits : c'est la vraie date de
         // modification des six pages, elles ne sont plus en base.
-        $modifPages = date('Y-m-d', (int)(@filemtime(dirname(__DIR__, 2) . '/views/pages/accueil.php') ?: time()));
+        $modifPages = date('Y-m-d', (int)(@filemtime(dirname(__DIR__, 2) . '/views/pages/accueil-v2.php') ?: time()));
 
         $xml = new \XMLWriter();
         $xml->openMemory();

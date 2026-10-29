@@ -13,11 +13,14 @@ abstract class Controleur
      * sinon `?utm_source=facebook` crée une adresse canonique de plus pour
      * la même page (erreur déjà commise sur ce domaine).
      */
-    protected function page(string $vue, array $donnees = [], array $seo = [], string $gabarit = 'layouts/public'): string
+    protected function page(string $vue, array $donnees = [], array $seo = [], ?string $gabarit = 'layouts/public-v2'): string
     {
         Vue::meta($seo);
         $html = Vue::rendre($vue, $donnees, $gabarit);
-        $this->cachePublic($html);
+        // Un fragment (gabarit null, destiné à la modale) n'a pas de sens à
+        // mettre en cache HTTP page entière : ETag et Cache-Control publics
+        // n'ont d'intérêt que pour une vraie page.
+        if ($gabarit !== null) $this->cachePublic($html);
         return $html;
     }
 
@@ -43,6 +46,28 @@ abstract class Controleur
             http_response_code(304);
             exit;
         }
+    }
+
+    /**
+     * Vrai quand la page est demandée pour être injectée dans la modale
+     * diagnostic (voir ea-v2.js) plutôt qu'affichée en page complète — le
+     * contrôleur peut alors répondre avec `gabarit: null` (fragment seul,
+     * sans <html>/<head>/pied de page) au lieu de la page entière.
+     */
+    protected function estRequeteModale(): bool
+    {
+        return ($_SERVER['HTTP_X_MODALE'] ?? '') === '1';
+    }
+
+    /**
+     * Vrai quand l'appelant (JavaScript, via fetch) attend du JSON plutôt
+     * qu'une redirection de page entière — utilisé par l'administration pour
+     * agir sans rechargement (supprimer, publier, marquer comme lu…) tout en
+     * gardant un formulaire classique fonctionnel sans JavaScript.
+     */
+    protected function veutJson(): bool
+    {
+        return str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
     }
 
     protected function rediriger(string $chemin, int $code = 303): never

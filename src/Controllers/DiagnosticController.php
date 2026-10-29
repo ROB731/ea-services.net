@@ -37,6 +37,11 @@ final class DiagnosticController extends Controleur
 
     public function formulaire(): string
     {
+        // Ouverte depuis la modale : fragment seul, aucune donnée structurée
+        // ni cache ETag de page complète n'a de sens pour ce contenu-là.
+        if ($this->estRequeteModale()) {
+            return $this->page('pages/diagnostic', [], [], null);
+        }
         return $this->page('pages/diagnostic', [], [
             'titre'       => "Diagnostic gratuit — chiffrez vos pertes en 2 minutes | EA-SERVICES",
             'description' => "Répondez à cinq questions : vous obtenez immédiatement vos deux plus "
@@ -55,9 +60,11 @@ final class DiagnosticController extends Controleur
         }
 
         if (!Csrf::valide($this->champ('csrf'))) {
-            return $this->page('pages/diagnostic', [
-                'erreur' => "Votre session a expiré. Rechargez la page et renvoyez le formulaire.",
-            ], [
+            $donnees = ['erreur' => "Votre session a expiré. Rechargez la fenêtre et renvoyez le formulaire."];
+            if ($this->estRequeteModale()) {
+                return $this->page('pages/diagnostic', $donnees, [], null);
+            }
+            return $this->page('pages/diagnostic', $donnees, [
                 'titre'     => "Diagnostic gratuit | EA-SERVICES",
                 'canonical' => '/diagnostic',
                 'robots'    => 'noindex, nofollow',
@@ -91,6 +98,12 @@ final class DiagnosticController extends Controleur
 
         $this->prevenirParCourriel($reponses, $pertes);
 
+        if ($this->estRequeteModale()) {
+            return $this->page('pages/diagnostic-resultat', [
+                'pertes'   => $pertes,
+                'reponses' => $reponses,
+            ], [], null);
+        }
         return $this->page('pages/diagnostic-resultat', [
             'pertes'   => $pertes,
             'reponses' => $reponses,

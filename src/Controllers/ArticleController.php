@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace EA\Controllers;
 
+use EA\Core\Config;
 use EA\Core\Controleur;
 use EA\Core\Csrf;
 use EA\Core\Database;
@@ -29,6 +30,16 @@ final class ArticleController extends Controleur
 
         $article['content_html'] = Texte::enHtml((string)$article['content']);
 
+        $sections = Database::tous(
+            'SELECT * FROM article_sections WHERE article_id = ? ORDER BY position',
+            [(int)$article['id']]
+        );
+        foreach ($sections as &$section) {
+            $section['body_html']  = Texte::enHtml((string)$section['body']);
+            $section['video_src']  = Texte::urlIntegrationVideo($section['video_url'] ?: null);
+        }
+        unset($section);
+
         $commentaires = Database::tous(
             'SELECT name, comment, created_at FROM article_comments
              WHERE article_id = ? AND published = 1 ORDER BY datetime(created_at) DESC',
@@ -42,8 +53,16 @@ final class ArticleController extends Controleur
             [(int)$article['id'], (string)$article['category']]
         );
 
-        return $this->page('blog/article', [
+        $imagePartage = $this->imagePartage($article['image_url'] ?? '');
+        $articlePourSchema = $article;
+        // Les données structurées veulent une adresse absolue (contrairement
+        // à la balise og:image, déjà absolutisée par le gabarit) — sinon
+        // Google la rejette silencieusement en dehors de cette page.
+        $articlePourSchema['image_url'] = Config::url($imagePartage);
+
+        return $this->page('blog/article-v2', [
             'article'            => $article,
+            'sections'           => $sections,
             'commentaires'       => $commentaires,
             'suggestions'        => $suggestions,
             'etatCommentaire'    => $etat['etat'] ?? null,
@@ -52,10 +71,29 @@ final class ArticleController extends Controleur
             'titre'       => $article['title'] . ' | EA-SERVICES',
             'description' => Texte::extrait((string)($article['excerpt'] ?: $article['content'])),
             'canonical'   => '/article/' . $article['slug'],
-            'image'       => $article['image_url'] ?: '/assets/logo-ea-services.jpeg',
+            'image'       => $imagePartage,
             'og_type'     => 'article',
-            'json_ld'     => Seo::blocsArticle($article),
-        ]);
+            'json_ld'     => Seo::blocsArticle($articlePourSchema),
+        ], 'layouts/public-v2');
+    }
+
+    /**
+     * L'image affichée SUR la page peut être un SVG — parfait dans un
+     * navigateur, mais WhatsApp et Facebook n'affichent tout simplement rien
+     * en aperçu de partage pour un `og:image` en SVG (seuls JPEG/PNG/GIF
+     * sont pris en charge par leurs robots). Les premières illustrations de
+     * couverture du site portent donc un jumeau JPEG au même endroit — même
+     * nom, extension différente — utilisé UNIQUEMENT pour le partage.
+     */
+    private function imagePartage(string $image): string
+    {
+        if ($image === '') return '/assets/logo-ea-services.jpeg';
+        if (str_ends_with($image, '.svg')) {
+            $jumeau = substr($image, 0, -4) . '.jpg';
+            if (is_file(dirname(__DIR__, 2) . '/public' . $jumeau)) return $jumeau;
+            return '/assets/logo-ea-services.jpeg';
+        }
+        return $image;
     }
 
     /**

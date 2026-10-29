@@ -26,7 +26,8 @@ $ancien = $ancien ?? [];
       <span class="etiquette-section__index">Contact</span>
       <span class="etiquette-section__texte">Trente minutes, gratuit, sans engagement</span>
     </p>
-    <h1 class="mesure">Commençons par<em>une conversation.</em></h1>
+    <h1 class="mesure titre-machine">Commençons par<em>une conversation.</em></h1>
+    <p class="heros__badge"><?= icone('cible') ?> Contactez notre agence de développement web à Abidjan</p>
     <p class="mesure-large doux" style="margin-top:1.25rem">
       Trente minutes, gratuit, sans engagement. Nous cherchons d'abord à
       comprendre où vous perdez du temps et des clients. Nous ne vendons rien

@@ -20,7 +20,7 @@
       <span class="etiquette-section__index">Diagnostic</span>
       <span class="etiquette-section__texte">Deux minutes, cinq questions</span>
     </p>
-    <h1 class="mesure">Chiffrez vos pertes<em>avant même qu'on se parle.</em></h1>
+    <h1 class="mesure titre-machine">Chiffrez vos pertes<em>avant même qu'on se parle.</em></h1>
     <p class="mesure-large doux" style="margin-top:1.25rem">
       Cinq questions sur votre semaine. Vous obtenez immédiatement vos deux plus
       grosses pertes, chiffrées à partir de vos propres réponses. Le calcul est

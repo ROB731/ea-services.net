@@ -89,7 +89,34 @@ foreach ($pdo->query("SELECT id, content FROM articles WHERE read_time IS NULL O
     $fait[] = "durée de lecture calculée (article {$a['id']})";
 }
 
-// 7. Tables du site marchand jamais utilisées (0 ligne chacune, aucun code ne
+// 7. Agent de conversation (chat, 2026-08-15). Deux tables : l'une compte les
+//    CONVERSATIONS (pas les messages) par client pour la limite quotidienne,
+//    l'autre garde le texte échangé — utile pour l'administration et pour
+//    vérifier après coup que l'agent n'a rien promis qu'il ne fallait pas.
+$pdo->exec(
+    'CREATE TABLE IF NOT EXISTS chat_conversations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        client_id TEXT NOT NULL,
+        conversation_id TEXT NOT NULL,
+        jour TEXT NOT NULL,
+        cree_le TEXT NOT NULL,
+        UNIQUE(client_id, conversation_id)
+    )'
+);
+$pdo->exec('CREATE INDEX IF NOT EXISTS idx_chat_conv_client_jour ON chat_conversations(client_id, jour)');
+$pdo->exec(
+    'CREATE TABLE IF NOT EXISTS chat_messages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        conversation_id TEXT NOT NULL,
+        role TEXT NOT NULL,
+        contenu TEXT NOT NULL,
+        cree_le TEXT NOT NULL
+    )'
+);
+$pdo->exec('CREATE INDEX IF NOT EXISTS idx_chat_msg_conv ON chat_messages(conversation_id, cree_le)');
+$fait[] = 'tables chat_conversations / chat_messages vérifiées';
+
+// 8. Tables du site marchand jamais utilisées (0 ligne chacune, aucun code ne
 //    les lit). On les laisse en place : les supprimer ne gagne rien et
 //    interdirait un retour en arrière. Signalé, pas exécuté.
 $inutilisees = [];
@@ -97,6 +124,27 @@ foreach (['orders', 'order_items', 'products', 'product_images', 'gallery_items'
     $existe = $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$t'")->fetchColumn();
     if ($existe && (int)$pdo->query("SELECT COUNT(*) FROM $t")->fetchColumn() === 0) $inutilisees[] = $t;
 }
+
+// 9. Articles par section (2026-08-16) : chaque section porte son propre
+//    texte et, si besoin, sa propre photo ou vidéo — un article n'est plus
+//    obligé d'avoir toutes ses images regroupées en tête. Un article sans
+//    section continue de fonctionner exactement comme avant (repli sur la
+//    colonne `content`, voir ArticleController) : rien n'est cassé pour les
+//    articles déjà publiés.
+$pdo->exec(
+    'CREATE TABLE IF NOT EXISTS article_sections (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        article_id INTEGER NOT NULL,
+        position INTEGER NOT NULL DEFAULT 0,
+        heading TEXT,
+        body TEXT,
+        image_url TEXT,
+        video_url TEXT,
+        FOREIGN KEY (article_id) REFERENCES articles(id)
+    )'
+);
+$pdo->exec('CREATE INDEX IF NOT EXISTS idx_article_sections_article ON article_sections(article_id, position)');
+$fait[] = 'table article_sections vérifiée';
 
 echo "Migration terminée.\n";
 foreach ($fait as $ligne) echo "  · $ligne\n";

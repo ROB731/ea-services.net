@@ -34,6 +34,10 @@ $c = (array)cfg('contact');
           <li><a href="mailto:<?= e($c['email']) ?>">
             <?= icone('courriel') ?> <?= e($c['email']) ?></a></li>
           <li><?= icone('lieu') ?> <?= e($c['quartier']) ?>, <?= e($c['ville']) ?></li>
+          <?php foreach ((array)cfg('reseaux', []) as $reseau => $lien): ?>
+            <li><a href="<?= e($lien) ?>" target="_blank" rel="noopener">
+              <?= icone($reseau) ?> <?= e(ucfirst($reseau)) ?></a></li>
+          <?php endforeach; ?>
         </ul>
       </div>
 
@@ -41,13 +45,13 @@ $c = (array)cfg('contact');
         <h4>Le prochain chiffre</h4>
         <p>Trente minutes pour identifier vos deux plus grosses pertes et
            chiffrer ce que vous récupérez.</p>
-        <a class="bouton bouton--safran bouton--large" href="/pages/contact"><?= e(cfg('cta.libelle')) ?></a>
+        <a class="bouton bouton--safran bouton--large" href="/diagnostic"><?= e(cfg('cta.libelle')) ?></a>
       </div>
     </div>
 
     <div class="pied__bas">
       <span>&copy; <?= date('Y') ?> EA-SERVICES — <?= e($c['ville']) ?>, <?= e($c['pays']) ?></span>
-      <span>Site édité et hébergé par EA-SERVICES</span>
+      <span>Site édité et hébergé par EA-SERVICES · <a href="/admin/connexion" style="opacity:.6">Administration</a></span>
     </div>
   </div>
 </footer>

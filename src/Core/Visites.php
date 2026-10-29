@@ -20,7 +20,7 @@ namespace EA\Core;
 final class Visites
 {
     /** Chemins jamais comptés : administration, points d'appel interne, fichiers. */
-    private const IGNORES = ['#^/admin#', '#^/__#', '#\.(css|js|jpe?g|png|svg|webp|ico|xml|txt|map|woff2?)$#'];
+    private const IGNORES = ['#^/admin#', '#^/__#', '#^/chat/#', '#\.(css|js|jpe?g|png|svg|webp|ico|xml|txt|map|woff2?)$#'];
 
     /** Signatures de scanners d'exploitation — jamais un visiteur réel. */
     private const SCANNERS = '#(wp-admin|wp-login|wp-json|wp-content|xmlrpc|\.env|\.git|phpmyadmin|/vendor/|eval-stdin|/cgi-bin/|\.aws|/config\.|/backup)#i';

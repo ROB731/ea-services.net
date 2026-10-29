@@ -109,23 +109,6 @@
 
   var reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* --- Bandeau d'accueil : photos en fondu enchaîné ----------------------
-     Trois photos superposées (voir accueil.php), une seule opaque à la fois.
-     Sans JavaScript ou en cas de préférence "mouvement réduit", la première
-     reste affichée en continu (opacité 1 par défaut en CSS) : rien ne casse,
-     il n'y a simplement pas de mouvement. */
-  var photosHero = document.querySelectorAll('.hero__fond img');
-  if (photosHero.length > 1 && !reduit) {
-    var indexActif = 0;
-    setInterval(function () {
-      photosHero[indexActif].classList.remove('est-visible');
-      photosHero[indexActif].classList.add('est-cachee');
-      indexActif = (indexActif + 1) % photosHero.length;
-      photosHero[indexActif].classList.remove('est-cachee');
-      photosHero[indexActif].classList.add('est-visible');
-    }, 6000);
-  }
-
   /* --- Révélation au défilement -------------------------------------------
      Les cartes de bénéfice, étapes et vignettes apparaissent en douceur
      quand elles entrent dans l'écran, au lieu d'être toutes plaquées d'un

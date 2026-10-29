@@ -11,7 +11,7 @@ use EA\Core\Csrf;
 <title>Connexion — EA-SERVICES</title>
 <link rel="icon" href="/assets/logo-ea-services.jpeg" type="image/jpeg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/css/ea.css">
+<link rel="stylesheet" href="/css/ea.css?v=<?= @filemtime(dirname(__DIR__, 2) . '/public/css/ea.css') ?: 1 ?>">
 </head>
 <body>
 <main class="contenant" style="max-width:26rem;padding-block:4rem">
