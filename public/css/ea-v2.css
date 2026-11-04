@@ -550,6 +550,12 @@ img { max-width: 100%; height: auto; display: block; }
   padding: 1.5rem;
 }
 .carte h3 { margin-bottom: .5rem; }
+/* Une carte pose son propre fond : elle doit aussi poser sa propre couleur de
+   texte. Sans cela, posee dans une section sombre (.section--encre), elle
+   herite du blanc de la section et son texte devient invisible sur le fond
+   clair de la carte (bogue constate sur /pages/sonnera, 2026-11-04). */
+.carte { color: var(--texte); }
+.section--encre .carte .doux { color: var(--texte-doux); }
 
 /* Aperçu d'un site réalisé : le vrai site chargé en direct (iframe) ou, à
    défaut d'autorisation côté serveur tiers (ivoirrapid.ci), une vraie
@@ -607,6 +613,7 @@ img { max-width: 100%; height: auto; display: block; }
   border-top: 1px solid var(--trait);
   font-size: .8125rem; color: var(--texte-doux);
 }
+.section--encre > .page-large > .investissement { color: rgba(255, 255, 255, .85); border-top-color: rgba(255, 255, 255, .25); }
 
 /* Emplacement réservé — jamais un témoignage inventé (règle du projet). */
 .reserve {
