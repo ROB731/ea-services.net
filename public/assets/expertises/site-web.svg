@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-label="Illustration : un site d&#x27;entreprise affiché sur ordinateur et sur téléphone, trouvé depuis une recherche">
+<defs>
+  <radialGradient id="halo" cx="70%" cy="20%" r="80%">
+    <stop offset="0%" stop-color="#294365"/><stop offset="100%" stop-color="#091a32"/>
+  </radialGradient>
+  <pattern id="points" width="22" height="22" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.2" fill="#ffffff" opacity=".07"/>
+  </pattern>
+  <filter id="ombre" x="-20%" y="-20%" width="140%" height="150%">
+    <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000" flood-opacity=".38"/>
+  </filter>
+  <filter id="ombre-douce" x="-20%" y="-20%" width="140%" height="160%">
+    <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity=".28"/>
+  </filter>
+</defs>
+<rect x="0" y="0" width="640" height="520" rx="0" fill="url(#halo)" />
+<rect x="0" y="0" width="640" height="520" rx="0" fill="url(#points)" />
+<circle cx="560" cy="70" r="150" fill="#f2b62b" opacity=".08"/>
+<circle cx="560" cy="70" r="90" fill="none" stroke="#f2b62b" stroke-opacity=".25"/>
+<g transform="translate(40,90)" filter="url(#ombre)">
+  <rect x="0" y="0" width="400" height="300" rx="14" fill="#fffdf8" />
+  <rect x="0" y="0" width="400" height="38" rx="14" fill="#ebe5d8" /><rect x="0" y="24" width="400" height="14" rx="0" fill="#ebe5d8" />
+  <circle cx="20" cy="19" r="5" fill="#c0392b" opacity=".7"/><circle cx="36" cy="19" r="5" fill="#f2b62b"/><circle cx="52" cy="19" r="5" fill="#128c4a" opacity=".8"/>
+  <rect x="72" y="10" width="308" height="18" rx="9" fill="#fffdf8" />
+  <path d="M84 15 v8 h7 v-8 z M85.5 15 v-2.5 a2 2 0 0 1 4 0 V15" fill="none" stroke="#128c4a" stroke-width="1.4"/>
+  <text x="98" y="23" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#5a6577" text-anchor="start" opacity="1">votre-entreprise.ci</text>
+  <g transform="translate(0,38)"><rect x="0" y="0" width="400" height="262" rx="0" fill="#fffdf8" /><rect x="0" y="0" width="400" height="44" rx="0" fill="#112849" /><text x="22" y="28" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="start" opacity="1">Votre entreprise</text><text x="200" y="28" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#fff" text-anchor="start" opacity="0.8">Services</text><text x="266" y="28" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#fff" text-anchor="start" opacity="0.8">Réalisations</text><text x="332" y="28" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="10.5" font-weight="500" fill="#fff" text-anchor="start" opacity="0.8">Contact</text><rect x="0" y="44" width="400" height="120" rx="0" fill="#16325a" /><text x="22" y="84" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="20" font-weight="800" fill="#fff" text-anchor="start" opacity="1">Votre métier,</text><text x="22" y="108" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="20" font-weight="800" fill="#f2b62b" text-anchor="start" opacity="1">expliqué en 5 secondes.</text><rect x="22" y="124" width="200" height="7" rx="3.5" fill="#ffffff" opacity=".35" /><rect x="22" y="138" width="128" height="16" rx="8" fill="#128c4a" /><text x="86" y="150" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="9.5" font-weight="700" fill="#fff" text-anchor="middle" opacity="1">Écrire sur WhatsApp</text><rect x="22" y="180" width="110" height="66" rx="8" fill="#f7f4ec" /><rect x="32" y="192" width="22" height="22" rx="6" fill="#f2b62b" /><rect x="32" y="222" width="80" height="8" rx="4.0" fill="#e9edf3" /><rect x="32" y="234" width="56" height="8" rx="4.0" fill="#e9edf3" /><rect x="146" y="180" width="110" height="66" rx="8" fill="#f7f4ec" /><rect x="156" y="192" width="22" height="22" rx="6" fill="#f2b62b" /><rect x="156" y="222" width="80" height="8" rx="4.0" fill="#e9edf3" /><rect x="156" y="234" width="56" height="8" rx="4.0" fill="#e9edf3" /><rect x="270" y="180" width="110" height="66" rx="8" fill="#f7f4ec" /><rect x="280" y="192" width="22" height="22" rx="6" fill="#f2b62b" /><rect x="280" y="222" width="80" height="8" rx="4.0" fill="#e9edf3" /><rect x="280" y="234" width="56" height="8" rx="4.0" fill="#e9edf3" /></g>
+</g><g transform="translate(430,150)" filter="url(#ombre)">
+  <rect x="0" y="0" width="170" height="330" rx="34" fill="#05101f" />
+  <rect x="2" y="2" width="166" height="326" rx="32" fill="#1b2c47" />
+  <g transform="translate(10,10)">
+    <clipPath id="ecran430150"><rect width="150" height="310" rx="26"/></clipPath>
+    <g clip-path="url(#ecran430150)">
+      <rect x="0" y="0" width="150" height="310" rx="0" fill="#fffdf8" />
+      <text x="22" y="30" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="11" font-weight="700" fill="#112849" text-anchor="start" opacity="1">09:41</text><rect x="94" y="21" width="18" height="9" rx="2" fill="#112849" opacity=".75"/><rect x="116" y="21" width="12" height="9" rx="2" fill="#112849" opacity=".75"/><rect x="0" y="40" width="150" height="34" rx="0" fill="#112849" /><text x="12" y="62" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#fff" text-anchor="start" opacity="1">Votre entreprise</text><rect x="0" y="74" width="150" height="110" rx="0" fill="#16325a" /><text x="12" y="104" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="start" opacity="1">Votre métier,</text><text x="12" y="122" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="13" font-weight="800" fill="#f2b62b" text-anchor="start" opacity="1">en 5 secondes.</text><rect x="12" y="138" width="112" height="26" rx="13" fill="#128c4a" /><text x="68" y="155" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#fff" text-anchor="middle" opacity="1">WhatsApp</text><rect x="12" y="198" width="126" height="40" rx="8" fill="#f7f4ec" /><rect x="22" y="207" width="20" height="20" rx="5" fill="#f2b62b" /><rect x="50" y="210" width="70" height="8" rx="4.0" fill="#e9edf3" /><rect x="50" y="222" width="48" height="8" rx="4.0" fill="#e9edf3" /><rect x="12" y="248" width="126" height="40" rx="8" fill="#f7f4ec" /><rect x="22" y="257" width="20" height="20" rx="5" fill="#f2b62b" /><rect x="50" y="260" width="70" height="8" rx="4.0" fill="#e9edf3" /><rect x="50" y="272" width="48" height="8" rx="4.0" fill="#e9edf3" /><rect x="12" y="298" width="126" height="40" rx="8" fill="#f7f4ec" /><rect x="22" y="307" width="20" height="20" rx="5" fill="#f2b62b" /><rect x="50" y="310" width="70" height="8" rx="4.0" fill="#e9edf3" /><rect x="50" y="322" width="48" height="8" rx="4.0" fill="#e9edf3" />
+    </g>
+  </g>
+  <rect x="51.0" y="16" width="68" height="16" rx="8" fill="#05101f" />
+</g><g transform="translate(40,34)" filter="url(#ombre-douce)"><rect x="0" y="0" width="330" height="40" rx="20" fill="#fffdf8" /><circle cx="24" cy="20" r="7" fill="none" stroke="#5a6577" stroke-width="2"/><path d="M29 25 l6 6" stroke="#5a6577" stroke-width="2" stroke-linecap="round"/><text x="44" y="25" font-family="DM Sans, Segoe UI, Roboto, Arial, sans-serif" font-size="13.5" font-weight="500" fill="#112849" text-anchor="start" opacity="1">réparation climatiseur Cocody</text></g>
+</svg>

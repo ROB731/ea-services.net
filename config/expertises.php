@@ -43,6 +43,12 @@ return [
                        . "seule demande par mois. La différence ne tient pas au graphisme : elle tient "
                        . "à ce que le site répond à une recherche précise, s'affiche vite sur un "
                        . "téléphone, et donne envie d'écrire tout de suite.",
+        'visuel'      => ['src' => '/assets/expertises/site-web.svg', 'alt' => "Illustration : un site d'entreprise sur ordinateur et téléphone, trouvé depuis une recherche Google"],
+        'photo'       => ['fichier' => 'abidjan-plateau', 'ratio' => '1200/567',
+                          'alt' => "Vue du Plateau, le quartier d'affaires d'Abidjan, depuis le pont Alassane Ouattara",
+                          'legende' => "Abidjan : des milliers de recherches chaque jour, sur téléphone. La question est de savoir si l'on vous y trouve.",
+                          'credit' => 'Edison McCullen, CC BY 4.0, Wikimedia Commons',
+                          'source' => 'https://commons.wikimedia.org/wiki/File:Le_Plateau_depuis_le_Pont_ADO_%E2%80%93_Abidjan.jpg'],
         'pertes' => [
             ['Personne ne le trouve', "Le site existe, mais il n'apparaît sur aucune recherche. Il a été écrit pour présenter l'entreprise, pas pour répondre à ce que tapent les clients."],
             ['Il est lent sur téléphone', "Vos clients le consultent sur leur téléphone, souvent avec une connexion moyenne. Au-delà de quelques secondes d'attente, ils repartent sans avoir rien lu."],
@@ -104,6 +110,12 @@ return [
         'chapo'       => "Vos clients regardent vos produits sur leur téléphone, le soir, après le "
                        . "travail. S'ils doivent vous écrire pour demander chaque prix et chaque "
                        . "taille, la plupart abandonnent avant d'avoir commandé.",
+        'visuel'      => ['src' => '/assets/expertises/boutique-en-ligne.svg', 'alt' => "Illustration : une boutique en ligne sur téléphone et une commande reçue sur WhatsApp"],
+        'photo'       => ['fichier' => 'abidjan-marche', 'ratio' => '4/3',
+                          'alt' => "Un marché couvert de parasols à Abidjan, vu d'en haut",
+                          'legende' => "Vos clients achètent déjà partout dans la ville. La boutique en ligne vous met sous leurs yeux, même quand ils ne passent pas devant chez vous.",
+                          'credit' => 'Al K. Bou, CC BY-SA 4.0, Wikimedia Commons',
+                          'source' => 'https://commons.wikimedia.org/wiki/File:Abidjan_Market.JPG'],
         'pertes' => [
             ['Les questions répétées', "« C'est combien ? », « Il reste la taille 40 ? », « Vous livrez à Yopougon ? » : chaque vente commence par dix messages, et vous répondez à la main."],
             ['Les ventes de nuit perdues', "Un client prêt à acheter à 22 h n'a personne pour lui répondre. Le lendemain, il a acheté ailleurs ou il a oublié."],
@@ -161,6 +173,7 @@ return [
                        . "Une application utile règle un problème qui revient chaque jour : une "
                        . "commande à passer, une tâche à confirmer, un suivi à consulter. C'est "
                        . "de là que nous partons.",
+        'visuel'      => ['src' => '/assets/expertises/application-mobile.svg', 'alt' => "Illustration : une application d'équipe avec une alarme de tâche et le suivi des réponses"],
         'pertes' => [
             ['Tout passe par des messages', "Les commandes, les consignes et les suivis passent par des groupes de discussion. Rien n'est rangé, tout se perd, et personne ne sait ce qui a été fait."],
             ['Des outils qui ne vous ressemblent pas', "Les applications toutes faites imposent leur façon de travailler. Votre équipe contourne l'outil, et vous revenez aux cahiers."],
@@ -218,6 +231,7 @@ return [
                        . "discussion ne suffisent plus. On ressaisit les mêmes informations trois "
                        . "fois, on cherche un document pendant vingt minutes, et les erreurs coûtent "
                        . "de l'argent. Un logiciel sur mesure remet tout au même endroit.",
+        'visuel'      => ['src' => '/assets/expertises/logiciel-sur-mesure.svg', 'alt' => "Illustration : un logiciel de gestion qui regroupe les commandes et leur statut"],
         'pertes' => [
             ['La double saisie', "La même commande est notée sur papier, recopiée dans un fichier, puis envoyée par message. Trois saisies, trois occasions de se tromper."],
             ['L’information introuvable', "Pour savoir où en est un client ou une livraison, il faut appeler quelqu'un. Personne n'a la vue d'ensemble."],
@@ -274,6 +288,7 @@ return [
         'chapo'       => "Un client vous écrit à 21 h. Vous le voyez le lendemain à 11 h. Entre-temps, "
                        . "il a écrit à deux autres entreprises, et l'une d'elles a répondu. Vous "
                        . "n'avez perdu ni sur le prix ni sur la qualité : vous avez perdu sur le délai.",
+        'visuel'      => ['src' => '/assets/expertises/chatbot-whatsapp.svg', 'alt' => "Illustration : une conversation WhatsApp où un client reçoit une réponse immédiate le soir"],
         'pertes' => [
             ['Les messages de la nuit', "Les demandes arrivent le soir et le week-end, quand personne n'est là pour répondre. Le client n'attend pas."],
             ['Les mêmes questions, cent fois', "Horaires, prix, adresse, délais : vous ou votre équipe répondez chaque jour aux mêmes questions, à la main."],
@@ -332,6 +347,7 @@ return [
                        . "répondre pour la dixième fois à la même question : le soir, le vrai "
                        . "travail n'a pas avancé. Ces tâches se répètent, donc elles peuvent "
                        . "tourner seules.",
+        'visuel'      => ['src' => '/assets/expertises/automatisation.svg', 'alt' => "Illustration : une suite de relances qui partent automatiquement au bon moment"],
         'pertes' => [
             ['Les relances à la main', "Vous savez qu'il faudrait relancer ce prospect à trois jours, puis à sept. En pratique, vous y pensez trois semaines plus tard."],
             ['La double saisie', "Les mêmes informations sont recopiées d'un endroit à l'autre. Du temps perdu, et des erreurs à chaque copie."],
@@ -385,6 +401,12 @@ return [
         'chapo'       => "Quelqu'un cherche exactement ce que vous vendez, à Abidjan, aujourd'hui. "
                        . "Il tape sa recherche sur son téléphone. Il ne vous trouve pas. Il appelle "
                        . "le premier nom de la liste, et ce n'est pas vous.",
+        'visuel'      => ['src' => '/assets/expertises/referencement.svg', 'alt' => "Illustration : une page de résultats de recherche où l'entreprise apparaît sur la carte et dans les résultats"],
+        'photo'       => ['fichier' => 'abidjan-plateau', 'ratio' => '1200/567',
+                          'alt' => "Vue du Plateau, le quartier d'affaires d'Abidjan, depuis le pont Alassane Ouattara",
+                          'legende' => "Quand quelqu'un cherche votre métier à Abidjan, il ne regarde que les premiers noms. Le travail consiste à y faire figurer le vôtre.",
+                          'credit' => 'Edison McCullen, CC BY 4.0, Wikimedia Commons',
+                          'source' => 'https://commons.wikimedia.org/wiki/File:Le_Plateau_depuis_le_Pont_ADO_%E2%80%93_Abidjan.jpg'],
         'pertes' => [
             ['Absent des recherches', "Votre site existe, mais Google ne le montre pour aucune recherche utile. Pour vos clients, vous n'existez pas."],
             ['Pas de fiche d’entreprise', "Sans fiche d'entreprise sur Google, vous n'apparaissez ni sur la carte ni dans les résultats locaux, là où se fait la majorité des appels."],
@@ -437,6 +459,7 @@ return [
         'chapo'       => "Le fichier de vos clients est sur un seul ordinateur. Le jour où cet "
                        . "ordinateur tombe, est volé ou prend l'eau, vous perdez des années de "
                        . "travail. Ce n'est pas une question de « si », c'est une question de « quand ».",
+        'visuel'      => ['src' => '/assets/expertises/maintenance.svg', 'alt' => "Illustration : un tableau de surveillance avec la sauvegarde du jour réussie à deux endroits"],
         'pertes' => [
             ['Une seule copie', "Vos données importantes n'existent qu'à un seul endroit. Une panne suffit à tout perdre."],
             ['La panne découverte trop tard', "Le site ou la messagerie tombe, et ce sont vos clients qui vous préviennent."],
@@ -489,6 +512,12 @@ return [
                        . "artificielle peut faire gagner des heures chaque semaine, à condition de "
                        . "savoir quoi lui demander et quoi vérifier. C'est ce que nous apprenons à "
                        . "vos équipes, sur leurs propres tâches.",
+        'visuel'      => ['src' => '/assets/expertises/formation.svg', 'alt' => "Illustration : une formation à l'intelligence artificielle appliquée à un vrai document de travail"],
+        'photo'       => ['fichier' => 'formation-informatique-abidjan', 'ratio' => '4/3',
+                          'alt' => "Une salle de formation informatique à Abidjan, un formateur face à des participants sur ordinateur",
+                          'legende' => "Une formation informatique à Abidjan (photo d'illustration, atelier du WikiClub Niangon). Nos formations se déroulent sur le même principe : sur ordinateur, sur des cas concrets.",
+                          'credit' => 'Manouka, CC0, Wikimedia Commons',
+                          'source' => 'https://commons.wikimedia.org/wiki/File:Formation_des_leaders_du_WikiClub_Niangon_20_novembre_2024_05.jpg'],
         'pertes' => [
             ['Des outils payés, pas utilisés', "Les logiciels sont là, mais l'équipe n'en exploite qu'une petite partie. Le reste est payé pour rien."],
             ['L’IA testée puis abandonnée', "On a essayé, le résultat était décevant, on a arrêté. Le plus souvent, il manquait seulement la bonne méthode."],

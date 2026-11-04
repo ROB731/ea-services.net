@@ -69,6 +69,13 @@ src/Controllers/    Page, Article, Contact, Seo, Auth, Admin
 src/migration.php   Migration de base, rejouable sans dommage
 views/              layouts/, partials/, pages/, blog/, admin/
 public/             index.php, css/ea.css, js/ea.js, assets/
+outils/maquettes.py Génère les maquettes SVG (assets/expertises/) — relancer
+                    après modification ; ce sont des illustrations, jamais des
+                    captures de clients.
+assets/photos/      Photos libres (Wikimedia Commons). Crédit affiché sous
+                    chaque photo, licences dans assets/photos/CREDITS.md.
+                    Aucune photo montrant l'enseigne d'un vrai commerce ou des
+                    personnes présentées comme « notre équipe ».
 ```
 
 - **Les 6 pages sont des gabarits** (`views/pages/`), plus des blocs de HTML

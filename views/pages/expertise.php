@@ -22,15 +22,28 @@
       <a href="/pages/prestations">Prestations</a> <span aria-hidden="true">›</span>
       <span aria-current="page"><?= e($x['libelle']) ?></span>
     </nav>
-    <h1 class="mesure titre-machine"><?= e($x['h1']) ?><em><?= e($x['h1_suite']) ?></em></h1>
-    <p class="heros__badge"><?= icone($x['icone']) ?> <?= e($x['badge']) ?></p>
-    <p class="mesure-large doux" style="margin-top:1.25rem"><?= e($x['chapo']) ?></p>
-    <div class="diagnostic__actions" style="margin-top:1.75rem">
-      <a class="bouton bouton--safran" href="/diagnostic"><?= e(cfg('cta.libelle')) ?> <?= icone('fleche') ?></a>
-      <a class="bouton bouton--contour-clair" href="<?= e(whatsapp()) ?>" target="_blank" rel="noopener">
-        <?= icone('whatsapp') ?> Écrire sur WhatsApp
-      </a>
-      <span class="diagnostic__note"><?= e(cfg('cta.promesse')) ?></span>
+    <div class="expertise-heros">
+      <div>
+        <h1 class="mesure titre-machine"><?= e($x['h1']) ?><em><?= e($x['h1_suite']) ?></em></h1>
+        <p class="heros__badge"><?= icone($x['icone']) ?> <?= e($x['badge']) ?></p>
+        <p class="mesure-large doux" style="margin-top:1.25rem"><?= e($x['chapo']) ?></p>
+        <div class="diagnostic__actions" style="margin-top:1.75rem">
+          <a class="bouton bouton--safran" href="/diagnostic"><?= e(cfg('cta.libelle')) ?> <?= icone('fleche') ?></a>
+          <a class="bouton bouton--contour-clair" href="<?= e(whatsapp()) ?>" target="_blank" rel="noopener">
+            <?= icone('whatsapp') ?> Écrire sur WhatsApp
+          </a>
+          <span class="diagnostic__note"><?= e(cfg('cta.promesse')) ?></span>
+        </div>
+      </div>
+      <?php if (!empty($x['visuel'])): ?>
+        <?php /* Premier écran : chargé tout de suite (pas de lazy), dimensions
+                 fixées pour éviter tout décalage de mise en page. */ ?>
+        <figure class="expertise-heros__visuel">
+          <img src="<?= e($x['visuel']['src']) ?>" alt="<?= e($x['visuel']['alt']) ?>"
+               width="640" height="520" fetchpriority="high">
+          <figcaption>Illustration de principe</figcaption>
+        </figure>
+      <?php endif; ?>
     </div>
   </div>
 </section>
@@ -94,6 +107,24 @@
     </div>
   </div>
 </section>
+
+<?php /* ------------------------------------------------------- La photo */ ?>
+<?php if (!empty($x['photo'])): $ph = $x['photo']; ?>
+<section class="section section--papier" style="padding-bottom:0">
+  <div class="page-large">
+    <figure class="photo-bandeau">
+      <img src="/assets/photos/<?= e($ph['fichier']) ?>-700.jpg"
+           srcset="/assets/photos/<?= e($ph['fichier']) ?>-700.jpg 700w, /assets/photos/<?= e($ph['fichier']) ?>-1200.jpg 1200w"
+           sizes="(min-width: 74rem) 74rem, 100vw" alt="<?= e($ph['alt']) ?>" loading="lazy"
+           style="aspect-ratio:<?= e($ph['ratio']) ?>">
+      <figcaption>
+        <span><?= e($ph['legende']) ?></span>
+        <a class="photo-bandeau__credit" href="<?= e($ph['source']) ?>" target="_blank" rel="noopener">Photo : <?= e($ph['credit']) ?></a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<?php endif; ?>
 
 <?php /* ------------------------------------------------------- La méthode */ ?>
 <section class="section section--papier">

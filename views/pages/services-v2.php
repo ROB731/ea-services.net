@@ -112,6 +112,15 @@ $pagesParGain = [
     'serenite'   => ['maintenance-informatique-abidjan', 'formation-informatique-ia-abidjan'],
 ];
 
+/* Illustrations de principe (outils/maquettes.py) : ce que le gain donne, concrètement. */
+$visuelsParGain = [
+    'temps'      => ['/assets/expertises/automatisation.svg', "Illustration : des relances qui partent automatiquement au bon moment"],
+    'conversion' => ['/assets/expertises/chatbot-whatsapp.svg', "Illustration : une conversation WhatsApp où le client reçoit une réponse immédiate"],
+    'visibilite' => ['/assets/expertises/referencement.svg', "Illustration : une entreprise qui apparaît sur la carte et dans les résultats de recherche"],
+    'ca'         => ['/assets/expertises/logiciel-sur-mesure.svg', "Illustration : un outil qui regroupe toutes les commandes et leur statut"],
+    'serenite'   => ['/assets/expertises/maintenance.svg', "Illustration : la sauvegarde du jour réussie à deux endroits, tous les services en marche"],
+];
+
 $libelles = [
     'temps' => 'Temps', 'conversion' => 'Conversion', 'visibilite' => 'Visibilité',
     'ca' => "Chiffre d'affaires", 'serenite' => 'Sérénité',
@@ -169,6 +178,11 @@ $iconesMots = [
           <span class="marqueur"><?= icone($iconesMots[$mot] ?? 'cible') ?> <?= e($mot) ?></span>
         <?php endforeach; ?>
       </div>
+    <?php endif; ?>
+
+    <?php if (!empty($visuelsParGain[$s['cle']])): [$src, $alt] = $visuelsParGain[$s['cle']]; ?>
+      <img src="<?= e($src) ?>" alt="<?= e($alt) ?>" width="640" height="520" loading="lazy"
+           style="display:block;width:100%;max-width:36rem;height:auto;border-radius:1rem;margin:0 0 1.5rem">
     <?php endif; ?>
 
     <div class="grille grille--2">

@@ -99,17 +99,12 @@
     </ol>
 
     <?php /* Illustration, pas une capture : l'écran réel n'est pas encore fourni. */ ?>
-    <figure class="carte" style="margin:2rem 0 0;max-width:22rem">
-      <span class="chapeau">Illustration</span>
-      <p class="doux" style="font-size:.875rem;margin:0">Lundi · 07:30</p>
-      <h3 style="margin:.5rem 0">Ouvrir la caisse et compter le fond</h3>
-      <p class="doux" style="font-size:.875rem">Tâche assignée par la gérante</p>
-      <p style="margin-top:1rem;display:flex;gap:.75rem;flex-wrap:wrap">
-        <span class="bouton bouton--marine" aria-hidden="true">C'est fait</span>
-        <span class="bouton bouton--contour" aria-hidden="true">Plus tard</span>
-      </p>
-      <figcaption class="doux" style="font-size:.75rem;margin-top:.75rem">
-        Schéma de principe de l'alarme, pas une capture d'écran.
+    <figure style="margin:2rem 0 0;max-width:40rem">
+      <img src="/assets/expertises/application-mobile.svg" width="640" height="520" loading="lazy"
+           alt="Illustration : l'alarme « Ouvrir la caisse » à 07:30 avec les boutons C'est fait et Plus tard, et le suivi des tâches de l'équipe"
+           style="display:block;width:100%;height:auto;border-radius:1rem">
+      <figcaption class="doux" style="font-size:.75rem;margin-top:.5rem">
+        Schéma de principe de l'application, pas une capture d'écran.
       </figcaption>
     </figure>
   </div>
