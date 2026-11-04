@@ -49,6 +49,18 @@ $c = (array)cfg('contact');
       </div>
     </div>
 
+    <?php /* Une ligne de liens vers chaque expertise : c'est ce qui permet à
+             Google (et au visiteur) de les atteindre depuis n'importe quelle page. */ ?>
+    <nav class="pied__expertises" aria-label="Nos expertises">
+      <h4>Nos expertises à Abidjan</h4>
+      <ul>
+        <?php foreach (\EA\Core\Config::expertises() as $slugX => $xp): ?>
+          <li><a href="/pages/<?= e($slugX) ?>"><?= e($xp['libelle']) ?></a></li>
+        <?php endforeach; ?>
+        <li><a href="/pages/sonnera">Sonnera, application d'équipe</a></li>
+      </ul>
+    </nav>
+
     <div class="pied__bas">
       <span>&copy; <?= date('Y') ?> EA-SERVICES — <?= e($c['ville']) ?>, <?= e($c['pays']) ?></span>
       <span>Site édité et hébergé par EA-SERVICES · <a href="/admin/connexion" style="opacity:.6">Administration</a></span>

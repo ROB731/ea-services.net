@@ -25,7 +25,10 @@ Structure actuelle, à conserver telle quelle :
 /pages/blog
 /pages/a-propos
 /pages/contact
-/article/{slug}          6 articles publiés
+/article/{slug}          articles publiés (voir la table articles)
+/pages/sonnera           application Android (2026-11-04)
+/pages/{expertise}       9 pages d'expertise, une par requête (2026-11-04) :
+                         la liste fait foi dans config/expertises.php
 ```
 
 La liste exhaustive des slugs d'articles est en fin de

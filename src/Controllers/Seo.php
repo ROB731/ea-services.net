@@ -141,6 +141,52 @@ final class Seo extends Controleur
         ];
     }
 
+    /**
+     * Données structurées d'une page d'expertise : l'organisation, le service
+     * proposé, le fil d'Ariane (Accueil › Prestations › Expertise) et la FAQ
+     * EXACTEMENT telle qu'affichée sur la page.
+     */
+    public static function blocsExpertise(string $slug, array $x): array
+    {
+        $idOrg = Config::url('/#organisation');
+        $url   = Config::url('/pages/' . $slug);
+        $blocs = [self::blocsCommuns('expertise')[0]];
+
+        $blocs[] = [
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Service',
+            'name'        => $x['h1'],
+            'serviceType' => $x['service'],
+            'description' => $x['description'],
+            'url'         => $url,
+            'provider'    => ['@id' => $idOrg],
+            'areaServed'  => [
+                ['@type' => 'City',    'name' => 'Abidjan'],
+                ['@type' => 'Country', 'name' => "Côte d'Ivoire"],
+            ],
+            'inLanguage'  => 'fr',
+        ];
+        $blocs[] = [
+            '@context' => 'https://schema.org',
+            '@type'    => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Accueil',     'item' => Config::url('/')],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Prestations', 'item' => Config::url('/pages/prestations')],
+                ['@type' => 'ListItem', 'position' => 3, 'name' => $x['libelle'], 'item' => $url],
+            ],
+        ];
+        $blocs[] = [
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array_map(static fn(array $qr) => [
+                '@type'          => 'Question',
+                'name'           => $qr[0],
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $qr[1]],
+            ], $x['faq']),
+        ];
+        return $blocs;
+    }
+
     /** Données structurées d'un article. */
     public static function blocsArticle(array $article): array
     {
@@ -206,6 +252,12 @@ final class Seo extends Controleur
 
         foreach ($pages as [$chemin, $priorite, $frequence]) {
             $this->entree($xml, Config::url($chemin), $modifPages, $frequence, $priorite);
+        }
+
+        // Pages d'expertise : date réelle = dernière modification de leur contenu.
+        $modifExpertises = date('Y-m-d', (int)(@filemtime(dirname(__DIR__, 2) . '/config/expertises.php') ?: time()));
+        foreach (array_keys(Config::expertises()) as $slug) {
+            $this->entree($xml, Config::url('/pages/' . $slug), $modifExpertises, 'monthly', '0.9');
         }
 
         foreach (Database::tous(

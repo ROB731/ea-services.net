@@ -19,6 +19,20 @@ final class Config
         return self::$data;
     }
 
+    private static ?array $expertises = null;
+
+    /**
+     * Pages d'expertise (config/expertises.php), une par besoin recherché.
+     * @return array<string,array> slug => expertise
+     */
+    public static function expertises(): array
+    {
+        if (self::$expertises === null) {
+            self::$expertises = require dirname(__DIR__, 2) . '/config/expertises.php';
+        }
+        return self::$expertises;
+    }
+
     /** @return mixed Chemin pointé : 'contact.email'. $defaut si absent. */
     public static function get(string $chemin, mixed $defaut = null): mixed
     {

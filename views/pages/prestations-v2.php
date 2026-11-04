@@ -72,6 +72,25 @@ $prestations = [
         ],
     ],
 ];
+
+/* Chaque moyen renvoie vers sa page d'expertise détaillée (config/expertises.php),
+   quand elle existe : c'est le chemin naturel du visiteur, et le maillage qui
+   permet à Google de relier ces pages entre elles. */
+$liensPoints = [
+    'Site vitrine, pour présenter votre activité' => 'creation-site-web-abidjan',
+    'Boutique en ligne'                            => 'boutique-en-ligne-abidjan',
+    'Développement de logiciel sur mesure'         => 'logiciel-sur-mesure-abidjan',
+    'Application web'                              => 'logiciel-sur-mesure-abidjan',
+    'Application mobile'                           => 'application-mobile-abidjan',
+    'Relances automatiques'                        => 'automatisation-taches-entreprise',
+    'Réponses WhatsApp'                            => 'chatbot-whatsapp-entreprise',
+    'Tâches répétitives prises en charge'          => 'automatisation-taches-entreprise',
+    'Informatique'                                 => 'formation-informatique-ia-abidjan',
+    'Intelligence artificielle'                    => 'formation-informatique-ia-abidjan',
+    'Maintenance informatique'                     => 'maintenance-informatique-abidjan',
+    'Sauvegarde et hébergement dans le cloud'      => 'maintenance-informatique-abidjan',
+];
+$expertises = \EA\Core\Config::expertises();
 ?>
 
 <?php /* ------------------------------------------------------ L'ouverture */ ?>
@@ -104,8 +123,8 @@ $prestations = [
             <h3><?= e($p['titre']) ?></h3>
             <p class="doux"><?= e($p['texte']) ?></p>
             <ul class="liste-cochee" style="margin-top:.75rem">
-              <?php foreach ($p['points'] as $point): ?>
-                <li><?= e($point) ?></li>
+              <?php foreach ($p['points'] as $point): $cible = $liensPoints[$point] ?? null; ?>
+                <li><?php if ($cible && isset($expertises[$cible])): ?><a href="/pages/<?= e($cible) ?>"><?= e($point) ?></a><?php else: ?><?= e($point) ?><?php endif; ?></li>
               <?php endforeach; ?>
             </ul>
           </div>

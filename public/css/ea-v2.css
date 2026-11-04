@@ -1133,3 +1133,25 @@ body.chat-ouverte .flottant { display: none; }
 .promo-article__carte .ico { color: var(--safran-encre); }
 .promo-article__titre { font-weight: 700; font-size: .9375rem; }
 .promo-article__impact { font-size: .8125rem; color: var(--texte-doux); }
+
+/* --- Pages d'expertise (2026-11-04) -------------------------------------- */
+.ariane { font-size: .8125rem; margin-bottom: 1.25rem; color: rgba(255, 255, 255, .7); }
+.ariane a { color: rgba(255, 255, 255, .85); }
+.ariane [aria-current] { color: #fff; font-weight: 600; }
+
+.carte h3 .ico { width: 1.125rem; height: 1.125rem; vertical-align: -.15em; color: var(--safran-encre); }
+.carte--perte { border-left: 4px solid var(--perte, #c0392b); }
+
+/* Carte entièrement cliquable : cible tactile large, aucun effet réservé au survol. */
+a.carte--lien { display: block; text-decoration: none; color: var(--texte); min-height: 44px; }
+a.carte--lien h3 { color: var(--texte); }
+a.carte--lien:hover, a.carte--lien:focus-visible { border-color: var(--safran-encre); }
+
+.pied__expertises { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .12); }
+.pied__expertises ul { list-style: none; margin: .75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+.pied__expertises a { display: inline-block; padding: .5rem 0; font-size: .875rem; }
+a.marqueur { text-decoration: none; min-height: 44px; }
+a.marqueur:hover, a.marqueur:focus-visible { border-color: var(--safran-encre); color: var(--texte); }
+/* Filet de sécurité à 390 px : un mot long dans un titre ne doit jamais
+   provoquer de défilement horizontal. */
+h1, h2, h3 { overflow-wrap: break-word; }

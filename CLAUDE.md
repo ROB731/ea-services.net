@@ -1,8 +1,14 @@
 # EA-SERVICES — site public ea-services.net
 
 Site vitrine d'EA-SERVICES. **Ce n'est pas un prototype** : le domaine est en
-production et le site a déjà 2511 visites humaines réelles (le total brut de
-4133 incluait 1629 requêtes de robots, désormais comptées à part).
+production et connu de Google (Googlebot passe tous les jours).
+
+**Audience — ne pas se fier à `bot = 0`** (constaté le 2026-11-04) : des robots
+qui imitent un vrai navigateur passent ce filtre (≈ 20 000 lignes « humaines »
+pour 1 282 navigateurs différents, aucune visite réellement venue de Google).
+Le chiffre fiable est `humain = 1` : posé par `ea-v2.js` seulement après un
+défilement, un toucher ou un clic (`POST /__h`). L'IP n'est stockée qu'avec
+consentement aux cookies — ne pas compter les visiteurs par IP.
 
 **Refonte complète le 2026-08-06** : code entièrement réécrit, contenu réécrit,
 identité alignée sur le logo (marine + or), couche SEO ajoutée. Les 12 URL
@@ -68,6 +74,14 @@ public/             index.php, css/ea.css, js/ea.js, assets/
 - **Les 6 pages sont des gabarits** (`views/pages/`), plus des blocs de HTML
   en base : une page d'accueil a une structure propre, la stocker dans une
   colonne empêchait de la faire évoluer.
+- **Pages d'expertise** (`/pages/creation-site-web-abidjan`, `/pages/chatbot-whatsapp-entreprise`…) :
+  une page par besoin que les gens tapent dans Google. Contenu dans
+  `config/expertises.php`, gabarit unique `views/pages/expertise.php`, servies
+  par `PageController::afficher()`. Ajouter une entrée au fichier suffit :
+  sitemap, pied de page, accueil et données structurées (Service + FAQPage)
+  suivent tout seuls. Le titre reprend la requête ; le corps garde la doctrine.
+  Raison : aucun titre visible des pages historiques ne contenait un mot
+  recherché — elles convainquent, elles ne font pas venir.
 - **Les articles restent en base** : ils sont rédigés en administration.
   Le contenu est du texte brut, mis en forme par `Texte::enHtml()` qui
   **échappe avant de baliser**.
@@ -140,4 +154,10 @@ tail -f /opt/ea-services/storage/php-error.log
 - **Confirmer les trois cas clients chiffrés** de `/pages/blog` (cabinet de
   recrutement, agent commercial, entreprise de services). Ils proviennent du
   contenu archivé ; s'ils ne sont pas vérifiables, ils doivent être retirés.
-- Le certificat Let's Encrypt est en renouvellement **manuel**.
+- Le certificat Let's Encrypt est en renouvellement **manuel** (expire le 2027-01-14).
+- **Créer la fiche Google Business Profile** d'EA-SERVICES (Marcory Biétry) :
+  levier le plus rapide pour les recherches locales « … à Abidjan ».
+- **Valider les engagements** écrits dans `config/expertises.php` (rubriques
+  « Pourquoi nous » et FAQ) : ils décrivent des pratiques, pas des chiffres,
+  mais le dirigeant doit pouvoir les tenir.
+- **Sonnera** : fournir le lien de téléchargement et de vraies captures.

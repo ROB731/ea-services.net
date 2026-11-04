@@ -386,6 +386,13 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
       </article>
     </div>
 
+    <?php /* Accès direct à chaque expertise : ce que les gens cherchent sur Google. */ ?>
+    <div class="marqueurs" style="margin-bottom:1.75rem">
+      <?php foreach (\EA\Core\Config::expertises() as $slugX => $xp): ?>
+        <a class="marqueur" href="/pages/<?= e($slugX) ?>"><?= icone($xp['icone']) ?> <?= e($xp['libelle']) ?></a>
+      <?php endforeach; ?>
+    </div>
+
     <a class="bouton bouton--marine" href="/pages/prestations">
       Voir le détail des prestations <?= icone('fleche') ?>
     </a>

@@ -110,6 +110,9 @@ final class PageController extends Controleur
             header('Location: /', true, 301);
             exit;
         }
+        if (isset(Config::expertises()[$slug])) {
+            return $this->expertise($slug);
+        }
         if (!isset(self::PAGES[$slug]) || $slug === 'accueil') {
             return $this->introuvable();
         }
@@ -126,6 +129,49 @@ final class PageController extends Controleur
             'canonical'   => $p['canonical'],
             'json_ld'     => Seo::blocsCommuns($cle),
         ], $p['gabarit'] ?? 'layouts/public-v2');
+    }
+
+    /**
+     * Page d'expertise : une adresse par besoin recherché sur Google, même
+     * gabarit pour toutes (views/pages/expertise.php), contenu dans
+     * config/expertises.php.
+     */
+    private function expertise(string $slug): string
+    {
+        $tout = Config::expertises();
+        $x    = $tout[$slug];
+
+        // Articles liés, dans l'ordre voulu, seulement s'ils sont publiés.
+        $articles = [];
+        if ($x['articles']) {
+            $marques = implode(',', array_fill(0, count($x['articles']), '?'));
+            $lignes  = Database::tous(
+                "SELECT title, slug, excerpt FROM articles WHERE published = 1 AND slug IN ($marques)",
+                $x['articles']
+            );
+            $parSlug = array_column($lignes, null, 'slug');
+            foreach ($x['articles'] as $s) {
+                if (isset($parSlug[$s])) $articles[] = $parSlug[$s];
+            }
+        }
+
+        $voisines = [];
+        foreach ($x['voisines'] as $s) {
+            if (isset($tout[$s])) $voisines[$s] = $tout[$s];
+        }
+
+        return $this->page('pages/expertise', [
+            'slug'     => $slug,
+            'x'        => $x,
+            'gain'     => (array)Config::get('gains.' . $x['gain'], []),
+            'articles' => $articles,
+            'voisines' => $voisines,
+        ], [
+            'titre'       => $x['titre'],
+            'description' => $x['description'],
+            'canonical'   => '/pages/' . $slug,
+            'json_ld'     => Seo::blocsExpertise($slug, $x),
+        ]);
     }
 
     private function articlesRecents(int $limite): array

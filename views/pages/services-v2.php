@@ -102,6 +102,16 @@ $services = [
     ],
 ];
 
+/* Les pages d'expertise qui détaillent chaque gain (config/expertises.php). */
+$expertises   = \EA\Core\Config::expertises();
+$pagesParGain = [
+    'temps'      => ['automatisation-taches-entreprise', 'application-mobile-abidjan'],
+    'conversion' => ['chatbot-whatsapp-entreprise', 'boutique-en-ligne-abidjan'],
+    'visibilite' => ['creation-site-web-abidjan', 'referencement-google-abidjan'],
+    'ca'         => ['logiciel-sur-mesure-abidjan', 'boutique-en-ligne-abidjan'],
+    'serenite'   => ['maintenance-informatique-abidjan', 'formation-informatique-ia-abidjan'],
+];
+
 $libelles = [
     'temps' => 'Temps', 'conversion' => 'Conversion', 'visibilite' => 'Visibilité',
     'ca' => "Chiffre d'affaires", 'serenite' => 'Sérénité',
@@ -176,6 +186,11 @@ $iconesMots = [
         </ul>
         <p class="doux" style="margin-top:1rem"><?= e($s['resultat']) ?></p>
         <span class="manifeste__impact"><?= e($s['impact']) ?></span>
+        <?php if (!empty($pagesParGain[$s['cle']])): ?>
+          <p style="margin-top:1rem;font-size:.9375rem">En détail :
+            <?php foreach ($pagesParGain[$s['cle']] as $n => $slugX): ?><?= $n ? ' · ' : '' ?><a href="/pages/<?= e($slugX) ?>"><?= e($expertises[$slugX]['libelle'] ?? $slugX) ?></a><?php endforeach; ?>
+          </p>
+        <?php endif; ?>
       </article>
     </div>
   </div>
