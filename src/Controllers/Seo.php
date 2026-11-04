@@ -59,6 +59,22 @@ final class Seo extends Controleur
 
         $blocs = [$organisation];
 
+        // Application Sonnera : donnees structurees d'une application. Aucune
+        // note ni avis (on n'en a aucun de verifiable), aucun prix (sur demande).
+        if ($page === 'sonnera') {
+            $blocs[] = [
+                '@context'            => 'https://schema.org',
+                '@type'               => 'SoftwareApplication',
+                'name'                => 'Sonnera',
+                'applicationCategory' => 'BusinessApplication',
+                'operatingSystem'     => 'Android',
+                'description'         => "Application de rappels et de suivi d'équipe : une alarme qui sonne même téléphone verrouillé, des tâches réparties entre collègues, et un responsable prévenu quand rien n'est fait.",
+                'url'                 => Config::url('/pages/sonnera'),
+                'inLanguage'          => 'fr',
+                'publisher'           => ['@id' => $idOrg],
+            ];
+        }
+
         if ($page !== 'accueil') {
             $blocs[] = self::filAriane($page);
         }
