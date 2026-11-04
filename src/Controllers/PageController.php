@@ -47,6 +47,14 @@ final class PageController extends Controleur
             'titre'       => "Solutions : site internet, prospection automatisée, recrutement | EA-SERVICES",
             'description' => "Création de site internet, prospection commerciale automatisée et recrutement simplifié : trois solutions pour entreprises ivoiriennes, pensées pour fonctionner ensemble.",
         ],
+        // Application mobile (ajoutee 2026-11-04). Nouvelle adresse, aucune URL existante touchee.
+        'sonnera' => [
+            'vue'         => 'pages/sonnera',
+            'gabarit'     => 'layouts/public-v2',
+            'canonical'   => '/pages/sonnera',
+            'titre'       => "Sonnera : application de rappels pour équipes | EA-SERVICES",
+            'description' => "Une alarme qui sonne même téléphone verrouillé, des tâches réparties entre collègues et un responsable prévenu si rien n'est fait. Application Android.",
+        ],
         'prestations' => [
             'vue'         => 'pages/prestations-v2',
             'gabarit'     => 'layouts/public-v2',
@@ -153,6 +161,14 @@ final class PageController extends Controleur
      * définitivement disparu, ce qui la fait sortir de l'index plus vite
      * qu'un simple 404.
      */
+    /** Balise appelee par ea-v2.js apres une interaction reelle (defilement, toucher, clic). */
+    public function humain(): string
+    {
+        \EA\Core\Visites::confirmer((string)($_POST['p'] ?? ''));
+        http_response_code(204);
+        return '';
+    }
+
     public function disparue(): string
     {
         http_response_code(410);

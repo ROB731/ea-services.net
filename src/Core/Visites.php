@@ -57,6 +57,28 @@ final class Visites
         }
     }
 
+    /**
+     * Marque comme « confirmée » la visite la plus récente de ce navigateur sur
+     * cette page. Un robot ne défile ni ne touche l'écran : seule une vraie
+     * personne déclenche l'appel. Best-effort, comme le reste du comptage.
+     */
+    public static function confirmer(string $chemin): void
+    {
+        if ($chemin === '' || $chemin[0] !== '/' || strlen($chemin) > 255) return;
+        $ua = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 255);
+        try {
+            Database::executer(
+                'UPDATE visits SET humain = 1 WHERE id = (
+                    SELECT id FROM visits
+                    WHERE path = ? AND user_agent IS ? AND bot = 0 AND humain = 0 AND created_at >= ?
+                    ORDER BY id DESC LIMIT 1)',
+                [$chemin, $ua !== '' ? $ua : null, date('Y-m-d H:i:s', time() - 600)]
+            );
+        } catch (\Throwable) {
+            // silence volontaire
+        }
+    }
+
     /** X-Forwarded-For d'abord : Apache peut être derrière un proxy. */
     public static function ip(): ?string
     {

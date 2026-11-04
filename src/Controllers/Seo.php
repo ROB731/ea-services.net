@@ -87,7 +87,7 @@ final class Seo extends Controleur
     {
         $libelles = [
             'services' => 'Services', 'produits' => 'Solutions', 'prestations' => 'Prestations',
-            'realisations' => 'Réalisations', 'blog' => 'Blog',
+            'realisations' => 'Réalisations', 'sonnera' => 'Sonnera', 'blog' => 'Blog',
             'a-propos' => 'À propos', 'contact' => 'Contact',
         ];
         return [
@@ -171,6 +171,7 @@ final class Seo extends Controleur
             ['/pages/services',     '0.9', 'monthly'],
             ['/pages/produits',     '0.9', 'monthly'],
             ['/pages/prestations',  '0.9', 'monthly'],
+            ['/pages/sonnera',      '0.8', 'monthly'],
             ['/pages/realisations', '0.8', 'monthly'],
             ['/pages/blog',         '0.8', 'weekly'],
             ['/pages/a-propos',     '0.7', 'monthly'],

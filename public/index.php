@@ -57,6 +57,19 @@ $routeur->get('/chat/historique',  [ChatController::class, 'historique']);
    plus vite). */
 $routeur->get('/ea-services-404.html', [PageController::class, 'disparue']);
 
+/* Deux articles d'un ancien site (emploi, colis) que Google redemande encore
+   des dizaines de fois : 410 plutot que 404, il les retire de l'index plus
+   vite et cesse de gaspiller son exploration sur ces adresses. */
+foreach ([
+    '/article/comment-trouver-un-emploi-a-abidjan-conseils-pratiques-et-outils-pour-2026',
+    '/article/envoi-colis-abidjan-les-solutions-rapides-et-fiables-pour-livrer-en-ville',
+] as $ancien) {
+    $routeur->get($ancien, [PageController::class, 'disparue']);
+}
+
+/* Confirmation qu'un vrai navigateur a eu une vraie interaction (voir ea-v2.js). */
+$routeur->post('/__h', [PageController::class, 'humain']);
+
 /* ------------------------------------------------------------------- SEO */
 $routeur->get('/sitemap.xml', [Seo::class, 'sitemap']);
 $routeur->get('/robots.txt',  [Seo::class, 'robots']);

@@ -500,4 +500,23 @@
       champ.remove();
     }
   });
+  /* --- Confirmation de visite réelle ---------------------------------------
+     Un robot charge la page mais ne touche rien. Au premier défilement,
+     toucher ou clic, on prévient le serveur une seule fois : c'est ce qui
+     permet de compter les vraies personnes. Aucune donnée personnelle. */
+  (function () {
+    var envoye = false;
+    var evenements = ['scroll', 'touchstart', 'pointerdown', 'keydown'];
+    function confirmer() {
+      if (envoye) return;
+      envoye = true;
+      evenements.forEach(function (e) { window.removeEventListener(e, confirmer); });
+      try {
+        var corps = new URLSearchParams({ p: location.pathname });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/__h', corps); }
+        else { fetch('/__h', { method: 'POST', body: corps, keepalive: true }); }
+      } catch (e) {}
+    }
+    evenements.forEach(function (e) { window.addEventListener(e, confirmer, { passive: true }); });
+  })();
 })();

@@ -689,6 +689,7 @@ final class AdminController extends Controleur
             ),
             'total'   => (int)Database::valeur('SELECT COUNT(*) FROM visits WHERE bot = 0'),
             'robots'  => (int)Database::valeur('SELECT COUNT(*) FROM visits WHERE bot = 1'),
+            'confirmees' => (int)Database::valeur('SELECT COUNT(*) FROM visits WHERE humain = 1 AND date(created_at) >= ?', [$depuis]),
         ]);
     }
 }

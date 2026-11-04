@@ -76,7 +76,7 @@ final class Router
      */
     private static function heritee(string $chemin): ?string
     {
-        if ($chemin === '/index.html' || $chemin === '/accueil.html') return '/';
+        if (in_array($chemin, ['/index', '/index.php', '/index.html', '/accueil.html'], true)) return '/';
 
         // La page « investissement temps » n'existe plus : son sujet est
         // traité par le gain Temps de la page Services.

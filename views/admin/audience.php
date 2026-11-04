@@ -1,6 +1,6 @@
 <?php
 /** @var array $parJour, $pages, $origines
- *  @var int $total, $robots */
+ *  @var int $total, $robots, $confirmees */
 $max = max(1, ...array_map(static fn($j) => (int)$j['n'], $parJour ?: [['n' => 1]]));
 ?>
 <h1 style="font-size:1.5rem">Audience</h1>
@@ -13,6 +13,10 @@ $max = max(1, ...array_map(static fn($j) => (int)$j['n'], $parJour ?: [['n' => 1
   <div class="stat">
     <span class="chiffre"><?= number_format(array_sum(array_column($parJour, 'n')), 0, ',', ' ') ?></span>
     <span>sur les 30 derniers jours</span>
+  </div>
+  <div class="stat">
+    <span class="chiffre"><?= number_format($confirmees, 0, ',', ' ') ?></span>
+    <span>visites confirmées par une vraie interaction (30 jours) : le chiffre fiable</span>
   </div>
   <div class="stat">
     <span class="chiffre"><?= number_format($robots, 0, ',', ' ') ?></span>

@@ -40,6 +40,12 @@ if (colonne($pdo, 'visits', 'bot', 'INTEGER NOT NULL DEFAULT 0')) {
     $fait[] = 'visits.bot ajoutée';
 }
 
+// 2b. Visite confirmée par une interaction réelle (défilement, toucher, clic).
+//     Plus fiable que `bot = 0`, que les robots à navigateur complet franchissent.
+if (colonne($pdo, 'visits', 'humain', 'INTEGER NOT NULL DEFAULT 0')) {
+    $fait[] = 'visits.humain ajoutée';
+}
+
 // 3. Reclassement rétroactif : environ 1700 des 4133 lignes héritées sont des
 //    scanners. Elles restent en base, marquées comme telles.
 $scanners = "path LIKE '%wp-admin%' OR path LIKE '%wp-login%' OR path LIKE '%wp-json%'
