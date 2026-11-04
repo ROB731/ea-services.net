@@ -7,7 +7,7 @@ use EA\Core\Csrf;
 <div class="pile" data-liste-vide>
   <p class="doux" data-message-vide<?= $demandes ? ' hidden' : '' ?>>Aucune demande reçue pour l'instant.</p>
     <?php foreach ($demandes as $d): $p = $d['donnees']; ?>
-      <article class="carte" data-ligne style="<?= empty($d['read']) ? 'border-left:4px solid var(--or-500)' : '' ?>">
+      <article class="carte<?= empty($d['read']) ? ' carte--a-traiter' : '' ?>" data-ligne>
         <div class="rangee" style="justify-content:space-between">
           <div>
             <h2 style="font-size:1.15rem;margin-bottom:.25rem">

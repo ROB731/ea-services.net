@@ -54,7 +54,7 @@ $e = $edite ?? null;
   <h2 style="font-size:1.15rem" id="compte-temoignages"><?= count($temoignages) ?> témoignage<?= count($temoignages) > 1 ? 's' : '' ?></h2>
   <div class="pile" style="margin-top:1rem" id="liste-temoignages" data-liste-vide>
     <?php foreach ($temoignages as $t): ?>
-      <div data-ligne style="border-left:3px solid var(--or-500);padding-left:1rem">
+      <div class="ligne-temoignage" data-ligne>
         <p style="margin-bottom:.25rem">« <?= e($t['comment']) ?> »</p>
         <p class="doux" style="font-size:.875rem;margin-bottom:.5rem">
           <strong><?= e($t['name']) ?></strong>

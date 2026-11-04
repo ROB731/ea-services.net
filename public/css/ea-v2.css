@@ -59,6 +59,7 @@
   --safran-encre: #7d5605;
 
   --signal:       #128c4a;   /* WhatsApp, et lui seul */
+  --perte:        #a8321f;   /* rang des pertes, alerte d'erreur : 6,2:1 sur papier */
 
   --texte:        var(--encre);
   --texte-doux:   #5a6577;
@@ -88,6 +89,7 @@
   --surface:      var(--papier);
   --trait:        rgba(255, 255, 255, .14);
   --safran-encre: var(--safran-vif);
+  --perte:        #f0907e;
 }
 
 /* --- 3. Base ------------------------------------------------------------ */
@@ -830,12 +832,13 @@ img { max-width: 100%; height: auto; display: block; }
    remplisseurs automatiques ignorent — il doit rester dans le flux. */
 .piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
+/* Message de formulaire : un encadré entier, teinté, sans barre latérale. */
 .alerte {
-  padding: .75rem 1rem; border-radius: var(--arrondi);
-  border-left: 4px solid; margin-bottom: 1.25rem;
+  padding: .875rem 1.125rem; border-radius: var(--arrondi);
+  border: 1px solid; margin-bottom: 1.25rem;
 }
-.alerte--ok     { border-color: var(--signal); background: rgba(18, 140, 74, .08);  color: var(--texte); }
-.alerte--erreur { border-color: #b3261e;       background: rgba(179, 38, 30, .08);  color: var(--texte); }
+.alerte--ok     { border-color: rgba(18, 140, 74, .35); background: rgba(18, 140, 74, .07);  color: var(--texte); }
+.alerte--erreur { border-color: rgba(168, 50, 31, .35); background: rgba(168, 50, 31, .07);  color: var(--texte); }
 
 .pile { display: flex; flex-direction: column; gap: 1rem; }
 .entete-section { margin-bottom: 2.5rem; }
@@ -1079,11 +1082,20 @@ body.chat-ouverte .flottant { display: none; }
 .redaction ul, .redaction ol { padding-left: 1.25rem; }
 .redaction li { margin-bottom: .5rem; }
 .redaction img { border-radius: var(--arrondi); margin-block: 1.75rem; }
+/* Citation d'article : un grand guillemet français en marge, à la manière
+   d'un livre, plutôt qu'une barre de couleur sur le côté. */
 .redaction blockquote {
-  margin: 1.75rem 0; padding: 1rem 1.5rem;
-  border-left: 4px solid var(--safran); background: var(--sable);
-  border-radius: 0 var(--arrondi) var(--arrondi) 0;
+  position: relative;
+  margin: 2rem 0; padding: .25rem 0 .25rem 2.75rem;
+  font-family: var(--serif-titre); font-size: 1.1875rem; line-height: 1.6;
+  color: var(--texte);
 }
+.redaction blockquote::before {
+  content: "«"; position: absolute; left: 0; top: -.35rem;
+  font-size: 3rem; line-height: 1; font-weight: 700;
+  color: var(--safran-encre);
+}
+.redaction blockquote > :last-child { margin-bottom: 0; }
 .redaction table { width: 100%; border-collapse: collapse; }
 .redaction td, .redaction th { padding: .5rem; border-bottom: 1px solid var(--trait); text-align: left; }
 
@@ -1140,7 +1152,24 @@ body.chat-ouverte .flottant { display: none; }
 .ariane [aria-current] { color: #fff; font-weight: 600; }
 
 .carte h3 .ico { width: 1.125rem; height: 1.125rem; vertical-align: -.15em; color: var(--safran-encre); }
-.carte--perte { border-left: 4px solid var(--perte, #c0392b); }
+/* Une perte se lit comme une ligne de relevé : un rang numéroté, un filet qui
+   court jusqu'au bord, puis le constat. Pas de barre colorée sur le côté de la
+   carte (procédé générique, écarté par le dirigeant le 2026-11-04) : la seule
+   touche de couleur est le rang, et le chiffre porte le sens autant que la
+   teinte. */
+.carte--perte { padding-top: 1.25rem; }
+.perte__rang {
+  display: flex; align-items: center; gap: .75rem;
+  margin: 0 0 1rem;
+  font-family: var(--serif-titre); font-weight: 700;
+  font-size: 1.75rem; line-height: 1; letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--perte);
+}
+.perte__rang::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--trait), transparent);
+}
 
 /* Carte entièrement cliquable : cible tactile large, aucun effet réservé au survol. */
 a.carte--lien { display: block; text-decoration: none; color: var(--texte); min-height: 44px; }

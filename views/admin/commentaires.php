@@ -12,7 +12,7 @@ $attente = array_filter($commentaires, static fn($c) => (int)$c['published'] ===
 <div class="pile" data-liste-vide>
   <p class="doux" data-message-vide<?= $commentaires ? ' hidden' : '' ?>>Aucun commentaire pour l'instant.</p>
     <?php foreach ($commentaires as $c): ?>
-      <article class="carte" data-ligne style="<?= (int)$c['published'] === 0 ? 'border-left:4px solid var(--or-500)' : '' ?>">
+      <article class="carte<?= (int)$c['published'] === 0 ? ' carte--a-traiter' : '' ?>" data-ligne>
         <p class="doux" style="font-size:.875rem;margin-bottom:.5rem">
           Sur <a href="/article/<?= e($c['slug']) ?>" target="_blank" rel="noopener"><?= e($c['title']) ?></a>
           · <?= e(dateFr($c['created_at'])) ?>

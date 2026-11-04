@@ -57,9 +57,10 @@
     </p>
     <h2 class="mesure">Trois pertes que vous vivez<span class="suite">peut-être déjà.</span></h2>
     <div class="grille grille--3" style="margin-top:1.5rem">
-      <?php foreach ($x['pertes'] as [$titre, $texte]): ?>
+      <?php foreach ($x['pertes'] as $i => [$titre, $texte]): ?>
         <article class="carte carte--perte">
-          <h3><?= icone('alerte') ?> <?= e($titre) ?></h3>
+          <p class="perte__rang" aria-hidden="true"><span><?= sprintf('%02d', $i + 1) ?></span></p>
+          <h3><?= e($titre) ?></h3>
           <p class="doux"><?= e($texte) ?></p>
         </article>
       <?php endforeach; ?>

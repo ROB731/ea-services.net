@@ -110,7 +110,8 @@ Le site repose sur des **cartes de bénéfice**, structure toujours identique :
 
 ```
 ┌────────────────────────────────┐
-│ ▎ Titre du gain                │  ← barre latérale colorée = le gain
+│ 01 ─────────────────────────   │  ← rang typographique + filet fin
+│ Titre du gain                  │
 │                                │
 │ Le problème, avec son chiffre  │
 │ en gras.                       │
@@ -119,8 +120,25 @@ Le site repose sur des **cartes de bénéfice**, structure toujours identique :
 └────────────────────────────────┘
 ```
 
-- Bordure gauche de 4 px, couleur du gain concerné.
-- Fond : la couleur du gain à 10 % d'opacité.
+### Interdit : la barre de couleur sur le côté
+
+**Jamais de bordure colorée sur un seul côté** d'une carte, d'un message,
+d'une citation ou d'une ligne de tableau : ni `border-left`, ni
+`border-inline-start`, ni `box-shadow: inset 3px 0 0`, ni pseudo-élément
+qui la simule. Le dirigeant l'a écartée le 2026-11-04 : c'est le procédé
+copié-collé de tous les gabarits, il rend le site banal.
+
+À la place, des solutions qui viennent du langage propre du site :
+- un **rang numéroté** en Space Grotesk (`01`, `02`) suivi d'un filet fin
+  (`.perte__rang`), comme les étiquettes de section ;
+- un **encadré entier** teinté (`.alerte`, `.carte--a-traiter`) ;
+- un **grand guillemet « en marge** pour les citations ;
+- un **badge texte** pour un état (publié, brouillon, nouveau).
+
+Avant toute nouvelle composante : se demander si elle ressemble à un gabarit
+générique. Si oui, la repenser. Créatif et professionnel, jamais la tendance.
+
+- Fond de carte : `--surface`, bordure 1 px `--trait` sur les quatre côtés.
 - La ligne `Impact :` en gras, texte atténué — c'est la promesse chiffrée.
 - Grille : `repeat(auto-fit, minmax(250px, 1fr))` — une colonne sur mobile,
   sans media query.

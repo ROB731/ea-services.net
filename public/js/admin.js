@@ -85,7 +85,7 @@
 
     if (type === 'lue') {
       if (ligne) {
-        ligne.style.borderLeft = 'none';
+        ligne.classList.remove('carte--a-traiter');
         var badge = ligne.querySelector('.etiquette');
         if (badge) badge.remove();
       }
@@ -96,7 +96,7 @@
 
     if (type === 'valider') {
       if (ligne) {
-        ligne.style.borderLeft = 'none';
+        ligne.classList.remove('carte--a-traiter');
         var attente = ligne.querySelector('[data-badge-attente]');
         if (attente) attente.remove();
       }
@@ -160,7 +160,7 @@
   // pas comme les autres (compteur, suppression, liste vide).
   function gabaritTemoignage(t, csrf) {
     var etoiles = '★'.repeat(Math.max(0, Math.min(5, t.rating)));
-    return '<div data-ligne style="border-left:3px solid var(--or-500);padding-left:1rem">'
+    return '<div class="ligne-temoignage" data-ligne>'
       + '<p style="margin-bottom:.25rem">« ' + echapper(t.comment) + ' »</p>'
       + '<p class="doux" style="font-size:.875rem;margin-bottom:.5rem">'
       + '<strong>' + echapper(t.name) + '</strong> · <span style="color:var(--or-600)">' + etoiles + '</span></p>'

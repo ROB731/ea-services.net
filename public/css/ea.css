@@ -266,10 +266,10 @@ h3 { font-size: clamp(1.15rem, 3vw, 1.4rem); }
 
 .alerte {
   padding: var(--r-sm) var(--r-md); border-radius: var(--arrondi);
-  border-left: 4px solid; margin-bottom: var(--r-md);
+  border: 1px solid; margin-bottom: var(--r-md);
 }
-.alerte--ok    { border-color: var(--gain-conv); background: var(--gain-conv-fond); color: var(--gain-conv); }
-.alerte--erreur{ border-color: var(--perte); background: var(--perte-fond); color: var(--perte); }
+.alerte--ok    { border-color: color-mix(in srgb, var(--gain-conv) 35%, transparent); background: var(--gain-conv-fond); color: var(--gain-conv); }
+.alerte--erreur{ border-color: color-mix(in srgb, var(--perte) 35%, transparent); background: var(--perte-fond); color: var(--perte); }
 
 /* --- 13. Étiquette (admin) ----------------------------------------------- */
 
@@ -307,8 +307,14 @@ h3 { font-size: clamp(1.15rem, 3vw, 1.4rem); }
 .tableau th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--texte-doux); }
 .tableau tr:hover td { background: var(--fond-alt); }
 
-.tableau tr[data-etat-ligne="publie"]     { box-shadow: inset 3px 0 0 var(--gain-conv); }
-.tableau tr[data-etat-ligne="brouillon"]  { box-shadow: inset 3px 0 0 var(--gain-visi); }
+/* L'état d'une ligne se lit dans son badge (.badge-etat), pas dans un liseré
+   coloré sur le côté : procédé écarté partout le 2026-11-04. */
+
+/* Élément à traiter (demande non lue, commentaire en attente) : fond légèrement
+   doré sur toute la carte, en plus de l'étiquette texte qui porte le sens. */
+.carte--a-traiter { background: color-mix(in srgb, var(--or-500) 7%, var(--surface)); border-color: color-mix(in srgb, var(--or-500) 45%, var(--bordure)); }
+.ligne-temoignage { padding-bottom: 1rem; border-bottom: 1px solid var(--bordure); }
+.ligne-temoignage:last-child { border-bottom: 0; padding-bottom: 0; }
 
 .badge-etat {
   display: inline-block; padding: .1875rem .5625rem; border-radius: 999px;
