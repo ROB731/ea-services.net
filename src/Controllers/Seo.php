@@ -49,6 +49,13 @@ final class Seo extends Controleur
                 ['@type' => 'City',    'name' => 'Abidjan'],
                 ['@type' => 'Country', 'name' => "Côte d'Ivoire"],
             ],
+            'founder'     => [
+                '@type'    => 'Person',
+                'name'     => (string)Config::get('fondateur.nom', ''),
+                'jobTitle' => (string)Config::get('fondateur.titre', ''),
+                'url'      => (string)Config::get('fondateur.portfolio', ''),
+                'sameAs'   => array_values(array_filter([(string)Config::get('fondateur.github', '')])),
+            ],
             'priceRange'  => 'FCFA',
             'knowsLanguage' => 'fr',
             // Les vrais profils sociaux, jamais un lien générique ou deviné :

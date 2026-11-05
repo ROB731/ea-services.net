@@ -30,6 +30,16 @@ return [
     // Réseaux réels — confirmés par le dirigeant le 2026-08-15. N'en ajouter
     // un que si le lien est vérifié : un lien social mort ou générique fait
     // plus de mal à la crédibilité qu'aucun lien du tout.
+    // Le fondateur et son portfolio : lien réciproque avec le portfolio (le
+    // portfolio renvoie vers ea-services.net), ce qui aide Google à relier
+    // les deux sites à la même personne et à la même entreprise.
+    'fondateur' => [
+        'nom'       => 'Herman Robe',
+        'titre'     => 'Concepteur-développeur full-stack',
+        'portfolio' => 'https://sites-sfb.ea-services.net/portfolio-herman-robe',
+        'github'    => 'https://github.com/ROB731',
+    ],
+
     'reseaux' => [
         'youtube'  => 'https://www.youtube.com/@ea-services',
         'facebook' => 'https://www.facebook.com/entreprendreaujourdhui',

@@ -183,6 +183,14 @@
       l'organisation du quotidien.
     </p>
 
+    <?php $fond = (array)cfg('fondateur', []); ?>
+    <p class="mesure-large" style="margin-top:1rem">
+      EA-SERVICES est dirigée par <strong><?= e($fond['nom'] ?? '') ?></strong>,
+      <?= e(mb_strtolower($fond['titre'] ?? '')) ?>. Il a conçu SFB, EMPLOI.EA et
+      Sonnera, et conduit des projets de l'analyse du besoin à la mise en
+      production. <a href="<?= e($fond['portfolio'] ?? '#') ?>" target="_blank" rel="noopener">Voir son portfolio</a>.
+    </p>
+
     <?php
     /**
      * PLACEHOLDERS TEMPORAIRES (2026-08-06) — à remplacer dès que le

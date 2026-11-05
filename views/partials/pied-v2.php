@@ -34,6 +34,10 @@ $c = (array)cfg('contact');
           <li><a href="mailto:<?= e($c['email']) ?>">
             <?= icone('courriel') ?> <?= e($c['email']) ?></a></li>
           <li><?= icone('lieu') ?> <?= e($c['quartier']) ?>, <?= e($c['ville']) ?></li>
+          <?php if (!empty(cfg('fondateur.portfolio'))): ?>
+            <li><a href="<?= e(cfg('fondateur.portfolio')) ?>" target="_blank" rel="noopener">
+              <?= icone('fleche') ?> Portfolio du fondateur</a></li>
+          <?php endif; ?>
           <?php foreach ((array)cfg('reseaux', []) as $reseau => $lien): ?>
             <li><a href="<?= e($lien) ?>" target="_blank" rel="noopener">
               <?= icone($reseau) ?> <?= e(ucfirst($reseau)) ?></a></li>
