@@ -32,7 +32,7 @@
         <?php if (!empty($article['read_time'])): ?> · <?= e($article['read_time']) ?> de lecture<?php endif; ?>
       </span>
     </p>
-    <h1 class="mesure"><?= e($article['title']) ?></h1>
+    <h1 class="mesure titre-long"><?= e($article['title']) ?></h1>
     <?php if (!empty($article['excerpt'])): ?>
       <p class="mesure-large doux" style="margin-top:1.25rem"><?= e($article['excerpt']) ?></p>
     <?php endif; ?>

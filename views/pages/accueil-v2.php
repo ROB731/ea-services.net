@@ -70,15 +70,15 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
            séparateurs et laisse un liseré parasite de chaque côté. */ ?>
   <div class="page-large">
     <div class="heros__chiffres">
-      <div class="heros__chiffre"><strong>420-720 h</strong><span>récupérées par an</span></div>
+      <div class="heros__chiffre"><strong>30 min</strong><span>pour chiffrer le temps que vous perdez</span></div>
       <div class="heros__chiffre"><strong>2 min</strong><span>pour répondre à un prospect</span></div>
       <div class="heros__chiffre"><strong>+40 %</strong><span>de demandes venues de Google</span></div>
       <div class="heros__chiffre"><strong>+20 à 40 %</strong><span>de chiffre d'affaires la 1<sup>re</sup> année</span></div>
     </div>
     <p class="heros__note">
-      Ce sont nos résultats mesurés chez d'autres entreprises — pas une promesse
-      identique pour tous. Chaque activité perd différemment ; le diagnostic
-      chiffre la vôtre.
+      Ce sont des résultats mesurés chez d'autres entreprises, pas une promesse
+      identique pour tous. Le temps récupéré n'y figure pas : il dépend
+      entièrement de votre activité, et le diagnostic le compte sur vos tâches.
     </p>
   </div>
 
@@ -117,11 +117,12 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
 
     <div class="releve">
       <div class="releve__ligne">
-        <span class="releve__chiffre">420-720 h</span>
+        <span class="releve__chiffre">1 h / jour</span>
         <div>
           <h3>Le temps qui part en tâches répétitives</h3>
           <p class="doux">Relances, suivis, saisies, la même réponse écrite dix fois par
-             semaine. Dix à dix-huit semaines de travail par an, que rien n'indique nulle part.</p>
+             semaine. Une seule heure par jour, c'est déjà plus de 200 heures par an.
+             Chez vous, c'est peut-être moins, peut-être bien plus : le diagnostic les compte.</p>
         </div>
         <span class="releve__bascule">tâches → temps récupéré</span>
       </div>
@@ -156,8 +157,8 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
     </p>
     <h2 class="mesure">La technique reste derrière.<span class="suite">Le résultat passe devant.</span></h2>
     <p class="mesure-large doux" style="margin-top:1.25rem">
-      Pas des outils à apprendre. Ces cinq lignes, avec leur chiffre — c'est ce
-      que nous nous engageons à vous livrer.
+      Pas des outils à apprendre. Ces cinq résultats — et chacun se mesure
+      chez vous, sur vos propres chiffres, avant et après.
     </p>
 
     <div class="manifeste">

@@ -30,8 +30,9 @@ $services = [
             'Vos informations se recopient d\'un endroit à l\'autre sans vous — plus de double saisie, plus de doublons.',
             'Une sauvegarde part chaque jour, sans que personne n\'y pense.',
         ],
-        'resultat' => "Vous récupérez huit à quatorze heures chaque semaine — l'équivalent d'une à "
-                    . "deux journées complètes rendues à la stratégie.",
+        'resultat' => "Ces heures vous reviennent. Combien exactement dépend de votre activité : "
+                    . "nous les comptons avec vous avant de commencer, puis nous mesurons ce qui a "
+                    . "réellement été récupéré.",
         'impact' => $gains['temps']['impact'],
     ],
     [

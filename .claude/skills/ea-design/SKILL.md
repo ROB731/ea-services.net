@@ -92,7 +92,13 @@ pas bricolé.
 
 - Famille : **Inter**, 300 à 900, avec `display=swap`.
 - Corps : `1.05rem`, interligne `1.8` — on lit sur mobile, souvent au soleil.
-- Titres : `h1` 2 à 2,5 rem ; `h2` 1,5 rem ; `h3` 1,25 rem.
+- Titres (échelle auditée le 2026-11-05, source : `public/css/ea-v2.css`) :
+  390 px → h1 35 · h2 27 · h3 19 px ; 1280 px → h1 62 · h2 42 · h3 21 px.
+  Rapport ≈ 1,5 entre niveaux, base en rem + part de vw (jamais de vw seul :
+  le zoom doit marcher). Titre long (article, page d'expertise) : classe
+  `.titre-long`. Intertitres d'article : `.redaction h2`, plus petits.
+  Vérifier avec les métriques réelles de la police qu'un titre long tient en
+  3 lignes sur ordinateur et que son plus long mot laisse de l'air à 390 px.
 - Un seul `h1` par page, et c'est la promesse principale.
 - Largeur de lecture : `max-width: 1200px`, texte courant autour de 70 caractères.
 

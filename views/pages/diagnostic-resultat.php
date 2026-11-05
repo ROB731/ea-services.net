@@ -68,7 +68,7 @@ $reste = array_slice($pertes, 2);
         <h3>Ce qu'on peut récupérer</h3>
         <p class="doux">
           C'est exactement ce que traite notre gain
-          « <?= e(str_replace(['Gagnez ', 'Convertissez ', 'Démultipliez '], '', (string)(cfg("gains.{$p['cle']}.titre") ?? ''))) ?> ».
+          « <?= e(str_replace(['Récupérez ', 'Gagnez ', 'Convertissez ', 'Démultipliez '], '', (string)(cfg("gains.{$p['cle']}.titre") ?? ''))) ?> ».
         </p>
         <?php if ($p['promesse'] !== ''): ?>
           <span class="manifeste__impact"><?= e($p['promesse']) ?></span>

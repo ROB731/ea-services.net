@@ -49,10 +49,14 @@ return [
      */
     'gains' => [
         'temps' => [
-            'titre'   => 'Gagnez 420 à 720 heures chaque année',
-            'perte'   => 'Vous passez 420 à 720 heures par an sur des tâches répétitives : relances, suivis, saisies, réponses courantes.',
-            'gain'    => 'Vous récupérez huit à quatorze heures chaque semaine pour la stratégie.',
-            'impact'  => '420 à 720 heures récupérées par an',
+            // Pas de nombre d'heures fixe (décision du dirigeant, 2026-11-05) :
+            // le temps perdu dépend entièrement de l'activité, aucune
+            // entreprise ne récupère le même. Le chiffre se calcule sur les
+            // tâches du client, pendant le diagnostic.
+            'titre'   => 'Récupérez le temps que les tâches répétitives vous prennent',
+            'perte'   => "Relances, suivis, saisies, réponses courantes : chaque semaine, des heures partent dans ce qu'une machine ferait sans vous.",
+            'gain'    => 'Ces heures vous reviennent, pour vos clients et pour la stratégie.',
+            'impact'  => 'vos heures récupérées, comptées sur vos propres tâches',
         ],
         'conversion' => [
             'titre'   => 'Convertissez 3 fois plus de prospects',

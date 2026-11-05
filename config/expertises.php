@@ -336,7 +336,7 @@ return [
         'libelle'     => 'Automatisation des tâches',
         'service'     => 'Automatisation des tâches répétitives',
         'titre'       => "Automatisation des tâches pour PME à Abidjan | EA-SERVICES",
-        'description' => "Relances, saisies, réponses courantes, sauvegardes : automatisez les tâches répétitives de votre PME et récupérez 420 à 720 heures par an. Diagnostic gratuit.",
+        'description' => "Relances, saisies, réponses courantes, sauvegardes : automatisez les tâches répétitives de votre PME et récupérez ce temps chaque semaine. Diagnostic gratuit.",
         'gain'        => 'temps',
         'icone'       => 'temps',
         'image'       => '/assets/prestations/automatisation.svg',
@@ -375,7 +375,7 @@ return [
         'faq' => [
             ['Quelles tâches peut-on automatiser dans une PME ?', "Les relances de prospects et de factures, les réponses aux questions courantes, la recopie d'informations d'un outil à l'autre, les rapports réguliers et les sauvegardes. En règle générale : tout ce qui se répète de la même façon."],
             ['Faut-il changer tous nos outils ?', "Non. Nous partons de ce que vous utilisez déjà et nous relions les outils entre eux. Le changement est progressif."],
-            ['Combien de temps peut-on récupérer ?', "Notre repère est de 420 à 720 heures par an, soit huit à quatorze heures par semaine, passées sur des tâches répétitives. Le diagnostic gratuit sert à estimer votre propre chiffre."],
+            ['Combien de temps peut-on récupérer ?', "Cela dépend entièrement de votre activité, et nous ne donnerons pas de chiffre avant de l'avoir mesuré. Pendant le diagnostic gratuit, nous comptons avec vous les heures passées chaque semaine sur des tâches répétitives : c'est ce chiffre-là, le vôtre, qui sert de base."],
             ['En combien de temps voit-on les résultats ?', "Les gains de temps se voient dès les premières semaines, car on commence par les tâches qui vous en coûtent le plus."],
         ],
         'articles' => [

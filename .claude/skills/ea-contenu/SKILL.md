@@ -38,7 +38,7 @@ décrit ce qu'on fabrique.
 |---|---|
 | Nos services | Comment on résout vos 5 problèmes majeurs |
 | Nos solutions | Trois solutions qui travaillent ensemble |
-| Automatisation | Gagnez 420 à 720 heures chaque année |
+| Automatisation | Récupérez le temps que les tâches répétitives vous prennent |
 | Chatbot WhatsApp | Répondez à vos clients même quand vous dormez |
 | Contact | Commençons par une conversation |
 
@@ -58,7 +58,11 @@ décrit ce qu'on fabrique.
 
 Chaque bénéfice porte un chiffre, et les chiffres de la marque sont fixes :
 
-- 420 à 720 heures par an récupérées
+- temps : **aucun nombre d'heures fixe** (le dirigeant, 2026-11-05 : on ne
+  peut pas garantir le même temps à toutes les entreprises). Le temps se
+  chiffre sur les tâches du client, pendant le diagnostic. Une illustration
+  arithmétique est permise (« 1 h par jour, c'est plus de 200 h par an »),
+  jamais une promesse « vous gagnerez X heures ».
 - réponse en moins de 2 minutes → +30 % de conversion
 - +50 % de visibilité, +40 % de prospects organiques
 - +20 à 40 % de chiffre d'affaires la première année

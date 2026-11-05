@@ -119,12 +119,30 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
-/* L'échelle typographique est le cœur de la direction : les titres montent
-   très haut sur mobile (13vw) parce qu'un titre timide sur un téléphone ne
-   se lit pas comme une prise de parole. */
-h1 { font-size: clamp(2.6rem, 12vw, 5.5rem); }
-h2 { font-size: clamp(2rem, 8.5vw, 3.5rem); }
-h3 { font-size: 1.125rem; letter-spacing: -.01em; }
+/* Échelle typographique — refaite le 2026-11-05 après audit.
+   L'ancienne (h1 12vw → 88 px, h2 56 px, h3 18 px) avait trois défauts,
+   mesurés avec les métriques réelles de Space Grotesk : sur 390 px, un titre
+   d'article prenait 10 lignes et « Développement » occupait 342 px sur 350,
+   collé aux deux bords ; sur ordinateur, ce même titre faisait 4 lignes à
+   88 px ; et le h3 ne dépassait le texte courant que de 2 px, laissant un
+   vide entre h2 et h3. Avec cette échelle : 5 lignes sur 390 px, 3 sur 1280.
+   Nouvelle règle : une progression régulière (rapport ≈ 1,5 entre niveaux),
+   une base en rem plus une part de vw (le zoom du navigateur reste actif),
+   et un interligne qui s'ouvre quand la taille baisse.
+     390 px  : h1 35 px · h2 27 px · h3 19 px · texte 16 px
+     1280 px : h1 62 px · h2 42 px · h3 21 px */
+h1 { font-size: clamp(2.125rem, 1.4rem + 3.2vw, 4rem); line-height: 1.05; letter-spacing: -.03em; }
+h2 { font-size: clamp(1.625rem, 1.2rem + 1.9vw, 2.625rem); line-height: 1.12; letter-spacing: -.022em; }
+h3 { font-size: clamp(1.125rem, 1.05rem + .35vw, 1.3125rem); line-height: 1.3; letter-spacing: -.01em; }
+
+/* Titre long (article, page d'expertise qui reprend la requête Google) : un
+   cran en dessous, pour rester sur trois lignes au plus. */
+.titre-long { font-size: clamp(1.875rem, 1.3rem + 2.3vw, 3.125rem); line-height: 1.08; }
+
+/* Dans le corps d'un article, les intertitres servent la lecture, pas
+   l'affiche : ils restent nettement au-dessus du texte sans l'écraser. */
+.redaction h2 { font-size: clamp(1.375rem, 1.15rem + .9vw, 1.75rem); line-height: 1.2; letter-spacing: -.015em; }
+.redaction h3 { font-size: clamp(1.125rem, 1.05rem + .3vw, 1.25rem); }
 
 /* La deuxième moitié du titre, en safran : c'est le geste typographique de la
    direction. Par défaut on prend la version ENCRE — le safran vif sur ivoire
@@ -1182,8 +1200,9 @@ a.carte--lien:hover, a.carte--lien:focus-visible { border-color: var(--safran-en
 a.marqueur { text-decoration: none; min-height: 44px; }
 a.marqueur:hover, a.marqueur:focus-visible { border-color: var(--safran-encre); color: var(--texte); }
 /* Filet de sécurité à 390 px : un mot long dans un titre ne doit jamais
-   provoquer de défilement horizontal. */
-h1, h2, h3 { overflow-wrap: break-word; }
+   provoquer de défilement horizontal. Et s'il doit vraiment se couper, c'est
+   avec un trait d'union, selon la césure française (lang="fr"). */
+h1, h2, h3 { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
 
 /* Bandeau d'expertise : texte puis maquette. Une colonne sur téléphone (la
    maquette passe sous les boutons), deux colonnes à partir de 60rem. */

@@ -31,7 +31,7 @@ change pas au hasard.
 
 | Gain | Promesse chiffrée |
 |---|---|
-| **Temps** | 420 à 720 heures récupérées par an |
+| **Temps** | les heures récupérées, comptées sur les tâches du client (aucun chiffre fixe promis) |
 | **Conversion** | +30 % de conversion, réponse en moins de 2 minutes |
 | **Visibilité** | +50 % de visibilité, +40 % de prospects organiques |
 | **Chiffre d'affaires** | +20 à 40 % la première année |

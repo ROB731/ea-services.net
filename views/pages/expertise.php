@@ -24,7 +24,7 @@
     </nav>
     <div class="expertise-heros">
       <div>
-        <h1 class="mesure titre-machine"><?= e($x['h1']) ?><em><?= e($x['h1_suite']) ?></em></h1>
+        <h1 class="mesure titre-long titre-machine"><?= e($x['h1']) ?><em><?= e($x['h1_suite']) ?></em></h1>
         <p class="heros__badge"><?= icone($x['icone']) ?> <?= e($x['badge']) ?></p>
         <p class="mesure-large doux" style="margin-top:1.25rem"><?= e($x['chapo']) ?></p>
         <div class="diagnostic__actions" style="margin-top:1.75rem">

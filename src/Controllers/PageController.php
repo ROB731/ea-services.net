@@ -29,7 +29,7 @@ final class PageController extends Controleur
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/',
             'titre'       => "Agence de développement web et de logiciel sur mesure à Abidjan | EA-SERVICES",
-            'description' => "Agence digitale à Abidjan : développement web, développement de logiciel sur mesure, automatisation et IA pour entreprises. Récupérez 420 à 720 heures par an. Diagnostic gratuit.",
+            'description' => "Agence digitale à Abidjan : développement web, développement de logiciel sur mesure, automatisation et IA pour entreprises. Récupérez le temps perdu en tâches répétitives. Diagnostic gratuit.",
         ],
         'services' => [
             // Portée sur la direction v2 (2026-08-13). L'ancienne vue reste sur
