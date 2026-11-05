@@ -35,8 +35,8 @@ final class Seo extends Controleur
             'url'         => Config::url('/'),
             'logo'        => Config::url('/assets/logo-ea-services.jpeg'),
             'image'       => Config::url('/assets/logo-ea-services.jpeg'),
-            'description' => "Accompagnement des entreprises ivoiriennes : visibilité en ligne, "
-                           . "prospection commerciale et recrutement, avec des résultats mesurés.",
+            'description' => "Création de sites web, d'applications mobiles et de chatbots WhatsApp, "
+                           . "automatisation des tâches et formation à l'IA pour les entreprises d'Abidjan.",
             'telephone'   => $c['telephone_e164'],
             'email'       => $c['email'],
             'address'     => [

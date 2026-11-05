@@ -28,8 +28,8 @@ final class PageController extends Controleur
             'vue'         => 'pages/accueil-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/',
-            'titre'       => "Agence de développement web et de logiciel sur mesure à Abidjan | EA-SERVICES",
-            'description' => "Agence digitale à Abidjan : développement web, développement de logiciel sur mesure, automatisation et IA pour entreprises. Récupérez le temps perdu en tâches répétitives. Diagnostic gratuit.",
+            'titre'       => "EA-SERVICES : sites web, applications et IA à Abidjan",
+            'description' => "Création de sites web, d'applications mobiles et de chatbots WhatsApp, automatisation des tâches et formation à l'IA pour les entreprises d'Abidjan.",
         ],
         'services' => [
             // Portée sur la direction v2 (2026-08-13). L'ancienne vue reste sur
@@ -37,15 +37,15 @@ final class PageController extends Controleur
             'vue'         => 'pages/services-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/services',
-            'titre'       => "Automatisation, chatbot WhatsApp, prospection : nos services à Abidjan | EA-SERVICES",
-            'description' => "Automatisation des tâches, chatbot WhatsApp, référencement, gestion commerciale, maintenance informatique : cinq pertes traitées, un chiffre en face de chacune.",
+            'titre'       => "Automatisation, chatbot WhatsApp, Google | EA-SERVICES",
+            'description' => "Automatisation des tâches, chatbot WhatsApp, référencement Google, suivi commercial et maintenance informatique pour les entreprises d'Abidjan.",
         ],
         'produits' => [
             'vue'         => 'pages/produits-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/produits',
-            'titre'       => "Solutions : site internet, prospection automatisée, recrutement | EA-SERVICES",
-            'description' => "Création de site internet, prospection commerciale automatisée et recrutement simplifié : trois solutions pour entreprises ivoiriennes, pensées pour fonctionner ensemble.",
+            'titre'       => "Site internet, prospection, recrutement | EA-SERVICES",
+            'description' => "Création de site internet, prospection commerciale automatisée et recrutement simplifié : trois solutions pour les entreprises de Côte d'Ivoire.",
         ],
         // Application mobile (ajoutee 2026-11-04). Nouvelle adresse, aucune URL existante touchee.
         'sonnera' => [
@@ -59,29 +59,29 @@ final class PageController extends Controleur
             'vue'         => 'pages/prestations-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/prestations',
-            'titre'       => "Développement de logiciel sur mesure, site web, IA à Abidjan | EA-SERVICES",
-            'description' => "Développement de logiciel sur mesure, application web ou mobile, site vitrine, boutique en ligne, automatisation, formation informatique et IA : nos prestations, une par une.",
+            'titre'       => "Sites, applications et logiciels à Abidjan | EA-SERVICES",
+            'description' => "Site vitrine, boutique en ligne, application mobile, logiciel sur mesure, automatisation, formation informatique et IA : toutes nos prestations à Abidjan.",
         ],
         'realisations' => [
             'vue'         => 'pages/realisations-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/realisations',
-            'titre'       => "Nos réalisations : sites web et résultats clients à Abidjan | EA-SERVICES",
-            'description' => "Exemples réels de sites web et applications créés pour des entreprises ivoiriennes, avec les chiffres avant/après : placements, prospects, heures récupérées.",
+            'titre'       => "Réalisations : sites et applications | EA-SERVICES",
+            'description' => "Sites web et applications créés pour des entreprises ivoiriennes, avec les chiffres avant et après : placements, prospects, temps récupéré.",
         ],
         'blog' => [
             'vue'         => 'pages/blog-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/blog',
-            'titre'       => "Blog — automatisation, IA, création de site web pour PME | EA-SERVICES",
-            'description' => "Chatbot WhatsApp, agent IA, création de site web, recrutement : nos articles répondent à ce que les entreprises ivoiriennes cherchent vraiment sur Google.",
+            'titre'       => "Blog : site web, WhatsApp, IA pour PME | EA-SERVICES",
+            'description' => "Chatbot WhatsApp, intelligence artificielle, création de site web, recrutement : des réponses claires aux questions des entreprises ivoiriennes.",
         ],
         'a-propos' => [
             'vue'         => 'pages/a-propos-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/a-propos',
-            'titre'       => "Notre agence web à Abidjan — pourquoi EA-SERVICES existe",
-            'description' => "Il n'existe pas d'achat, il n'existe que des investissements. Notre principe, notre méthode en quatre étapes et nos engagements. Agence basée à Marcory, Abidjan.",
+            'titre'       => "Agence web et IA à Marcory, Abidjan | EA-SERVICES",
+            'description' => "EA-SERVICES crée sites web, applications et automatisations pour les entreprises d'Abidjan. Notre méthode en quatre étapes et nos engagements.",
         ],
         'contact' => [
             // Portee sur la direction v2 (2026-08-13). Formulaire identique :
@@ -89,8 +89,8 @@ final class PageController extends Controleur
             'vue'         => 'pages/contact-v2',
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/contact',
-            'titre'       => "Contact agence web Abidjan — diagnostic gratuit de 30 minutes | EA-SERVICES",
-            'description' => "WhatsApp, téléphone ou formulaire : réservez votre diagnostic gratuit de 30 minutes. Réponse sous 2 heures. EA-SERVICES, Marcory Biétry, Abidjan.",
+            'titre'       => "Contact et diagnostic gratuit à Abidjan | EA-SERVICES",
+            'description' => "Un projet de site, d'application ou d'automatisation ? WhatsApp, téléphone ou formulaire : diagnostic gratuit de 30 minutes. Marcory Biétry, Abidjan.",
         ],
     ];
 

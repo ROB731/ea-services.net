@@ -31,7 +31,7 @@ return [
     'creation-site-web-abidjan' => [
         'libelle'     => 'Création de site web',
         'service'     => 'Création de site internet',
-        'titre'       => "Création de site web à Abidjan, pensé pour être trouvé | EA-SERVICES",
+        'titre'       => "Création de site web à Abidjan | EA-SERVICES",
         'description' => "Création de site internet à Abidjan : rapide sur téléphone, écrit sur les mots que tapent vos clients, relié à WhatsApp. Diagnostic gratuit de 30 minutes.",
         'gain'        => 'visibilite',
         'icone'       => 'visibilite',
@@ -219,7 +219,7 @@ return [
     'logiciel-sur-mesure-abidjan' => [
         'libelle'     => 'Logiciel sur mesure',
         'service'     => 'Développement de logiciel sur mesure',
-        'titre'       => "Logiciel sur mesure et application web à Abidjan | EA-SERVICES",
+        'titre'       => "Logiciel sur mesure à Abidjan | EA-SERVICES",
         'description' => "Développement de logiciel sur mesure à Abidjan : un outil construit autour de votre façon de travailler, pas l'inverse. Plateformes déjà en service en Côte d'Ivoire.",
         'gain'        => 'temps',
         'icone'       => 'croissance',
@@ -277,7 +277,7 @@ return [
     'chatbot-whatsapp-entreprise' => [
         'libelle'     => 'Chatbot WhatsApp',
         'service'     => 'Chatbot WhatsApp pour entreprise',
-        'titre'       => "Chatbot WhatsApp pour entreprise en Côte d'Ivoire | EA-SERVICES",
+        'titre'       => "Chatbot WhatsApp pour entreprise | EA-SERVICES",
         'description' => "Chatbot WhatsApp Business à Abidjan : chaque client reçoit une réponse en moins de 2 minutes, même la nuit. Vous ne rappelez que les demandes sérieuses.",
         'gain'        => 'conversion',
         'icone'       => 'conversion',
@@ -448,7 +448,7 @@ return [
     'maintenance-informatique-abidjan' => [
         'libelle'     => 'Maintenance informatique',
         'service'     => 'Maintenance informatique et sauvegarde',
-        'titre'       => "Maintenance informatique et sauvegarde à Abidjan | EA-SERVICES",
+        'titre'       => "Maintenance informatique à Abidjan | EA-SERVICES",
         'description' => "Maintenance informatique, sauvegarde et hébergement pour PME à Abidjan : vos données survivent à n'importe quelle panne, et un interlocuteur répond en moins de 2 heures.",
         'gain'        => 'serenite',
         'icone'       => 'serenite',
@@ -500,7 +500,7 @@ return [
     'formation-informatique-ia-abidjan' => [
         'libelle'     => 'Formation informatique et IA',
         'service'     => 'Formation en informatique et intelligence artificielle',
-        'titre'       => "Formation informatique et IA pour entreprises à Abidjan | EA-SERVICES",
+        'titre'       => "Formation informatique et IA à Abidjan | EA-SERVICES",
         'description' => "Formation en informatique, développement web et intelligence artificielle à Abidjan, pour vos équipes ou vos étudiants. Des cas concrets, tirés de votre métier.",
         'gain'        => 'serenite',
         'icone'       => 'document',
