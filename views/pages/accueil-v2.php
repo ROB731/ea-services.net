@@ -229,7 +229,7 @@ $icones = ['temps' => 'temps', 'conversion' => 'conversion', 'visibilite' => 'vi
             <figcaption class="doux" style="font-size:.9375rem">
               <strong><?= e($t['name']) ?></strong>
               <span aria-label="<?= (int)$t['rating'] ?> sur 5" style="color:var(--safran-encre)">
-                · <?= str_repeat('★', max(0, min(5, (int)$t['rating']))) ?>
+                · <?php for ($e = 0; $e < max(0, min(5, (int)$t['rating'])); $e++) { echo icone('etoile'); } ?>
               </span>
             </figcaption>
           </figure>
