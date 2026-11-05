@@ -166,12 +166,12 @@
 <section class="section section--papier">
   <div class="page-large">
     <article class="carte">
-      <span class="chapeau">Sonnera · Application Android</span>
+      <span class="chapeau">Sonnera · Android et version web</span>
       <h2 style="margin-bottom:.5rem">Plus aucune consigne perdue dans un groupe de discussion</h2>
       <p class="doux">Une alarme qui sonne même téléphone verrouillé, des tâches réparties
          entre collègues, et un responsable prévenu quand quelque chose traîne.</p>
       <p style="margin-top:1rem">
-        <a class="bouton bouton--marine" href="/pages/sonnera">Découvrir Sonnera <?= icone('fleche') ?></a>
+        <a class="bouton bouton--marine" href="/pages/sonnera#essayer">Découvrir et tester Sonnera <?= icone('fleche') ?></a>
       </p>
     </article>
   </div>

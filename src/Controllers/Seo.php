@@ -67,7 +67,7 @@ final class Seo extends Controleur
                 '@type'               => 'SoftwareApplication',
                 'name'                => 'Sonnera',
                 'applicationCategory' => 'BusinessApplication',
-                'operatingSystem'     => 'Android',
+                'operatingSystem'     => 'Android, Web',
                 'description'         => "Application de rappels et de suivi d'équipe : une alarme qui sonne même téléphone verrouillé, des tâches réparties entre collègues, et un responsable prévenu quand rien n'est fait.",
                 'url'                 => Config::url('/pages/sonnera'),
                 'inLanguage'          => 'fr',

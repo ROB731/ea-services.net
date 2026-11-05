@@ -53,7 +53,7 @@ final class PageController extends Controleur
             'gabarit'     => 'layouts/public-v2',
             'canonical'   => '/pages/sonnera',
             'titre'       => "Sonnera : application de rappels pour équipes | EA-SERVICES",
-            'description' => "Une alarme qui sonne même téléphone verrouillé, des tâches réparties entre collègues et un responsable prévenu si rien n'est fait. Application Android.",
+            'description' => "Une alarme qui sonne même téléphone verrouillé, des tâches réparties entre collègues et un responsable prévenu si rien n'est fait. Android et version web, en test.",
         ],
         'prestations' => [
             'vue'         => 'pages/prestations-v2',

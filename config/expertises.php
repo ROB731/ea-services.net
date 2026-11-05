@@ -204,7 +204,7 @@ return [
         ],
         'faq' => [
             ['Combien coûte le développement d’une application mobile ?', "Tout dépend de ce que l'application doit faire. C'est pour cela que nous commençons par une première version limitée à l'essentiel. Pendant le diagnostic gratuit, nous donnons le montant de cette première version et ce qu'elle doit vous faire gagner."],
-            ['Android ou iPhone ?', "Sonnera, notre propre application, fonctionne sur Android, le téléphone de la grande majorité des utilisateurs en Côte d'Ivoire. Si votre public est surtout sur iPhone, nous en parlons dès le diagnostic."],
+            ['Android ou iPhone ?', "Sonnera, notre propre application, s'installe sur Android, le téléphone de la grande majorité des utilisateurs en Côte d'Ivoire, et propose aussi une version web pour iPhone et ordinateur. Pour votre projet, si votre public est surtout sur iPhone, nous en parlons dès le diagnostic."],
             ['Faut-il une application ou un site suffit-il ?', "Souvent, un site bien fait suffit. Une application se justifie quand elle est ouverte chaque jour : une équipe à coordonner, des commandes régulières, des alertes. Nous vous le dirons honnêtement."],
             ['Qui s’occupe de l’application après sa sortie ?', "Nous assurons le suivi et les corrections après le lancement, et nous formons votre équipe à son usage quotidien."],
         ],

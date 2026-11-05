@@ -1,13 +1,17 @@
 <?php
 /**
- * Sonnera — application mobile Android d'EA-SERVICES.
+ * Sonnera — application d'EA-SERVICES (Android et version web).
  *
  * Contenu tiré de la présentation fournie par le dirigeant (Sonnera-presentation.pdf).
  * Aucun chiffre ajouté : le seul chiffre est un fait du produit (relance du
  * responsable après 30 minutes, réglable). Les six situations sont des
  * exemples d'usage, pas des témoignages — le dire est une obligation.
  *
- * À COMPLÉTER PAR LE DIRIGEANT : lien de téléchargement (Play Store ou fichier),
+ * Mis à jour le 2026-11-05 d'après https://sonnera.vercel.app/ (page officielle).
+ * Le lien d'essai est une VERSION DE TEST : le dirigeant l'a demandé ainsi, le
+ * lien définitif n'est pas encore prêt. On renvoie vers la page de présentation
+ * (qui aide à choisir 32 ou 64 bits), jamais directement vers le fichier .apk.
+ * À COMPLÉTER PAR LE DIRIGEANT : lien définitif (Play Store ou site officiel),
  * captures d'écran réelles, éventuels retours d'utilisateurs réels.
  */
 ?>
@@ -17,13 +21,13 @@
   <div class="page-large">
     <p class="etiquette-section">
       <span class="etiquette-section__index">Sonnera</span>
-      <span class="etiquette-section__texte">Application Android · rappels et suivi d'équipe</span>
+      <span class="etiquette-section__texte">Android et version web · rappels et suivi d'équipe</span>
     </p>
     <h1 class="mesure titre-machine">Ce qui doit être fait sonne<em>jusqu'à ce que ce soit fait.</em></h1>
     <p class="mesure-large doux" style="margin-top:1.25rem">
       Une alarme que l'on entend vraiment, des tâches réparties entre
       collègues, et un responsable prévenu quand quelque chose traîne.
-      Même téléphone verrouillé.
+      Même téléphone verrouillé, avec une voix en français, et même sans réseau.
     </p>
     <div class="diagnostic__actions" style="margin-top:1.5rem">
       <a class="bouton bouton--safran" href="/diagnostic"><?= e(cfg('cta.libelle')) ?> <?= icone('fleche') ?></a>
@@ -242,6 +246,53 @@
   </div>
 </section>
 
+<?php /* --------------------------------------------------------- Essayer */ ?>
+<section class="section section--claire" id="essayer">
+  <div class="page-large">
+    <p class="etiquette-section">
+      <span class="etiquette-section__index">Essayer</span>
+      <span class="etiquette-section__texte">Sur Android, iPhone et ordinateur</span>
+    </p>
+    <h2 class="mesure">Testez Sonnera<span class="suite">avant d'en parler à votre équipe.</span></h2>
+    <p class="mesure-large doux" style="margin-top:1rem">
+      Créez un compte d'essai et gardez ce qui vous sert. L'application
+      s'installe sur un téléphone Android ; la version web fonctionne sur
+      iPhone et sur ordinateur.
+    </p>
+
+    <article class="carte" style="margin-top:1.5rem">
+      <span class="chapeau">Version de test</span>
+      <h3>Le lien d'essai n'est pas encore définitif</h3>
+      <p class="doux">
+        Sonnera est en phase d'essai. Le lien ci-dessous mène à la page de
+        présentation officielle, où vous choisissez la version adaptée à votre
+        téléphone. Le téléchargement définitif sera publié ici dès qu'il est prêt.
+        D'ici là, des fonctions peuvent encore évoluer.
+      </p>
+      <p style="margin-top:1rem">
+        <a class="bouton bouton--marine" href="https://sonnera.vercel.app/" target="_blank" rel="noopener">
+          Essayer la version de test <?= icone('fleche') ?>
+        </a>
+      </p>
+    </article>
+
+    <div class="grille grille--3" style="margin-top:1.25rem">
+      <article class="carte">
+        <h3>Téléphone Android</h3>
+        <p class="doux">Deux versions : une pour les téléphones récents (64 bits), une pour les plus anciens (32 bits). La page d'essai vous guide pour l'installation.</p>
+      </article>
+      <article class="carte">
+        <h3>iPhone ou ordinateur</h3>
+        <p class="doux">Une version web, sans rien installer, pour organiser les tâches et suivre l'équipe depuis un écran plus grand.</p>
+      </article>
+      <article class="carte">
+        <h3>Une question ?</h3>
+        <p class="doux">Écrivez à <a href="mailto:contact@sonnera.app">contact@sonnera.app</a> ou directement sur WhatsApp.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <?php /* ---------------------------------------------------------- Offres */ ?>
 <section class="section section--papier">
   <div class="page-large">
@@ -288,7 +339,7 @@
         </ul>
       </article>
     </div>
-    <p class="doux" style="margin-top:1rem">Sonnera fonctionne sur téléphone Android.</p>
+    <p class="doux" style="margin-top:1rem">Sonnera s'installe sur téléphone Android et s'utilise aussi depuis un navigateur, sur iPhone ou ordinateur. Aucun tarif n'est publié pendant la phase d'essai.</p>
   </div>
 </section>
 
