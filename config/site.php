@@ -34,7 +34,7 @@ return [
     // portfolio renvoie vers ea-services.net), ce qui aide Google à relier
     // les deux sites à la même personne et à la même entreprise.
     'fondateur' => [
-        'nom'       => 'Herman Robe',
+        'nom'       => 'Herman Robé',
         'titre'     => 'Concepteur-développeur full-stack',
         'portfolio' => 'https://sites-sfb.ea-services.net/portfolio-herman-robe',
         'github'    => 'https://github.com/ROB731',
