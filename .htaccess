@@ -1,0 +1,22 @@
+# Racine du site sur hébergement mutualisé (cPanel/LWS) : le code est dans
+# public_html, mais seul public/ doit être servi. Aucun changement de racine
+# de domaine nécessaire.
+Options -Indexes
+RewriteEngine On
+
+# Déjà réécrit vers public/ : ne rien refaire (évite les boucles).
+RewriteRule ^public/ - [L]
+
+# Dossiers du code et des données : jamais servis.
+RewriteRule ^(src|config|views|data|storage|outils)(/|$) - [F,L]
+
+# Fichiers cachés et documents internes : jamais servis.
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^(CLAUDE|README)\.md$ - [F,L]
+
+# Fichier réel dans public/ (css, js, images, uploads) : servi tel quel.
+RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+RewriteRule ^(.*)$ public/$1 [L]
+
+# Tout le reste : routeur du site (REQUEST_URI reste l'adresse d'origine).
+RewriteRule ^ public/index.php [L]
