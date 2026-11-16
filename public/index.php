@@ -22,7 +22,18 @@ if (PHP_SAPI === 'cli-server') {
     if (is_file($fichier)) return false;
 }
 
-require dirname(__DIR__) . '/src/bootstrap.php';
+/**
+ * Dossier de l'application (celui qui contient src/, config/, views/, data/).
+ * Par défaut c'est le parent de public/. Sur l'hébergement mutualisé, la
+ * racine web (public_html) est fixe et le code vit ailleurs : le déploiement
+ * y écrit alors son chemin dans le fichier caché .racine.
+ */
+$racine = dirname(__DIR__);
+if (!is_file($racine . '/src/bootstrap.php')) {
+    $indique = trim((string)@file_get_contents(__DIR__ . '/.racine'));
+    if ($indique !== '') $racine = $indique;
+}
+require $racine . '/src/bootstrap.php';
 
 use EA\Core\Router;
 use EA\Controllers\AdminController;
