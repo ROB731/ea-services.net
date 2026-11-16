@@ -1,4 +1,4 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/c2799087c/public_html/ea-services/
+    - export DEPLOYPATH=/home/c2799087c/public_html
     - /bin/cp -R * $DEPLOYPATH
