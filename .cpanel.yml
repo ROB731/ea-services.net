@@ -1,16 +1,20 @@
 ---
-# Déploiement cPanel (LWS) : un simple push suffit, aucune manipulation dans
-# cPanel. Le code va dans public_html ; le .htaccess racine n'expose que
-# public/ et bloque src/, config/, views/, data/, storage/.
+# Déploiement cPanel (LWS). Un dossier par site dans le compte :
+#   /home/c2799087c/ea-services/   -> site principal (ea-services.net)
+#   autres sites                   -> un dossier chacun, un sous-domaine chacun
+# Racine du domaine ea-services.net (cPanel > Domaines) :
+#   /home/c2799087c/ea-services/public
+# Seul public/ est exposé ; src/, config/, views/, data/, storage/ restent
+# hors de portée du web.
 # Ne touche jamais à data/, storage/, public/uploads/ ni config/secrets.php
 # (données vivantes, jamais versionnées). Pas de rsync : cp seul.
 # Limite : un fichier supprimé du dépôt reste sur le serveur.
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/c2799087c/public_html
-    - /bin/mkdir -p $DEPLOYPATH/data $DEPLOYPATH/storage $DEPLOYPATH/public/uploads
-    - /bin/cp -R public config src views $DEPLOYPATH/
-    - /bin/cp .htaccess $DEPLOYPATH/.htaccess
-    - /bin/chmod -R u+rwX,g+rwX $DEPLOYPATH/data $DEPLOYPATH/storage $DEPLOYPATH/public/uploads
-    - printf 'Require all denied\n' > $DEPLOYPATH/data/.htaccess
-    - printf 'Require all denied\n' > $DEPLOYPATH/storage/.htaccess
+    - export APP=/home/c2799087c/ea-services
+    - /bin/mkdir -p $APP/public/uploads $APP/config $APP/src $APP/views $APP/data $APP/storage
+    - /bin/cp -R public/. $APP/public/
+    - /bin/cp -R config/. $APP/config/
+    - /bin/cp -R src/. $APP/src/
+    - /bin/cp -R views/. $APP/views/
+    - /bin/chmod -R u+rwX,g+rwX $APP/data $APP/storage $APP/public/uploads
