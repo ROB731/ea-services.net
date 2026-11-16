@@ -1,0 +1,11 @@
+# Routage : tout ce qui n'est pas un fichier réel arrive sur index.php
+# (même principe que FallbackResource du serveur d'origine, sans RewriteRule).
+DirectoryIndex index.php
+FallbackResource /index.php
+
+Options -Indexes
+
+# Aucun fichier caché (.git, .env...) ne doit être servi.
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
